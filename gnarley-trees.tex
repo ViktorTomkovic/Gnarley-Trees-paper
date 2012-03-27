@@ -1,0 +1,74 @@
+% !Mode:: "TeX::UTF-8"
+\documentclass[slovensky]{svk}
+%% ak pisete po slovensky, pouzijete namiesto horneho riadku
+%% \documentclass[slovensky]{svk}
+
+\begin{document}
+\title{Gnarley Trees}
+
+\author{Katka Kotrlová
+\email{katkin email, ktorý chce zverejniť}
+\and 
+Pavol Lukča
+\email{palyho mail}
+\and 
+Viktor Tomkovič
+\email{viktor.tomkovic@gmail.com}
+\and 
+Tatiana Tóthová
+\email{táničkin mail}
+}
+%% vsimnite si, ze u autorov sa nepisu tituly
+%% prikaz \inst sluzi ako odkaz do zoznamu institucii
+%% (vid. nizsie)
+
+%% skolitela nepiste medzi autorov, ale v tejto casti
+%% ak praca nema skolitela, jednoducho vynechajte
+\supervisor{Jakub Kováč\inst{1}
+\email{hmm}}
+
+%% nasleduje kratka verzia nazvu clanku a 
+%% zoznam autorov (bez krstnych mien)
+%% tieto informacie sa zobrazuju v hlavicke
+\titlerunning{Gnarley Trees}
+\authorrunning{Kotrlová, Lukča, Tomkovič, Tóthová}
+
+\institute{
+Katedra informatiky,
+FMFI UK,
+Mlynská Dolina
+842~48~Bratislava}
+
+\maketitle
+
+\begin{abstract}
+V tomto článku prezentujeme našu prácu na projekte Gnarley Trees, 
+ktorý vytvoril Jakub Kováč ako svoju bakalársku prácu. \cite{Kuko:2007}
+
+
+\keywords{Gnarley Trees, vizualizácia, algoritmy a dátové štruktúry}
+\end{abstract}
+
+\input{uvod/uvod}
+\input{vylepsenia/vylepsenia}
+\input{vyvazene-stromy/vyvazene-stromy}
+\input{haldy/haldy}
+\input{uf/uf}
+\input{trie/trie}
+\input{historia/historia}
+\input{zaver/zaver}
+\input{prispevky/prispevky}
+\input{podakovanie/podakovanie}
+
+\nocite{*}
+\bibliographystyle{apalike}
+\bibliography{references}
+
+%% citacie ulozte do suboru references.bib
+%% na populaciu zoznamu literatury pouzite program
+%%
+%% bibtex references
+%%
+%% po ktorom je potrebne dokument znova zlatexovat
+
+\end{document}

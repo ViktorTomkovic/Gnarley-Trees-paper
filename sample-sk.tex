@@ -1,0 +1,368 @@
+% !Mode:: "TeX::UTF-8"
+\documentclass[slovensky]{svk}
+%% ak pisete po slovensky, pouzijete namiesto horneho riadku
+%% \documentclass[slovensky]{svk}
+
+\begin{document}
+\title{Príprava článku na ŠVK}
+
+\author{Daniel Ševčovič\inst{1}
+\email{sevcovic@fmph.uniba.sk}
+\and 
+Tomáš Vinař\inst{2}
+\email{vinar@fmph.uniba.sk}}
+%% vsimnite si, ze u autorov sa nepisu tituly
+%% prikaz \inst sluzi ako odkaz do zoznamu institucii
+%% (vid. nizsie)
+
+%% skolitela nepiste medzi autorov, ale v tejto casti
+%% ak praca nema skolitela, jednoducho vynechajte
+\supervisor{Tom\'a\v{s} Plachetka\inst{3}
+\email{plachetk@dcs.fmph.uniba.sk}}
+
+%% nasleduje kratka verzia nazvu clanku a 
+%% zoznam autorov (bez krstnych mien)
+%% tieto informacie sa zobrazuju v hlavicke
+\titlerunning{Príprava článku na ŠVK}
+\authorrunning{Ševčovič and Vinař}
+
+\institute{
+Katedra aplikovanej matematiky a štatistiky,
+FMFI UK,
+Mlynská Dolina,
+842~48~Bratislava,
+\and
+Katedra aplikovanej informatiky,
+FMFI UK,
+Mlynská Dolina
+842~48~Bratislava
+\and
+Katedra informatiky,
+FMFI UK,
+Mlynská Dolina
+842~48~Bratislava}
+
+\maketitle
+
+\begin{abstract}
+V tomto článku prezentujeme jednoduchý dokument, ktorý
+možno použiť ako príklad ako pripraviť článok na ŠVK
+v systéme \LaTeX.
+
+\keywords{\LaTeX makrá, sadzba textu, ŠVK}
+\end{abstract}
+
+\section{Úvod a príklady}
+Tento článok je príkladom, ako použiť makrá ŠVK v \LaTeX{}u.
+Článok poukazuje na preferencie ŠVK čo sa týka štýlu a formátovania
+rôznych častí textu, ako napríklad citácií, matematických vzorcov
+a pod. 
+
+\subsection{Sample text}
+Let $S=[s_{ij}]$ ($1\leq i,j\leq n$) be a $(0,1,-1)$-matrix
+of order $n$. Then $S$ is a {\em sign-nonsingular matrix}
+(SNS-matrix) provided that each real matrix with the same
+sign pattern as $S$ is nonsingular. There has been
+considerable recent interest in constructing and
+characterizing SNS-matrices \cite{bs}, \cite{klm}. There
+has also been interest in strong forms of
+sign-nonsingularity \cite{djd}. In this paper we give a new
+generalization of SNS-matrices and investigate some of
+their basic properties.
+ 
+Let $S=[s_{ij}]$ be a $(0,1,-1)$-matrix of order $n$ and
+let $C=[c_{ij}]$ be a real matrix of order $n$. The pair
+$(S,C)$ is called a {\em matrix pair of order} $n$.
+Throughout, $X=[x_{ij}]$ denotes a matrix of order $n$
+whose entries are algebraically independent indeterminates
+over the real field. Let $S\circ X$ denote the Hadamard
+product (entrywise product) of $S$ and $X$. We say that the
+pair $(S,C)$ is a {\em sign-nonsingular matrix pair of
+order} $n$, abbreviated SNS-{\em matrix pair of order} $n$,
+provided that the matrix \[A=S\circ X+C\] is nonsingular
+for all positive real values of the $x_{ij}$.  If $C=O$
+then the pair $(S,O)$ is a SNS-matrix pair if and only if
+$S$ is a SNS-matrix.  If $S=O$ then the pair $(O,C)$ is a
+SNS-matrix pair if and only if $C$ is nonsingular. Thus
+SNS-matrix pairs include both nonsingular matrices and
+sign-nonsingular matrices as special cases.
+ 
+\subsection{An enumeration list}
+In this paper we consider the evaluation of integrals of the 
+following forms:
+\begin{equation}
+\int_a^b \left( \sum_i E_i B_{i,k,x}(t) \right)
+         \left( \sum_j F_j B_{j,l,y}(t) \right) dt,\label{problem}
+\end{equation}
+\begin{equation}
+\int_a^b f(t) \left( \sum_i E_i B_{i,k,x}(t) \right) dt,\label{problem2}
+\end{equation}
+where $B_{i,k,x}$ is the $i$th B-spline of order $k$ defined over the
+knots $x_i, x_{i+1}, \ldots, x_{i+k}$.
+We will consider B-splines normalized so that their integral is one.
+The splines may be of different orders and
+defined on different knot sequences $x$ and $y$.
+Often the limits of integration will be the entire real line, $-\infty$
+to $+\infty$. Note that (\ref{problem}) is a special case of (\ref{problem2})
+where $f(t)$ is a spline.
+
+
+There are five different methods for calculating (\ref{problem})
+that will be considered:
+\begin{enumerate}
+\item Use Gauss quadrature on each interval.
+\item Convert the integral to a linear combination of
+      integrals of products of B-splines and provide a recurrence for
+      integrating the product of a pair of B-splines.
+\item Convert the sums of B-splines to piecewise
+      B\'{e}zier format and integrate segment
+      by segment using the properties of the Bernstein polynomials.
+\item Express the product of a pair of B-splines as a linear combination
+      of B-splines.
+      Use this to reformulate the integrand as a linear combination
+      of B-splines, and integrate term by term.
+\item Integrate by parts.
+\end{enumerate}
+Of these five, only methods 1 and 5 are suitable for calculating 
+(\ref{problem2}). The first four methods will be touched on and the 
+last will be discussed at length.
+
+
+\subsection{Some displayed equations and \{{\tt eqnarray}\}s}
+     By introducing the product topology on  $R^{m \times m} \times
+R^{n \times n}$  with the induced inner product
+\begin{equation}
+\langle (A_{1},B_{1}), (A_{2},B_{2})\rangle := \langle A_{1},A_{2}\rangle 
++ \langle B_{1},B_{2}\rangle,\label{eq2.10}
+\end{equation}
+we calculate the Fr\'{e}chet derivative of  $F$  as follows:
+\begin{eqnarray}
+ F'(U,V)(H,K) &=& \langle R(U,V),H\Sigma V^{T} + U\Sigma K^{T}\nonumber\\
+             && - P(H\Sigma V^{T} + U\Sigma K^{T})\rangle \nonumber \\
+         &=& \langle R(U,V),H\Sigma V^{T} + U\Sigma K^{T}\rangle\nonumber \\
+&=& \langle R(U,V)V\Sigma^{T},H\rangle + \nonumber\\
+  &&    \langle \Sigma^{T}U^{T}R(U,V),K^{T}\rangle.    \label{eq2.11}
+\end{eqnarray}
+
+In the middle line of (\ref{eq2.11}) we have used the fact that the range of
+$R$ is always perpendicular to the range of $P$.  The gradient $\nabla F$  of
+$F$, therefore,  may be interpreted as the
+pair of matrices:
+\begin{eqnarray}
+ \nabla F(U,V) &=& (R(U,V)V\Sigma^{T},R(U,V)^{T}U\Sigma )\nonumber\\
+ && \in R^{m \times m} \times R^{n \times n}.   \label{eq2.12}
+\end{eqnarray}
+
+Thus, the vector field
+\begin{equation}
+\frac{d(U,V)}{dt} = -g(U,V) 	\label{eq2.15}
+\end{equation}
+defines a steepest descent flow on the manifold  ${\cal O} (m) \times
+{\cal O} (n)$ for the objective function  $F(U,V)$.
+
+ 
+\section{Main results} 
+ 
+Let $(S,C)$ be a matrix pair of order $n$.  The determinant
+\[\det (S\circ X+C)\] 
+is a polynomial in the indeterminates of $X$ of degree at
+most $n$ over the real field. We call this polynomial the
+{\em indicator polynomial} of the matrix pair $(S,C)$
+because of the following proposition.
+ 
+\begin{theorem} 
+\label{th:prop} 
+The matrix pair $(S,C)$ is a {\rm SNS}-matrix pair if and
+only if all the nonzero coefficients in its indicator
+polynomial have the same sign and there is at least one
+nonzero coefficient.
+\end{theorem} 
+ 
+\begin{proof}
+Assume that $(S,C)$ is a SNS-matrix pair.  Clearly the
+indicator polynomial has a nonzero coefficient.  Consider a
+monomial
+\begin{equation} 
+\label{eq:mono} 
+b_{i_{1},\ldots,i_{k};j_{1},\ldots,j_{k}}x_{i_{1}j_{1}}\cdots
+x_{i_{k}j_{k}}
+\end{equation} 
+occurring in the indicator polynomial with a nonzero
+coefficient.  By taking the $x_{ij}$ that occur in
+(\ref{eq:mono}) large and all others small, we see that any
+monomial that occurs in the indicator polynomial with a
+nonzero coefficient can be made to dominate all others.
+Hence all the nonzero coefficients have the same sign. The
+converse is im-\linebreak mediate. \qquad\end{proof} 
+ 
+
+For SNS-matrix pairs $(S,C)$ with $C=O$ the indicator
+polynomial is a homogeneous polynomial of degree $n$. In
+this case Theorem \ref{th:prop} is a standard fact about
+SNS-matrices.
+ 
+\begin{lemma}[{\rm Stability}]
+\label{stability}
+Given $T>0$, suppose that $\| \epsilon (t) \|_{1,2} \leq h^{q-2}$
+for $0 \leq t \leq T$ and $q \geq 6$. 
+Then there exists a positive number $B$ that depends on
+$T$ and the exact solution $\psi$ only such that for all $0 \leq t \leq T$,
+\begin{equation}
+\label{Gron}
+\frac {d}{dt} \| \epsilon (t) \| _{1,2}  \leq B
+   ( h^{q-3/2} + \| \epsilon (t) \|_{1,2})\;.
+\end{equation}
+The function $B(T)$ can be chosen to be nondecreasing in time.
+\end{lemma}
+ 
+ 
+\begin{theorem} 
+\label{th:gibson} 
+The maximum number of nonzero entries in a {\rm SNS}-matrix
+$S$ of order $n$ equals \[\frac{n^{2}+3n-2}{2}\] with
+equality if and only if there exist permutation matrices
+such that $P|S|Q=T_{n}$ where
+\begin{equation} 
+\label{eq:gibson} 
+T_{n}=\left[\begin{array}{cccccc} 1&1&\cdots&1&1&1\\
+1&1&\cdots&1&1&1\\ 0&1&\cdots&1&1&1\\ 
+\vdots&\vdots&\ddots&\vdots&\vdots&\vdots\\ 
+0&0&\cdots&1&1&1\\ 0&0&\cdots&0&1&1\end{array}\right]. 
+\end{equation} 
+\end{theorem} 
+ 
+We note for later use that each submatrix of $T_{n}$ of
+order $n-1$ has all 1s on its main diagonal. 
+ 
+We now obtain a bound on the number of nonzero entries of
+$S$ in a SNS-matrix pair $(S,C)$ in terms of the degree of
+the indicator polynomial. We denote the strictly upper
+triangular (0,1)-matrix of order $m$ with all 1s above the
+main diagonal by $U_{m}$. The all 1s matrix of size $m$ by
+$p$ is denoted by $J_{m,p}$.
+ 
+
+\begin{definition}
+Let $S$ be an isolated invariant set with isolating neighborhood $N$.
+An {\em index pair} for $S$ is a pair of compact sets $(N_{1},N_{0})$
+with $N_{0} \subset N_{1} \subset N$ such that:
+\begin{enumerate}
+\item $cl(N_{1} \backslash N_{0})$
+is an isolating neighborhood for $S$.
+\item $N_{i}$ is positively invariant relative to $N$ for $i=0,1$,
+i.e., given
+$x \in N_{i}$ and $x \cdot [0,t] \subset N$, then $x \cdot [0,t] \subset
+N_{i}$.
+\item $N_{0}$ is an exit set for $N_{1}$, i.e. if $x \in N_{1}$,
+$x \cdot [0, \infty ) \not\subset N_{1}$, then there is a $T \geq 0$ such
+that $x \cdot [0,T] \subset N_{1}$ and $x \cdot T \in N_{0}$.
+\end{enumerate}
+\end{definition}
+
+\subsection{Numerical experiments} We conducted numerical experiments 
+in computing inexact Newton steps for discretizations of a  
+{\em modified Bratu problem}, given by  
+\begin{eqnarray} 
+{\displaystyle \Delta w + c e^w + d{ {\partial w}\over{\partial x} } } 
+&=&{\displaystyle f \quad {\rm in}\ D, }\nonumber\\[-1.5ex]
+\label{bratu} \\[-1.5ex]
+{\displaystyle w }&=&{\displaystyle 0 \quad {\rm on}\ \partial D , } \nonumber
+\end{eqnarray} 
+where $c$ and $d$ are constants. The actual Bratu problem has $d=0$ and  
+$f \equiv0$. It provides a simplified model of nonlinear diffusion  
+phenomena, e.g., in combustion and semiconductors, and has been 
+considered by Glowinski, Keller, and Rheinhardt \cite{GloKR85}, 
+as well as by a number of other investigators; see \cite{GloKR85} 
+and the references therein. See also problem 3 by Glowinski and  Keller  
+and problem 7 by Mittelmann in the collection of nonlinear model 
+problems assembled by Mor\'e \cite{More}. The modified problem  
+(\ref{bratu}) has been used as a test problem for inexact Newton 
+methods by Brown and Saad \cite{Brown-Saad1}.  
+
+\def\gmres{{GMRES}} 
+\def\gmresm{{\rm GMRES($m$)}} 
+
+In our experiments, we took $D = [0,1]\times[0,1]$, $f \equiv0$, 
+$c=d=10$, and discretized (\ref{bratu}) using the usual second-order 
+centered differences over a $100\times100$ mesh of equally 
+spaced points in $D$. In \gmres($m$), we took $m=10$ and used fast  
+Poisson right preconditioning as in the experiments in \S2. The computing  
+environment was as described in \S2. All computing was done  
+in double precision.  
+ 
+\begin{figure}
+\includegraphics[width=\columnwidth]{fig}
+\caption{Graph of the function $\sin(x)/x$.} 
+\label{diff} 
+\end{figure}  
+%% ak je vas obrazok siroky a chcete ho zobrazit
+%% cez dva stlpce, pouzite \begin{figure*}...\end{figure*}
+ 
+In the first set of experiments, we allowed each method to  
+run for $40$ {\gmresm} iterations, starting with zero as the initial  
+approximate solution, after which the limit of residual norm  
+reduction had been reached. The results are shown in Fig.~\ref{diff}.  
+In Fig.~\ref{diff}, the top curve was produced by method FD1. 
+The second curve from the top is actually a superposition of  
+the curves produced by methods EHA2 and FD2; the two curves are 
+visually indistinguishable. Similarly, the third curve from  
+the top is a superposition of the curves produced by methods EHA4 
+and FD4, and the fourth curve from the top, which lies barely above  
+the bottom curve, is a superposition of the curves produced by  
+methods EHA6 and FD6. The bottom curve was produced by method A. 
+ 
+\begin{table*}
+\caption{Statistics over $20$ trials of {\rm GMRES$(m)$} iteration numbers,  
+$F$-evaluations, and run times required to reduce the residual norm by  
+a factor of $\epsilon$. For each method, the number of {\rm GMRES$(m)$} iterations  
+and $F$-evaluations was the same in every trial.} 
+
+\begin{center} \footnotesize
+\begin{tabular}{|c|c|c|c|c|c|} \hline  
+&& Number of & Number of & Mean Run Time & Standard \\ 
+Method & $\epsilon$ & Iterations & $F$-Evaluations& (Seconds) & Deviation \\ \hline 
+\lower.3ex\hbox{EHA2} & \lower.3ex\hbox{$10^{-10}$} & \lower.3ex\hbox{26} &  
+\lower.3ex\hbox{32} & \lower.3ex\hbox{47.12} & \lower.3ex\hbox{.1048} \\ 
+FD2 & $10^{-10}$ & 26 & 58 & 53.79 & .1829 \\ \hline  
+\lower.3ex\hbox{EHA4} & \lower.3ex\hbox{$10^{-12}$} & \lower.3ex\hbox{30} &  
+\lower.3ex\hbox{42} & \lower.3ex\hbox{56.76} & \lower.3ex\hbox{.1855} \\  
+FD4 & $10^{-12}$ & 30 & 132 & 81.35 & .3730 \\ \hline  
+\lower.3ex\hbox{EHA6} & \lower.3ex\hbox{$10^{-12}$} & \lower.3ex\hbox{30} &  
+\lower.3ex\hbox{48} & \lower.3ex\hbox{58.56} & \lower.3ex\hbox{.1952} \\ 
+FD6 & $10^{-12}$ & 30 & 198 & 100.6 & .3278 \\ \hline  
+\end{tabular}
+\end{center} 
+\label{diffstats} 
+\end{table*}
+%% ak je vasa tabulka uzka a chcete, aby zaberala iba
+%% jeden stlpec, pouzite \begin{tabular}...\end{tabular}
+
+In our second set of experiments, we took $c=d=100$ and carried out  
+trials analogous to those in the first set above. No preconditioning  
+was used in these experiments, both because we wanted to compare 
+the methods without preconditioning and because the fast  
+Poisson preconditioning used in the first set of experiments is 
+not cost effective for these large values of $c$ and $d$. We first  
+allowed each method to run for 600 {\gmresm} iterations, 
+starting with zero as the initial approximate solution, after which  
+the limit of residual norm reduction had been reached. 
+ 
+
+\section*{Acknowledgments}
+The authors thank the anonymous contributors whose work largely
+constitutes this sample file. This work has been supported by the 
+European Community grant number xxxxx and by the Comenius University
+Grant for Young Researchers.
+
+\nocite{*}
+\bibliographystyle{apalike}
+\bibliography{references}
+
+%% citacie ulozte do suboru references.bib
+%% na populaciu zoznamu literatury pouzite program
+%%
+%% bibtex references
+%%
+%% po ktorom je potrebne dokument znova zlatexovat
+
+\end{document}
