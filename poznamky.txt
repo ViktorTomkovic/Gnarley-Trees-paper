@@ -22,6 +22,7 @@
 		http://en.wikipedia.org/wiki/BibTeX 
 		http://en.wikibooks.org/wiki/LaTeX/More_Bibliographies
 		a inde na nete
+		používajte citep a citet
 		konkrétny .bib záznam sa často dá získať z 
 			~ http://citeseer.ist.psu.edu/index
 			~ http://www.informatik.uni-trier.de/~ley/db/
