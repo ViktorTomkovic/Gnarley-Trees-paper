@@ -1,0 +1,22 @@
+-kódovanie všetkých súborov je utf-8, nie cp-1250
+-píšte po slovensky
+-vždy si text po sebe skontrolujte
+-http://www.fmph.uniba.sk/index.php?id=2827 je podrobný popis čo a ako
+-pokiaľ chcete vložiť tabuľku, obrázok, hocičo, tak z vyššieho linku sa dá
+	dostať ku príkladom prác
+-neodkladajte to!
+-rozdelenie práce:
+	+abstrakt: spraví sa na konci
+	+úvod: všetci, friker začne zvyšok doplní
+	+jadro:
+		*rozšírenie: ??
+		*vyvážené stromy: táňa
+		*haldy: katka
+		*union-find: friker
+		*písmenkový strom: friker
+		*história: paly
+	+záver: paly (asi on má najlepšiu predstavu ako sa to chce prerobiť)
+	+príspevok autorov: tak spoločne
+	+referencie: rozbehnem ja, ako sa čo cituje je tu 
+		http://en.wikipedia.org/wiki/BibTeX a inde na nete, konkrétny 
+		.bib záznam sa často dá získať z http://citeseer.ist.psu.edu/index
