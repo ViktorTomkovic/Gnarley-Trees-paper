@@ -2,6 +2,8 @@
 \documentclass[slovensky]{svk}
 %% ak pisete po slovensky, pouzijete namiesto horneho riadku
 %% \documentclass[slovensky]{svk}
+\catcode`\"=\active
+\def "{\begingroup\clqq\def "{\endgroup\crqq}}
 
 \begin{document}
 \title{Gnarley Trees}
