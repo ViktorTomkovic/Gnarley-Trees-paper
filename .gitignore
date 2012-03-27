@@ -1,0 +1,7 @@
+*.log
+*.blg
+*.bbl
+*.aux
+*.out
+*~
+gnarley-trees.pdf
