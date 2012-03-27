@@ -29,4 +29,5 @@
 -poznámky adresujte konkrétne (napr. "nechcem robiť záver. podľa mňa by ho mala robiť táňa.") 
 	a kontrolujte e-mail, aby ste mohli na dotazy odpovedať (napr. táňa si to o dve hodiny 
 	prečíta a odpovie: "ja záver robiť nebudem. sprav si ho sám."). snažte sa nehádzať 
-	zbytočne spoločnú prácu na iných. 
+	zbytočne spoločnú prácu na iných.
+ 

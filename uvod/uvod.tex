@@ -1,6 +1,47 @@
 \section{Úvod}
+Ako ľudia so záujmom o dátové štruktúry sme sa rozhodli pomôcť vybudovať 
+dobrý softvér na vizualizáciu algoritmov a dátových štruktúr a obohatiť 
+kompiláciu Jakuba Kováča \cite{kuko} o ďalšie dátové štruktúry. 
+Vizualizujeme rôznorodé dátové štruktúry. Z binárnych vyvažovaných stromov 
+to sú \emph{finger tree} a \emph{reversal tree}, z háld to sú \emph{d-nárna 
+halda}, \emph{ľavicová halda}, \emph{skew halda} a \emph{párovacia halda}. 
+Taktiež vizualizujeme aj \emph{problém disjuktných množín (union-find 
+problém)} pomocou grafov a \emph{písmenkový strom (trie)}. 
 
-co robime? na co je dobra vizualizacia? (mozete porovnat svet s a bez vizualizacie :))
-co konkretne vizualizujeme? preco to robime? (uz daco take je? [da sa odcitovat shaffer])
+Okrem vizualizácie prerábame softvér, doplnili sme ho o históriu krokov 
+a operácií, jednoduchšie ovládanie a veľa iných vecí, zlepšujúcich 
+celkový dojem. Softvér je celý v slovenčine a angličtine a je 
+implementovaný v jazyku \texttt{Java}.
 
-Friker, makaj! Zvyšok, pomôž!
+\subsection{Vizualizácia}
+Dátové štruktúry a algoritmy tvoria základnú, prvotnú časť výučby 
+informatiky. Vizualizácia algoritmov a dátových štruktúr je grafické 
+znázornenie, ktoré abstrahuje spôsob ako algoritmus a dátové štruktúry 
+pracujú od ich vnútornej reprezentácie a umiestnení v pamäti. Je teda 
+vyhľadávaná a všeobecne rozšírená pomôcka pri výučbe. Výsledky výskumov 
+ohľadne jej efektívnosti sa líšia, od stavu \uv{nezaznamenali sme výrazné 
+zlepšenie} po \uv{je viditeľné zlepšenie}. \cite{shaffer}
+
+Rozmach vizualizačných algoritmov priniesla najmä Java a jej fungovanie 
+bez viazanosti na konkrétny operačný systém. Kvalita vizualizácií sa líši 
+a keďže ide o ľahko naprogramovateľné programy, je ich veľa a sú pomerne 
+nekvalitné. V takomto množstve je ťažké nájsť kvalitné vizualizácie. 
+Zbieraním a analyzovaním kvality sa venuje skupina AlgoViz, ktorá už 
+veľa rokov funguje na portále \url{http://algoviz.org/}.
+
+Zaujímavé je pozorovanie, že určovanie si vlastného tempa pri vizualizácií 
+je veľká pomôcka. Naopak, ukazovanie pseudokódu alebo nemožnosť určenia si
+vlastného tempa (napríklad animácia bez možnosti pozastavenia), takmer 
+žiadne zlepšenie neprináša. \cite{shaffer}\cite{saraiya}
+
+\subsection*{Motivácia}
+Z vyššie uvedeného je jasné, že našou snahou je vytvoriť kvalitnú kompiláciu 
+a softvér, ktorý bude nezávislý od operačného systému, bude vyhovovať ako 
+pomôcka pri výučbe ako aj pri samoštúdiu a bude voľne prístupný a náležite 
+propagovaný. Toto sú hlavné body, ktoré nespĺňa žiaden slovenský a 
+len veľmi málo svetových vizualizačných softvérov. Našou hlavnou snahou 
+je teda ponúknuť plnohodnotné prostredie pri učení.
+%co robime? na co je dobra vizualizacia? (mozete porovnat svet s a bez vizualizacie :))
+%co konkretne vizualizujeme? preco to robime? (uz daco take je? [da sa odcitovat shaffer])
+%
+%Friker, makaj! Zvyšok, pomôž!
