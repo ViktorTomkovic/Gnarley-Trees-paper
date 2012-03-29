@@ -1,6 +1,0 @@
-#!
-pdflatex gnarley-trees.tex;
-bibtex gnarley-trees;
-pdflatex gnarley-trees.tex;
-#odkomentuj mriežkou/zmeň na svoj obľúbený prehliadač .pdf
-evince gnarley-trees.pdf;

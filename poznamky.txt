@@ -31,4 +31,5 @@
 	a kontrolujte e-mail, aby ste mohli na dotazy odpovedať (napr. táňa si to o dve hodiny 
 	prečíta a odpovie: "ja záver robiť nebudem. sprav si ho sám."). snažte sa nehádzať 
 	zbytočne spoločnú prácu na iných.
- 
+-je dobrým zvykom nový pojem napísať prvý krát kurzívou. samozrejme vysvetliť. 
+	(napr. finger vo finger tree)
