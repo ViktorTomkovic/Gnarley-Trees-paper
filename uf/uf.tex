@@ -1,31 +1,42 @@
-\section{Union Find}
+\def\uf{Union-Find}
+\def\null{\texttt{NULL}}
+\def\makeset{$\mathop{\mathbf{makeset}}$}
+\def\find{$\mathop{\mathbf{find}}(x)$}
+\def\union{$\mathop{\mathbf{union}}(x, y)$}
+
+\section{\uf}
 Sú problémy, ktoré vyžadujú spájanie objektov do množín a množín navzájom 
 a následné určovanie, do ktorej množiny objekt patrí. Od takejto \emph{
 dátovej štruktúry pre disjunktné množiny} očakávame, že si bude udržiavať 
 jednoznačného \emph{zástupcu} každej množiny a bude poskytovať 
 tieto tri oprácie: 
 \begin{itemize}
-\item \textbf{makeset} -- vytvorí novú množinu s jedným prvkom, ktorý 
+\item \makeset\ -- vytvorí novú množinu s jedným prvkom, ktorý 
 nepatrí do žiadnej inej množiny;
-\item \textbf{find($x$)} -- nájde zástupcu množiny, v ktorej sa 
+\item \find\ -- nájde zástupcu množiny, v ktorej sa 
 prvok $x$ nachádza;
-\item \textbf{union($x$, $y$)} -- vytvorí novú množinu, ktorá obsahuje 
+\item \union\ -- vytvorí novú množinu, ktorá obsahuje 
 všetky prvky v množinách, ktorých zástupcovia sú $x$ a $y$. Tieto 
 množiny zmaže. Ďalej vyberie nového zástupcu novej množiny. Pre 
 jednoduchosť, táto operácia predpokladá, že $x$ a $y$ sú 
-\emph{zástupcovia} množín.
+zástupcovia množín.
 \end{itemize}
-Vďaka dvom hlavným operáciam \textbf{find} a \textbf{union} sa na Slovensku 
-je táto dátová štruktúra známejšia pod poj\-mom \emph{Union-Find}, ktorý 
-používame aj my. 
+Vďaka dvom hlavným operáciam \find\ a \union\ 
+je táto dátová štruktúra známejšia pod pojmom \emph{\uf}, ktorý 
+používame aj my. Medzi najznámejšie problémy, ktoré sa riešia pomocou 
+\uf\ patria Kruskalov algoritmus na nájdenie najlacnejšej kostry 
+\citep{kruskal} a unifikácia \citep{unif}. Veľmi triviálne použitie je 
+zistenie počtu komponentov v grafe.
 
-Na reprezentovanie dátovej štruktúry sme si zvolili štruktúru podobnú 
-lesu: každá množina je reprezentovaná stromom a zástupca množiny je koreň. 
-Ďalej je dôležité, že ku objektom vieme pristupovať pria\-mo (pole).
-Teda, objekty majú svoje \emph{id} a pointer \emph{p($x$)} 
-ukazujúci na otca v strome. Pointer zástupcu množiny ukazuje na 
-hodnotu \texttt{NULL}.\\
-rozne kopresie cesty
+Vďaka častej asociácií objektov a spájania množín ako vrcholy a hrany grafu 
+sa často dátová štruktúra abstraktne reprezentuje ako 
+\emph{les} -- množina zakorenených stromov. 
+Konkrétnou implementáciou potom býva pole objektov---vrcholov. Ku každému 
+objektu sa musí udržiavať smerník $p(x)$ na otca v strome. Smerník zástupcu 
+množiny zvyčajne ukazuje na seba ($p(x) = x$). V našej implementácií však 
+smerník zástupcu množiny ukazuje na hodnotu \null.
+
+rozne kopresie cesty\\
 citovat Walkerov alg.
 \\
 Yahoo! Walker, Texas ranger, FTW!
