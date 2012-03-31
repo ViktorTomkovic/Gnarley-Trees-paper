@@ -1,6 +1,6 @@
 \def\uf{Union-Find}
 \def\null{\texttt{NULL}}
-\def\makeset{$\mathop{\mathbf{makeset}}$}
+\def\makeset{$\mathop{\mathbf{makeset}}(x)$}
 \def\find{$\mathop{\mathbf{find}}(x)$}
 \def\union{$\mathop{\mathbf{union}}(x, y)$}
 
@@ -26,18 +26,60 @@ je táto dátová štruktúra známejšia pod pojmom \emph{\uf}, ktorý
 používame aj my. Medzi najznámejšie problémy, ktoré sa riešia pomocou 
 \uf\ patria Kruskalov algoritmus na nájdenie najlacnejšej kostry 
 \citep{kruskal} a unifikácia \citep{unif}. Veľmi triviálne použitie je 
-zistenie počtu komponentov v grafe.
+zistenie počtu komponentov v grafe. Existujú aj iné problémy z teórie 
+grafov, napr. \citet{paths1}.
 
 Vďaka častej asociácií objektov a spájania množín ako vrcholy a hrany grafu 
 sa často dátová štruktúra abstraktne reprezentuje ako 
 \emph{les} -- množina zakorenených stromov. 
-Konkrétnou implementáciou potom býva pole objektov---vrcholov. Ku každému 
+Konkrétnou implementáciou potom býva pole objektov --- vrcholov. Ku každému 
 objektu sa musí udržiavať smerník $p(x)$ na otca v strome. Smerník zástupcu 
 množiny zvyčajne ukazuje na seba ($p(x) = x$). V našej implementácií však 
 smerník zástupcu množiny ukazuje na hodnotu \null.
 
-rozne kopresie cesty\\
-citovat Walkerov alg.
-\\
-Yahoo! Walker, Texas ranger, FTW!
+Operácia \makeset\ teda vytvorí nový prvok $x$ a nastaví $p(x) = \null$. 
+Operáciu \find\ vykonáme tak, že budeme sledovať cestu po smerníkoch, až 
+kým nenájdeme zástupcu. 
+Operáciu \union\ ide najjednoduchšie vykonať tak, že presmerujeme smerník 
+$p(y)$ na prvok $x$, teda $p(y) = x$. 
+Môžeme ľahko pozorovať, že takýto \emph{naivný} spôsob je neefektívny, 
+lebo nám operácia \find\ v najhoršom prípade, na $n$ prvkoch, trvá $O(n)$ 
+krokov. 
+
+Existujú dva prístupy ako zlepšiť operácie a tým aj zrýchliť ich vykonanie. 
+Sú to: heuristika \emph{union podľa ranku} a rôzne heuristiky na 
+\emph{kompresiu cesty}. Prvá heuristika pridáva ku algoritmom hodnotu 
+$rank(x)$, ktorá bude určovať najväčšiu možnú hĺbku podstromu zakorenenú 
+vrcholom $x$. V tom prípade pri o\-pe\-rá\-cií \makeset\ zadefinujeme 
+$rank(x) = 0$. 
+Pri o\-pe\-rá\-cií \union\ vždy porovnáme $rank(x)$ a $rank(y)$, aby sme zistili, 
+ktorý zástupca predstavuje menší strom. Smerník tohto zástupcu potom napojíme 
+na zástupcu s výšším rankom. Zástupca novej množiny bude ten s vyšším rankom. 
+Ak sú oba ranky rovnaké, vyberieme ľubovoľného zo zástupcov $x$ a $y$, 
+jeho rank zvýšime o jeden a smerník ostatného zástupcu bude ukazovať 
+na tohto zástupcu. Zástupcom novej množiny bude vybratý zástupca. 
+
+Druhou heuristikou je kompresia cesty. Algoritmov na efektívnu kompresiu 
+cesty je veľa \citep{paths2}. Tu popíšeme tie najefektívnejšie. Prvou z nich 
+je \emph{jednoduchá kompresia cesty} \citep{comp1}. Pri vykonávaní 
+operácie \find, po tom, 
+ako nájdeme zástupcu množiny obsahujúcej prvok $x$, smerníky prvkov 
+navštívených po ceste (včetne $x$) presmerujeme na zástupcu množiny. Toto 
+síce spomalí prvé vykonávanie, ale výrazne zrýchli ďalšie hľadania. 
+Druhou heuristikou je \emph{delenie cesty} \citep{comp2}. Pri vykonávaní 
+operácie \find\ 
+pripojíme každý vrchol\footnote{okrem koreňa a synov koreňa, 
+keďže tie deda a otca resp. deda nemajú} v ceste od vrcholu $x$ po koreň stromu 
+na otca jeho otca. 
+Treťou heuristikou je \emph{pólenie cesty} \citep{comp2}. Pri vykonávaní 
+operácie \find\ 
+pripojíme každý druhý vrchol\footnote{okrem koreňa a synov koreňa, 
+keďže tie deda a otca resp. deda nemajú} 
+v ceste od vrcholu $x$ po koreň stromu na otca jeho otca. 
+
+Podľa \citet{galil} je najefektívnejšie pólenie cesty pred delením, ktoré 
+spotrebuje zhruba dva krát viac smerníkov a jednoduchou kompresiou, ktorá 
+vyžaduje dva behy.
+
+%citovat Walkerov alg. - to mám robiť tu?
 
