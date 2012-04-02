@@ -1,5 +1,5 @@
 default: gnarley-trees.pdf
-gnarley-trees.pdf: *.tex */*.tex references.bib
+gnarley-trees.pdf: *.tex */*.tex references.bib obrazky/*
 	pdfcslatex gnarley-trees.tex
 	bibtex gnarley-trees
 	pdfcslatex gnarley-trees.tex

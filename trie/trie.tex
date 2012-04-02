@@ -1,4 +1,99 @@
+
+\def\k{k}
+%\def\kluc{kľúč}
+\def\put{$\mathop{insert}(\k)$}
+\def\find{$\mathop{find}(\k)$}
+\def\delete{$\mathop{delete}(\k)$}
+\def\trie{trie}
+
 \section{Písmenkový strom}
-Friker, neobzeraj baby a pracuj! 
-Nejaké citovateľné práce o trie?
+\emph{Abeceda} je množina \emph{znakov}. \emph{Slovo} je postupnosť znakov 
+z danej abecedy. \emph{Písmenkový strom} je \emph{zakorenený strom}, v ktorom 
+sú vrcholy prázdne a každá hrana obsahuje práve jeden znak z abecedy alebo 
+\emph{ukončovací znak}. Strom 
+obsahuje slová nazývané \emph{kľúče} a to tak, že kľúč je rozdelený na znaky 
+abecedy a tie sú umiestnené na jednotlivých hranách tak, že po prejdení cesty 
+z koreňa do vrchola prečítame daný kľúč. 
+
+Oproti binárnym vyhľadávacím stromom je hlavný rozdiel v tom, že \emph{kľúče} 
+nie sú uložené vo vrcholoch, ale samotná poloha v strome určuje kľúč. To, či 
+je kľúč v strome uložený určuje \emph{ukončovací znak}. Môže to byť ľubovoľný 
+symbol, ktorý sa nenachádza v abecede. My budeme používať ako abecedu veľké 
+znaky anglickej abecedy a ukončovací znak značiť dolárom. ($\$$)
+
+\paragraph{Popis}
+Vzhľadom na svoj vznik sa písmenkový strom využíva ako \emph{asociatívne pole 
+(slovník)} a teda poskytuje tieto tri operácie:
+\begin{itemize}
+\item $\mathop{\mathbf{insert}}(\k)$ -- pridá do stromu kľúč $\k$;
+\item $\mathop{\mathbf{find}}(\k)$ -- zistí, či sa v strom kľúč $\k$ nachádza;
+\item $\mathop{\mathbf{delete}}(\k)$ -- odstráni zo stromu kľúč $\k$ a 
+prípadne vyrieši zmeny v strome.
+\end{itemize}
+Operácia \put\ začína v koreni. Zoberie kľúč $k$ a spraví z neho postupnosť 
+znakov. Na koniec postupnosti zaradí ukončovací znak. 
+Následne začne vykonávať cyklus, v ktorom vyberie z postupnosti ten znak, 
+ktorý je na rade a presunie sa z momentálneho vrchola po príslušnej hrane. 
+Ak hrana neexistuje pridá sa do stromu nový vrchol a príslušná hrana. Cyklus 
+sknčí, keď sa vyčerpajú všetky znaky a teda sa do stromu vloží celý kľúč a 
+ukončovací znak.
+
+\begin{figure*}
+\includegraphics[width=2\columnwidth]{obrazky/trieinsert.png}
+\caption{\emph{Operácia \put.} Vo vizualizácií naznačujeme, kade sa 
+presunieme.} 
+\label{img:trieinsert} 
+\end{figure*}
+
+Operácia \find\ začína hľadať kľúč $k$ taktiež v koreni. Pridá ku 
+postupnosti spravenej z kľúča ukončovací znak (podobne ako pri \put) a 
+spustí sa z koreňa podľa postupnosti znakov. Ak hrana, po ktorej sa máme
+spustiť neexistuje, daný kľúč sa v strome nenachádza. Ak prečítame celú 
+postupnosť, daný kľúč sa v strome nachádza.
+
+Operácia \delete\ najprv nájde hľadaný kľúč pomocou operácie \find\ a potom 
+už len stačí odstrániť hranu s ukončovacím symbolom a vrchol, ktorý bol 
+na nej zavesený. V tomto štádiu sa nám môže stať, že v strome ostane 
+takzvaná \emph{mŕtva vetva} -- nie je ukončená ukončovacím znakom. 
+Keďže si práve pamätáme smerník na mrtvého syna môžeme ho odtrhnúť. A takto 
+pokračovať vyššie až kým neutrhneme celú vetvu.
+
+\begin{figure*}
+\includegraphics[width=2\columnwidth]{obrazky/triedeletebig.png}
+\caption{\emph{Operácia \delete.} Najprv zistíme, či je kľúč v strome, 
+potom ho zmažeme a potom zmažeme mŕtvu vetvu, ktorá je vyznačená 
+červenou farbou.} 
+\label{img:triedelete} 
+\end{figure*}
+
+\paragraph{Použitie}
+Písmenkový strom sa používa v rôznych modifikáciach a na rôzne účely. O 
+zavedenie pojmov sa zaslúžil \citet{fredkin}, ktorý používal operácie 
+$\mathop{storage}$ (\put), $\mathop{retrieval}$ (\find) 
+a $\mathop{deletion}$ (\delete) a dátovú štruktúru nazýval \emph{trie 
+memory}, keďže išlo naozaj o spôsob uloženia dát v pamäti. Výraz \emph{trie}%
+\footnote{Z anglického re\emph{trie}val -- získať.} 
+sa ujal a tak budeme písmenkový strom označovať aj v ďalšom texte.
+Vďaka tomu, že písmenkový strom udržiava spoločné \emph{prefixy} kľúčov sa 
+nazýva aj \emph{prefixový strom}.
+
+O niečo neskôr \citet{knuth} uviedol vo svojej knihe ako príklad na \trie\ 
+vreckový slovník. V tom istom diele uviedol aj možnosť komprimovania vetiev 
+a možnosť prerobenia $m$-árneho \trie\ na binárny. 
+Pre silnú podobnosť s \emph{konečnými automatmi} vznikli prerobenie a 
+implementácie \trie\ pomocou komprimovaných automatov. Tieto majú použitie 
+najmä ako pomôcky pri kontrole pravopisu \citep{ca}. Každý jazyk obsahuje 
+veľa predpôn a prípon a ich kombinácií, preto takéto automaty zaberajú 
+málo miesta. 
+
+Priamočiare je použitie \trie\ na utriedenie poľa slov. Všetky slová sa 
+pridajú do stromu a potom sa spraví \emph{preorderový prechod} \trie. 
+Túto myšlienku spracoval \citet{burstsort1} a veľmi výrazne zrýchlil triedenie 
+dlhých zoznamov slov. Neskôr tento algoritmus vylepšil \citet{burstsort2}.
+Špeciálnym použitím \trie\ je zmena jeho prefixovej charakteristiky 
+na suffixovú a vytvorenie tzv. \emph{suffixového stromu}. Táto štruktúra má 
+veľmi veľa praktických využití \citep{gusfield}. 
+
+%Friker, neobzeraj baby a pracuj! 
+%Nejaké citovateľné práce o trie?
 
