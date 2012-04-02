@@ -34,3 +34,4 @@
 -je dobrým zvykom nový pojem napísať prvý krát kurzívou. samozrejme vysvetliť. 
 	(napr. finger vo finger tree)
 -\insert je zadefinovaný pre \footnote a aj iné veci
+

@@ -5,7 +5,7 @@
 \def\union{$\mathop{union}(x, y)$}
 
 \section{\uf}
-\paragraph{Popis}
+\paragraph{Popis.}
 Sú problémy, ktoré vyžadujú spájanie objektov do množín a množín navzájom 
 a následné určovanie, do ktorej množiny objekt patrí. Od takejto \emph{
 dátovej štruktúry pre disjunktné množiny} očakávame, že si bude udržiavať 
@@ -30,15 +30,17 @@ objektu sa musí udržiavať smerník $p(x)$ na otca v strome. Smerník zástupc
 množiny ukazuje na hodnotu \null.
 
 Operácia \makeset\ teda vytvorí nový prvok $x$ a nastaví $p(x) = \null$. 
+
 Operáciu \find\ vykonáme tak, že budeme sledovať cestu po smerníkoch, až 
 kým nenájdeme zástupcu. 
+
 Operáciu \union\ ide najjednoduchšie vykonať tak, že presmerujeme smerník 
 $p(y)$ na prvok $x$, teda $p(y) = x$. 
 Môžeme ľahko pozorovať, že takýto \emph{naivný} spôsob je neefektívny, 
 lebo nám operácia \find\ v najhoršom prípade, na $n$ prvkoch, trvá $O(n)$ 
 krokov. 
 
-\paragraph{Použitie}
+\paragraph{Použitie.}
 Vďaka dvom hlavným operáciam \find\ a \union\ 
 je táto dátová štruktúra známejšia pod pojmom \emph{\uf}, ktorý 
 používame aj my. Medzi najznámejšie problémy, ktoré sa riešia pomocou 
@@ -47,11 +49,11 @@ používame aj my. Medzi najznámejšie problémy, ktoré sa riešia pomocou
 na zodpovedanie otázky "Koľko je komponentov súvislosti?" alebo
 "Sú dva prvky v rovnakej množine?" ("Sú dva objekty navzájom prepojené?"), 
 ak máme dovolené za behu pridávať hrany (spájať množiny objektov). 
-Niektoré ďalšie grafové problémy sú popísané napr. v \citet{paths1}.
+Niektoré ďalšie grafové problémy popísal napr. \citet{paths1}.
 
 
 
-\paragraph{Heuristika na spájanie}
+\paragraph{Heuristika na spájanie.}
 Existujú dva prístupy ako zlepšiť operácie a tým aj zrýchliť ich vykonanie. 
 Sú to: heuristika \emph{spájanie podľa ranku} a rôzne heuristiky na 
 \emph{kompresiu cesty}. 
@@ -74,7 +76,7 @@ Ak sú oba ranky rovnaké, vyberieme ľubovoľného zo zástupcov $x$ a $y$,
 jeho rank zvýšime o jeden a smerník ostatného zástupcu bude ukazovať 
 na tohto zástupcu. Zástupcom novej množiny bude vybratý zástupca. 
 
-\paragraph{Heuristiky na kompresiu cesty}
+\paragraph{Heuristiky na kompresiu cesty.}
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{obrazky/komp.png}
@@ -92,13 +94,13 @@ navštívených po ceste (včetne $x$) presmerujeme na zástupcu množiny. Toto
 síce spomalí prvé vykonávanie, ale výrazne zrýchli ďalšie hľadania. 
 Druhou heuristikou je \emph{delenie cesty} \citep{comp2}. Pri vykonávaní 
 operácie \find\ 
-pripojíme každý vrchol\footnote{okrem koreňa a synov koreňa, 
-keďže tie deda a otca resp. deda nemajú} v ceste od vrcholu $x$ po koreň stromu 
+pripojíme každý vrchol\footnote{Okrem koreňa a synov koreňa, 
+keďže tie deda a otca resp. deda nemajú.} v ceste od vrcholu $x$ po koreň stromu 
 na otca jeho otca. 
 Treťou heuristikou je \emph{pólenie cesty} \citep{comp2}. Pri vykonávaní 
 operácie \find\ 
-pripojíme každý druhý vrchol\footnote{okrem koreňa a synov koreňa, 
-keďže tie deda a otca resp. deda nemajú} 
+pripojíme každý druhý vrchol\footnote{Okrem koreňa a synov koreňa, 
+keďže tie deda a otca resp. deda nemajú.} 
 v ceste od vrcholu $x$ po koreň stromu na otca jeho otca. 
 
 Zdá sa, že najefektívnejšie je pólenie cesty pred delením, ktoré 
