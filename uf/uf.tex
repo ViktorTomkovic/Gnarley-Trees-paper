@@ -1,8 +1,8 @@
 \def\uf{Union-Find}
 \def\null{\texttt{NULL}}
-\def\makeset{$\mathop{makeset}(x)$}
-\def\find{$\mathop{find}(x)$}
-\def\union{$\mathop{union}(x, y)$}
+\def\makeset{$\mathop{makeset}\left( x\right)$}
+\def\find{$\mathop{find}\left( x\right)$}
+\def\union{$\mathop{union}\left( x, y\right)$}
 
 \section{\uf}
 \paragraph{Popis.}
@@ -12,11 +12,11 @@ dátovej štruktúry pre disjunktné množiny} očakávame, že si bude udržiav
 jednoznačného \emph{zástupcu} každej množiny a bude poskytovať 
 tieto tri oprácie: 
 \begin{itemize}
-\item $\mathop{\mathbf{makeset}}(x)$ -- vytvorí novú množinu s jedným prvkom, 
+\item $\mathop{\mathbf{makeset}}\left( x\right)$ -- vytvorí novú množinu s jedným prvkom, 
 ktorý nepatrí do žiadnej inej množiny;
-\item $\mathop{\mathbf{find}}(x)$ -- nájde zástupcu množiny, v ktorej sa 
+\item $\mathop{\mathbf{find}}\left( x\right)$ -- nájde zástupcu množiny, v ktorej sa 
 prvok $x$ nachádza;
-\item $\mathop{\mathbf{union}}(x, y)$ -- vytvorí novú množinu, ktorá obsahuje 
+\item $\mathop{\mathbf{union}}\left( x, y\right)$ -- vytvorí novú množinu, ktorá obsahuje 
 všetky prvky v množinách, ktorých zástupcovia sú $x$ a $y$. Tieto 
 množiny zmaže. Ďalej vyberie nového zástupcu novej množiny. Pre 
 jednoduchosť, táto operácia predpokladá, že $x$ a $y$ sú 
@@ -51,20 +51,18 @@ na zodpovedanie otázky "Koľko je komponentov súvislosti?" alebo
 ak máme dovolené za behu pridávať hrany (spájať množiny objektov). 
 Niektoré ďalšie grafové problémy popísal napr. \citet{paths1}.
 
-
-
-\paragraph{Heuristika na spájanie.}
+\bigskip
 Existujú dva prístupy ako zlepšiť operácie a tým aj zrýchliť ich vykonanie. 
 Sú to: heuristika \emph{spájanie podľa ranku} a rôzne heuristiky na 
 \emph{kompresiu cesty}. 
 
-\begin{figure}
-\includegraphics[width=\columnwidth]{obrazky/union.png}
-\caption{\emph{Spájanie podľa ranku.} (a) Pred spojením. (b) Po spojení. 
-Plytší strom sa napojil pod hlbší.} 
-\label{img:union} 
-\end{figure}
-
+%\begin{figure}
+%\includegraphics[width=\columnwidth]{obrazky/union.png}
+%\caption{\emph{Spájanie podľa ranku.} (a) Pred spojením. (b) Po spojení. 
+%Plytší strom sa napojil pod hlbší.} 
+%\label{img:union} 
+%\end{figure}
+\paragraph{Heuristika na spájanie.}
 Prvá heuristika pridáva ku algoritmom hodnotu 
 $rank(x)$, ktorá bude určovať najväčšiu možnú hĺbku podstromu zakorenenú 
 vrcholom $x$. V tom prípade pri o\-pe\-rá\-cií \makeset\ zadefinujeme 
@@ -80,8 +78,11 @@ na tohto zástupcu. Zástupcom novej množiny bude vybratý zástupca.
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{obrazky/komp.png}
-\caption{\emph{Kompresie cesty.} (a) Pred vykonaním \find. (b) Jednoduchá 
-kompresia. (c) Delenie cesty. (d) Pólenie cesty.} 
+\caption{\emph{Kompresia cesty z vrchola 11 do koreňa.} 
+Cesta je vyznačená šedou. 
+(a) Pred vykonaním kompresie. Pri jednoduchej 
+kompresii~(b) sa všetky vrcholy sa napoja na zástupcu. Pri delení cesty~(c) a 
+pólení cesty~(d) sa cesta skráti približne na polovicu.} 
 \label{img:komp} 
 \end{figure}
 
@@ -106,6 +107,44 @@ v ceste od vrcholu $x$ po koreň stromu na otca jeho otca.
 Zdá sa, že najefektívnejšie je pólenie cesty pred delením, ktoré 
 použije zhruba dvakrát viac priradení smerníkov a jednoduchou kompresiou, 
 ktorá vyžaduje dva behy \citep{galil}. 
+
+\paragraph{Časová zložitosť.}
+Časová zložitosť \uf\ záleží od toho, koľko prvkov je v množinách a koľko je 
+operácií celkovo vykonaných operácií. Počet prvkov označme $n$ a počet 
+operácií $m$. V praxi je zvyčajne počet operácií oveľa väčší 
+ako počet prvkov. Všetky uvedené spôsoby ako vykonať 
+operáciu \find\ sa dajú použiť s obomi realizáciami operácie \union. 
+V tabuľke~\ref{fig:uf:comp} je porovnanie časových zložitostí \citep{paths2}.
+
+\begin{table}
+\centering
+\small
+%\footnotesize %toto tu mám nechať?
+\subfloat[Časová zložitosť pre \uf, keď $m \geq n$.][Prehľad časových zložitostí, ak $m \geq n$.]{
+\begin{tabular}{m{2.5cm}m{2.2cm}m{2.2cm}}
+& Naivné spájanie & Spájanie podľa ranku \tabularnewline
+\hline
+Naivné hľadanie & $\Theta\left( mn\right)$ & $\Theta\left( m\log n\right)$ \tabularnewline
+Jednoduchá kompresia, delenie cesty, pólenie cesty & $\Theta\left(m\log _{1+m/n} n \right)$ & $\Theta\left( m\alpha\left( m, n\right) \right)$ \tabularnewline
+\label{fig:uf:comp1}
+\end{tabular}
+}
+\qquad
+\subfloat[Časová zložitosť pre \uf, keď $m < n$.][Prehľad časových zložitostí, ak $m < n$.]{
+\begin{tabular}{m{2.5cm}m{2.2cm}m{2.2cm}}
+& Naivné spájanie & Spájanie podľa ranku \tabularnewline
+\hline
+Naivné hľadanie & $\Theta\left( mn\right)$ & $\Theta\left(n + m\log n\right)$ \tabularnewline
+Jednoduchá kompresia& $\Theta\left(n + m\log  n \right)$ & $\Theta\left(n + m\alpha\left( n, n\right) \right)$ \tabularnewline
+Delenie cesty & $\Theta\left(n \log m \right)$ & $\Theta\left(n + m\alpha\left( n, n\right) \right)$ \tabularnewline
+Pólenie cesty & $\Omega\left(n + m\log n \right)$, $O\left(n\log m\right)$ & $\Theta\left(n + m\alpha\left( n, n\right) \right)$ \tabularnewline
+\label{fig:uf:comp2}
+\end{tabular}}
+\caption{\normalsize Porovnanie časových zložitostí pre rôzne kombinácie hľadaní prvkov a 
+spájaní množín pre \uf. Počet prvkov je $n$ a počet operácií je $m$. $\alpha$ 
+je inverzná ackermannová funkcia. V praxi zväčša platí, že $m > n$.}
+\label{fig:uf:comp}
+\end{table}
 
 %citovat Walkerov alg. - to mám robiť tu?
 
