@@ -1,5 +1,20 @@
 \section{História}
-Každá vizualizovaná operácia (insert/delete/...) na dátovej štruktúre pozostáva z niekoľkých krokov. Jednou z noviniek v projekte je možnosť vrátiť sa pri prehliadani operácií o niekoľko krokov späť (história krokov), resp. vrátiť späť celé operácie (história operácií).\\
-Niekedy sa stáva, že nedočkavý užívateľ rýchlo prekliká cez celú vizualizáciu operácie a pritom si nestihne uvedomiť, aké zmeny sa vykonali na danej dátovej štruktúre. Inokedy je operácia taká rozsiahla, že niektoré dôležité zmeny si nevšimne. Vtedy by bolo užitočné pozrieť si vizualizáciu ešte raz (alebo niekoľkokrát). Tento problém rieši história krokov. Užívateľ má možnosť vrátiť sa späť o jeden krok (tlačidlo "Späť"/"Previous") alebo preskočiť na ľubovoľný krok po kliknutí na zodpovedajúci komentár. \\
-História krokov a operácií je atomická. Krok/operácia sa vykoná/vráti celý(-á) alebo vôbec, pričom stav dátovej štruktúry korešponduje s pozíciou v histórii. To umožňuje po vrátení celej operácie vykonať inú operáciu. Táto vlastnosť je užitočná najmä v prípade vykonania operácie (príp. zmazania celej dátovej štruktúry) omylom.
+Každá vizualizovaná operácia (insert/delete/...) na dátovej štruktúre pozostáva
+z niekoľkých krokov. Jednou z noviniek v projekte je možnosť vrátiť sa pri
+prehliadani operácií o niekoľko krokov späť (história krokov), resp. vrátiť späť
+celé operácie (história operácií).
+
+Niekedy sa stáva, že nedočkavý užívateľ rýchlo prekliká cez celú vizualizáciu
+operácie a pritom si nestihne uvedomiť, aké zmeny sa vykonali na danej dátovej
+štruktúre. Inokedy je operácia taká rozsiahla, že niektoré dôležité zmeny si
+nevšimne. Vtedy by bolo užitočné pozrieť si vizualizáciu ešte raz (alebo
+niekoľkokrát). Tento problém rieši história krokov. Užívateľ má možnosť vrátiť
+sa späť o jeden krok (tlačidlo "Späť"/"Previous") alebo preskočiť na ľubovoľný
+krok po kliknutí na zodpovedajúci komentár.
+
+História krokov a operácií je atomická. Krok/operácia sa vykoná/vráti celý(-á)
+alebo vôbec, pričom stav dátovej štruktúry korešponduje s pozíciou v histórii.
+To umožňuje po vrátení celej operácie vykonať inú operáciu. Táto vlastnosť je
+užitočná najmä v prípade vykonania operácie (prípadne zmazania celej dátovej
+štruktúry) omylom.
 
