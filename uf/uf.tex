@@ -7,33 +7,38 @@
 
 \paragraph{Popis.}
 
-Sú problémy, ktoré vyžadujú spájanie objektov do množín a množín navzájom 
-a následné určovanie, do ktorej množiny objekt patrí. Od takejto \emph{
-dátovej štruktúry pre disjunktné množiny} očakávame, že si bude udržiavať 
-jednoznačného \emph{zástupcu} každej množiny a bude poskytovať 
-tieto tri oprácie: 
+% Sú problémy, ktoré vyžadujú spájanie objektov do množín a množín navzájom 
+% a následné určovanie, do ktorej množiny objekt patrí. Od takejto \emph{
+% dátovej štruktúry pre disjunktné množiny} očakávame, že si bude udržiavať 
+% jednoznačného \emph{zástupcu} každej množiny a bude poskytovať 
+% tieto tri oprácie: 
+V niektorých aplikáciach potrebujeme udržiavať prvky rozdelené do skupín
+(disjunktných množín), pričom skupiny sa môžu zlučovať a my potrebujeme
+pre daný prvok efektívne zistiť, do ktorej skupiny patrí. Predpokladáme,
+že každá množina $S$ je jednoznačne určená jedným svojim zástupcom $x\in S$
+a potrebujeme implementovať nasledovné tri operácie:
 
 \begin{itemize}
-\item \makeset\ -- vytvorí novú množinu s jedným prvkom, 
-ktorý nepatrí do žiadnej inej množiny;
+\item \makeset\ -- vytvorí novú množinu $S=\{x\}$ s jedným prvkom; %,
+                   %ktorý nepatrí do žiadnej inej množiny;
+\item \union\ -- ak $x,y$ sú zástupcovia množín $S$ a $T$,
+                 {\it union} vytvorí novú množinu $S\cup T$,
+                 pričom $S$ aj $T$ zmaže. Zástupcom novej množiny $S\cup T$
+                 je $x$ alebo $y$.
 \item \find\ -- nájde zástupcu množiny, v ktorej sa 
-prvok $x$ nachádza;
-\item \union\ -- vytvorí novú množinu, ktorá obsahuje 
-všetky prvky v množinách, ktorých zástupcovia sú $x$ a $y$. Tieto 
-množiny zmaže. Ďalej vyberie nového zástupcu novej množiny. Pre 
-jednoduchosť, táto operácia predpokladá, že $x$ a $y$ sú 
-zástupcovia množín.
+                prvok $x$ nachádza.
 \end{itemize}
 
+V takejto situácií je vhodná štruktúra \emph{union-find}.
 % Vďaka častej asociácií objektov a spájania množín ako vrcholy a hrany grafu 
 % sa často dátová štruktúra abstraktne reprezentuje ako 
 % \emph{les} -- množina zakorenených stromov. 
 % Konkrétnou implementáciou potom býva pole objektov -- vrcholov. Ku každému 
 % objektu sa musí udržiavať smerník $p(x)$ na otca v strome. Smerník zástupcu 
 % množiny ukazuje na hodnotu \null.
-Táto dátová štruktúra sa často reprezentuje ako les, kde každý strom zodpovedá
+Táto dátová štruktúra sa reprezentuje ako les, kde každý strom zodpovedá
 jednej množine a korene stromov sú zástupcovia množín. Pri implementácií si
-stačí pre každý prvok $x$ stačí udržiavať smerník $p(x)$ na jeho otca
+stačí pre každý prvok $x$ udržiavať smerník $p(x)$ na jeho otca
 (pre koreň je $p(x)=\null$).
 
 Operácia \makeset\ teda vytvorí nový prvok $x$ a nastaví $p(x) = \null$. 
@@ -49,9 +54,9 @@ krokov.
 
 \paragraph{Použitie.}
 
-Vďaka dvom hlavným operáciam \find\ a \union\ 
-je táto dátová štruktúra známejšia pod pojmom \emph{union-find}, ktorý 
-používame aj my. Medzi najznámejšie problémy, ktoré sa riešia pomocou 
+% Vďaka dvom hlavným operáciam \find\ a \union\ je táto dátová štruktúra známejšia
+% pod pojmom \emph{union-find}, ktorý používame aj my.
+Medzi najznámejšie problémy, ktoré sa riešia pomocou 
 union-find patria Kruskalov algoritmus na nájdenie najlacnejšej kostry 
 \citep{kruskal} a unifikácia \citep{unif}. Veľmi priamočiare použitie je 
 na zodpovedanie otázky "Koľko je komponentov súvislosti?" alebo
