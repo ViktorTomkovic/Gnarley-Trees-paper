@@ -22,7 +22,7 @@ Písmenkový strom je \emph{zakorenený strom}, v~ktorom každá hrana obsahuje
 práve jeden znak z abecedy alebo \emph{ukončovací znak}. Teda, každá cesta 
 z koreňa do listu so znakmi $w_1, w_2, \ldots, w_n, \uz$ prirodzene 
 zodpovedá slovu $w=w_1w_2\cdots w_n$. \emph{Ukončovací znak} je ľubovoľný, 
-dopredu dohodnutý symbol, ktorý sa v abecede nenachádza. 
+dopredu dohodnutý symbol, ktorý sa v abecede nenachádza (napr. \uz). 
 
 Písmenkový strom je \emph{asociatívne pole (slovník)}, čiže 
 poskytuje tieto tri operácie:
@@ -73,9 +73,8 @@ zložitosť $O(|\k|)$, kde $|\k|$ je dĺžka slova.
 
 \paragraph{Použitie.}
 Prvýkrát navrhol písmenkový strom \citet{fredkin}, ktorý používal názov 
-\emph{trie memory}, keďže išlo o spôsob udržiavania dát v pamäti. Pojem 
-\emph{trie}\footnote{Z anglického re\emph{trie}val -- získanie.} 
-sa rozšíril a používa sa celosvetovo.
+\emph{trie memory}\footnote{Z anglického re\emph{trie}val -- získanie.}, 
+keďže išlo o spôsob udržiavania dát v pamäti. 
 %používal operácie 
 %$\mathop{storage}$ (\put), $\mathop{retrieval}$ (\find) 
 %a $\mathop{deletion}$ (\delete) a dátovú štruktúru nazýval \emph{trie 
@@ -119,7 +118,10 @@ mo\-di\-fi\-ko\-vať na udržiavanie viacerých slov. Tieto štruktúry majú
 veľmi veľa praktických využití \citep{gusfield}. 
 
 \paragraph{Vizualizácia.} Pri vizualizácií písmenkového stromu sme použili 
-známy Walkerov algoritumus pre úsporné rozloženie vrcholov v strome. 
+Walkerov algoritumus pre úsporné rozloženie vrcholov v strome. 
 \citep{walker} Keď má vrchol viacej synov a hrany kreslíme priamo, tak vzniká 
 nedostatok priestoru pre umiestnenie znakov na hrany. Preto sme sa rozhodli 
-kresliť hrany zakrivene, podľa Bézierovej krivky určenej štyrmi bodmi.
+kresliť hrany zakrivene, podľa Bézierovej krivky určenej štyrmi bodmi. 
+Vo vizualizácií sa dajú vložiť náhodné slová podľa momentálne nastaveného 
+jazyka. Taktiež sa automaticky odstraňuje diakritika a interpunkcia, takže 
+sa dá naraz vložiť súvislý text.
