@@ -1,4 +1,18 @@
 \section{Rozšírenie predošlej práce}
-jednotlive vizualizacie a implementovane ficurie
-co sa zmenilo od bakalarky? zoomovanie, komentare, tree layouty, historia a nove ds
+%jednotlive vizualizacie a implementovane ficurie
+%co sa zmenilo od bakalarky? zoomovanie, komentare, tree layouty, historia a nove ds
 
+toto treba kompletne vymyslieť a napísať a potom tam dakde pichnúť:
+
+\paragraph{Tesnejšie vykresľovanie grafov.}
+Stromy sa vykresľovali tak, že sa spravil obdĺžnikový obal podstromov daného 
+vrcholu, tieto obdĺžniky sa usporiadali vedľa seba a k nim sa pripojil daný 
+vrchol a okolo celej štruktúry sa spravil obdĺžnik. Toto je ale spôsob, ktorý 
+nešetrí priestor a pri štruktúrach ako písmenkový strom by výsledné stromy 
+vyzerali škaredo. Preto sme sa rozhodli pre stromy implementovať 
+alternatívny spôsob rozloženia, ktorý vymyslel \citet{reingold} a pre $m$-árne 
+stromy rozšíril \citet{walker}. Tieto rozloženia vykresľujú vrcholy stromov 
+najtesnejšie, pričom dodržujú tieto pravidlá: vrcholy v rovnakej hĺbke musia 
+byť vykreslené na jednej priamke a priamky určujúce jednotlivé úrovne majú byť 
+rovnobežné; poradie synov má byť zachované; otec má ležať v strede svojich 
+synov a podstromy majú byť symetrické.
