@@ -78,20 +78,20 @@ na tohto zástupcu. Zástupcom novej množiny bude vybratý zástupca.
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{obrazky/komp.png}
-\caption{\emph{Kompresia cesty z vrchola 11 do koreňa.} 
+\caption{\emph{Kompresia cesty z vrcholu 11 do koreňa.} 
 Cesta je vyznačená šedou. 
-(a) Pred vykonaním kompresie. Pri jednoduchej 
-kompresii~(b) sa všetky vrcholy sa napoja na zástupcu. Pri delení cesty~(c) a 
-pólení cesty~(d) sa cesta skráti približne na polovicu.} 
+(a) Pred vykonaním kompresie. Pri kompresii~(b) sa všetky vrcholy napoja 
+na zástupcu. Pri delení cesty~(c) a pólení cesty~(d) sa cesta skráti 
+približne na polovicu.} 
 \label{img:komp} 
 \end{figure}
 
 Druhou heuristikou je kompresia cesty. Algoritmov na efektívnu kompresiu 
 cesty je veľa \citep{paths2}. Tu popíšeme tie najefektívnejšie. Prvou z nich 
-je \emph{jednoduchá kompresia cesty} \citep{comp1}. Pri vykonávaní 
+je \emph{kompresia} \citep{comp1}. Pri vykonávaní 
 operácie \find, po tom, 
 ako nájdeme zástupcu množiny obsahujúcej prvok $x$, smerníky prvkov 
-navštívených po ceste (včetne $x$) presmerujeme na zástupcu množiny. Toto 
+navštívených po ceste (vrátane $x$) presmerujeme na zástupcu množiny. Toto 
 síce spomalí prvé vykonávanie, ale výrazne zrýchli ďalšie hľadania. 
 Druhou heuristikou je \emph{delenie cesty} \citep{comp2}. Pri vykonávaní 
 operácie \find\ 
@@ -104,47 +104,53 @@ pripojíme každý druhý vrchol\footnote{Okrem koreňa a synov koreňa,
 keďže tie deda a otca resp. deda nemajú.} 
 v ceste od vrcholu $x$ po koreň stromu na otca jeho otca. 
 
-Zdá sa, že najefektívnejšie je pólenie cesty pred delením, ktoré 
-použije zhruba dvakrát viac priradení smerníkov a jednoduchou kompresiou, 
-ktorá vyžaduje dva behy \citep{galil}. 
-
-\paragraph{Časová zložitosť.}
+\bigskip
 Časová zložitosť \uf\ záleží od toho, koľko prvkov je v množinách a koľko je 
-operácií celkovo vykonaných operácií. Počet prvkov označme $n$ a počet 
-operácií $m$. V praxi je zvyčajne počet operácií oveľa väčší 
-ako počet prvkov. Všetky uvedené spôsoby ako vykonať 
+operácií celkovo vykonaných operácií. Všetky uvedené spôsoby ako vykonať 
 operáciu \find\ sa dajú použiť s obomi realizáciami operácie \union. 
-V tabuľke~\ref{fig:uf:comp} je porovnanie časových zložitostí \citep{paths2}.
+Počet prvkov označme $n$ a počet operácií $m$. V praxi je zvyčajne počet 
+operácií oveľa väčší ako počet prvkov. Pri tomto predpoklade ($m\geq n$) je 
+pri použití spájania podľa ranku časová zložitosť pre algoritmus bez kompresie 
+$\Theta\left( m\log n\right)$ a pre všetky tri uvedené typy kompresií 
+$\Theta\left( m\alpha\left( m, n\right) \right)$ \citep{paths2}.
 
-\begin{table}
-\centering
-\small
-%\footnotesize %toto tu mám nechať?
-\subfloat[Časová zložitosť pre \uf, keď $m \geq n$.][Prehľad časových zložitostí, ak $m \geq n$.]{
-\begin{tabular}{m{2.5cm}m{2.2cm}m{2.2cm}}
-& Naivné spájanie & Spájanie podľa ranku \tabularnewline
-\hline
-Naivné hľadanie & $\Theta\left( mn\right)$ & $\Theta\left( m\log n\right)$ \tabularnewline
-Jednoduchá kompresia, delenie cesty, pólenie cesty & $\Theta\left(m\log _{1+m/n} n \right)$ & $\Theta\left( m\alpha\left( m, n\right) \right)$ \tabularnewline
-\label{fig:uf:comp1}
-\end{tabular}
-}
-\qquad
-\subfloat[Časová zložitosť pre \uf, keď $m < n$.][Prehľad časových zložitostí, ak $m < n$.]{
-\begin{tabular}{m{2.5cm}m{2.2cm}m{2.2cm}}
-& Naivné spájanie & Spájanie podľa ranku \tabularnewline
-\hline
-Naivné hľadanie & $\Theta\left( mn\right)$ & $\Theta\left(n + m\log n\right)$ \tabularnewline
-Jednoduchá kompresia& $\Theta\left(n + m\log  n \right)$ & $\Theta\left(n + m\alpha\left( n, n\right) \right)$ \tabularnewline
-Delenie cesty & $\Theta\left(n \log m \right)$ & $\Theta\left(n + m\alpha\left( n, n\right) \right)$ \tabularnewline
-Pólenie cesty & $\Omega\left(n + m\log n \right)$, $O\left(n\log m\right)$ & $\Theta\left(n + m\alpha\left( n, n\right) \right)$ \tabularnewline
-\label{fig:uf:comp2}
-\end{tabular}}
-\caption{\normalsize Porovnanie časových zložitostí pre rôzne kombinácie hľadaní prvkov a 
-spájaní množín pre \uf. Počet prvkov je $n$ a počet operácií je $m$. $\alpha$ 
-je inverzná ackermannová funkcia. V praxi zväčša platí, že $m > n$.}
-\label{fig:uf:comp}
-\end{table}
+\paragraph{Vizualizácia.} \uf\ sme vizualizovali ako les. Pre názorné 
+oddelenie množín sme si zvolili pravidlo, ktoré zakazovalo vykresliť vrchol 
+napravo od najľavejšieho vrcholu a naľavo od napravejšieho vrcholu inej 
+množiny. Jednotlivé množiny sme už vykreslovali tesným Walkerovým algoritmom 
+\citep{walker}. 
+
+% V tabuľke~\ref{fig:uf:comp} je porovnanie časových zložitostí \citep{paths2}.
+
+% \begin{table}
+% \centering
+% \small
+% %\footnotesize %toto tu mám nechať?
+% \subfloat[Časová zložitosť pre \uf, keď $m \geq n$.][Prehľad časových zložitostí, ak $m \geq n$.]{
+% \begin{tabular}{m{2.5cm}m{2.2cm}m{2.2cm}}
+% & Naivné spájanie & Spájanie podľa ranku \tabularnewline
+% \hline
+% Naivné hľadanie & $\Theta\left( mn\right)$ & $\Theta\left( m\log n\right)$ \tabularnewline
+% Kompresia, delenie cesty, pólenie cesty & $\Theta\left(m\log _{1+m/n} n \right)$ & $\Theta\left( m\alpha\left( m, n\right) \right)$ \tabularnewline
+% \label{fig:uf:comp1}
+% \end{tabular}
+% }
+% \qquad
+% \subfloat[Časová zložitosť pre \uf, keď $m < n$.][Prehľad časových zložitostí, ak $m < n$.]{
+% \begin{tabular}{m{2.5cm}m{2.2cm}m{2.2cm}}
+% & Naivné spájanie & Spájanie podľa ranku \tabularnewline
+% \hline
+% Naivné hľadanie & $\Theta\left( mn\right)$ & $\Theta\left(n + m\log n\right)$ \tabularnewline
+% Kompresia& $\Theta\left(n + m\log  n \right)$ & $\Theta\left(n + m\alpha\left( n, n\right) \right)$ \tabularnewline
+% Delenie cesty & $\Theta\left(n \log m \right)$ & $\Theta\left(n + m\alpha\left( n, n\right) \right)$ \tabularnewline
+% Pólenie cesty & $\Omega\left(n + m\log n \right)$, $O\left(n\log m\right)$ & $\Theta\left(n + m\alpha\left( n, n\right) \right)$ \tabularnewline
+% \label{fig:uf:comp2}
+% \end{tabular}}
+% \caption{\normalsize Porovnanie časových zložitostí pre rôzne kombinácie hľadaní prvkov a 
+% spájaní množín pre \uf. Počet prvkov je $n$ a počet operácií je $m$. $\alpha$ 
+% je inverzná Ackermannova funkcia. V praxi zväčša platí, že $m > n$.}
+% \label{fig:uf:comp}
+% \end{table}
 
 %citovat Walkerov alg. - to mám robiť tu?
 
