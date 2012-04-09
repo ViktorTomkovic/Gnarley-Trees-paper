@@ -1,33 +1,45 @@
-\def\uf{Union-Find}
 \def\null{\texttt{NULL}}
-\def\makeset{$\mathop{makeset}\left( x\right)$}
-\def\find{$\mathop{find}\left( x\right)$}
-\def\union{$\mathop{union}\left( x, y\right)$}
+\def\makeset{$\mathop{\mathit{makeset}}(x)$}
+\def\find{$\mathop{\mathit{find}}(x)$}
+\def\union{$\mathop{\mathit{union}}(x, y)$}
 
-\section{\uf}
+\section{Union-find}
+
 \paragraph{Popis.}
-Sú problémy, ktoré vyžadujú spájanie objektov do množín a množín navzájom 
-a následné určovanie, do ktorej množiny objekt patrí. Od takejto \emph{
-dátovej štruktúry pre disjunktné množiny} očakávame, že si bude udržiavať 
-jednoznačného \emph{zástupcu} každej množiny a bude poskytovať 
-tieto tri oprácie: 
+
+% Sú problémy, ktoré vyžadujú spájanie objektov do množín a množín navzájom 
+% a následné určovanie, do ktorej množiny objekt patrí. Od takejto \emph{
+% dátovej štruktúry pre disjunktné množiny} očakávame, že si bude udržiavať 
+% jednoznačného \emph{zástupcu} každej množiny a bude poskytovať 
+% tieto tri oprácie: 
+V niektorých aplikáciach potrebujeme udržiavať prvky rozdelené do skupín
+(disjunktných množín), pričom skupiny sa môžu zlučovať a my potrebujeme
+pre daný prvok efektívne zistiť, do ktorej skupiny patrí. Predpokladáme,
+že každá množina $S$ je jednoznačne určená jedným svojim zástupcom $x\in S$
+a potrebujeme implementovať nasledovné tri operácie:
+
 \begin{itemize}
-\item $\mathop{\mathbf{makeset}}\left( x\right)$ -- vytvorí novú množinu s jedným prvkom, 
-ktorý nepatrí do žiadnej inej množiny;
-\item $\mathop{\mathbf{find}}\left( x\right)$ -- nájde zástupcu množiny, v ktorej sa 
-prvok $x$ nachádza;
-\item $\mathop{\mathbf{union}}\left( x, y\right)$ -- vytvorí novú množinu, ktorá obsahuje 
-všetky prvky v množinách, ktorých zástupcovia sú $x$ a $y$. Tieto 
-množiny zmaže. Ďalej vyberie nového zástupcu novej množiny. Pre 
-jednoduchosť, táto operácia predpokladá, že $x$ a $y$ sú 
-zástupcovia množín.
+\item \makeset\ -- vytvorí novú množinu $S=\{x\}$ s jedným prvkom; %,
+                   %ktorý nepatrí do žiadnej inej množiny;
+\item \union\ -- ak $x,y$ sú zástupcovia množín $S$ a $T$,
+                 {\it union} vytvorí novú množinu $S\cup T$,
+                 pričom $S$ aj $T$ zmaže. Zástupcom novej množiny $S\cup T$
+                 je $x$ alebo $y$.
+\item \find\ -- nájde zástupcu množiny, v ktorej sa 
+                prvok $x$ nachádza.
 \end{itemize}
-Vďaka častej asociácií objektov a spájania množín ako vrcholy a hrany grafu 
-sa často dátová štruktúra abstraktne reprezentuje ako 
-\emph{les} -- množina zakorenených stromov. 
-Konkrétnou implementáciou potom býva pole objektov -- vrcholov. Ku každému 
-objektu sa musí udržiavať smerník $p(x)$ na otca v strome. Smerník zástupcu 
-množiny ukazuje na hodnotu \null.
+
+V takejto situácií je vhodná štruktúra \emph{union-find}.
+% Vďaka častej asociácií objektov a spájania množín ako vrcholy a hrany grafu 
+% sa často dátová štruktúra abstraktne reprezentuje ako 
+% \emph{les} -- množina zakorenených stromov. 
+% Konkrétnou implementáciou potom býva pole objektov -- vrcholov. Ku každému 
+% objektu sa musí udržiavať smerník $p(x)$ na otca v strome. Smerník zástupcu 
+% množiny ukazuje na hodnotu \null.
+Táto dátová štruktúra sa reprezentuje ako les, kde každý strom zodpovedá
+jednej množine a korene stromov sú zástupcovia množín. Pri implementácií si
+stačí pre každý prvok $x$ udržiavať smerník $p(x)$ na jeho otca
+(pre koreň je $p(x)=\null$).
 
 Operácia \makeset\ teda vytvorí nový prvok $x$ a nastaví $p(x) = \null$. 
 
@@ -41,10 +53,11 @@ lebo nám operácia \find\ v najhoršom prípade, na $n$ prvkoch, trvá $O(n)$
 krokov. 
 
 \paragraph{Použitie.}
-Vďaka dvom hlavným operáciam \find\ a \union\ 
-je táto dátová štruktúra známejšia pod pojmom \emph{\uf}, ktorý 
-používame aj my. Medzi najznámejšie problémy, ktoré sa riešia pomocou 
-\uf\ patria Kruskalov algoritmus na nájdenie najlacnejšej kostry 
+
+% Vďaka dvom hlavným operáciam \find\ a \union\ je táto dátová štruktúra známejšia
+% pod pojmom \emph{union-find}, ktorý používame aj my.
+Medzi najznámejšie problémy, ktoré sa riešia pomocou 
+union-find patria Kruskalov algoritmus na nájdenie najlacnejšej kostry 
 \citep{kruskal} a unifikácia \citep{unif}. Veľmi priamočiare použitie je 
 na zodpovedanie otázky "Koľko je komponentov súvislosti?" alebo
 "Sú dva prvky v rovnakej množine?" ("Sú dva objekty navzájom prepojené?"), 
@@ -63,6 +76,7 @@ Sú to: heuristika \emph{spájanie podľa ranku} a rôzne heuristiky na
 %\label{img:union} 
 %\end{figure}
 \paragraph{Heuristika na spájanie.}
+
 Prvá heuristika pridáva ku algoritmom hodnotu 
 $rank(x)$, ktorá bude určovať najväčšiu možnú hĺbku podstromu zakorenenú 
 vrcholom $x$. V tom prípade pri o\-pe\-rá\-cií \makeset\ zadefinujeme 
@@ -105,16 +119,16 @@ keďže tie deda a otca resp. deda nemajú.}
 v ceste od vrcholu $x$ po koreň stromu na otca jeho otca. 
 
 \bigskip
-Časová zložitosť \uf\ záleží od toho, koľko prvkov je v množinách a koľko je 
+Časová zložitosť union-findu záleží od toho, koľko prvkov je v množinách a koľko je 
 operácií celkovo vykonaných operácií. Všetky uvedené spôsoby ako vykonať 
 operáciu \find\ sa dajú použiť s obomi realizáciami operácie \union. 
 Počet prvkov označme $n$ a počet operácií $m$. V praxi je zvyčajne počet 
 operácií oveľa väčší ako počet prvkov. Pri tomto predpoklade ($m\geq n$) je 
 pri použití spájania podľa ranku časová zložitosť pre algoritmus bez kompresie 
-$\Theta\left( m\log n\right)$ a pre všetky tri uvedené typy kompresií 
-$\Theta\left( m\alpha\left( m, n\right) \right)$ \citep{paths2}.
+$\Theta(m\log n)$ a pre všetky tri uvedené typy kompresií 
+$\Theta(m\mathop{\alpha}(m,n))$ \citep{paths2}.
 
-\paragraph{Vizualizácia.} \uf\ sme vizualizovali ako les. Pre názorné 
+\paragraph{Vizualizácia.} Union-find sme vizualizovali ako les. Pre názorné 
 oddelenie množín sme si zvolili pravidlo, ktoré zakazovalo vykresliť vrchol 
 napravo od najľavejšieho vrcholu a naľavo od napravejšieho vrcholu inej 
 množiny. Jednotlivé množiny sme už vykreslovali tesným Walkerovým algoritmom 
@@ -126,7 +140,7 @@ množiny. Jednotlivé množiny sme už vykreslovali tesným Walkerovým algoritm
 % \centering
 % \small
 % %\footnotesize %toto tu mám nechať?
-% \subfloat[Časová zložitosť pre \uf, keď $m \geq n$.][Prehľad časových zložitostí, ak $m \geq n$.]{
+% \subfloat[Časová zložitosť pre union-find, keď $m \geq n$.][Prehľad časových zložitostí, ak $m \geq n$.]{
 % \begin{tabular}{m{2.5cm}m{2.2cm}m{2.2cm}}
 % & Naivné spájanie & Spájanie podľa ranku \tabularnewline
 % \hline
@@ -136,7 +150,7 @@ množiny. Jednotlivé množiny sme už vykreslovali tesným Walkerovým algoritm
 % \end{tabular}
 % }
 % \qquad
-% \subfloat[Časová zložitosť pre \uf, keď $m < n$.][Prehľad časových zložitostí, ak $m < n$.]{
+% \subfloat[Časová zložitosť pre union-find, keď $m < n$.][Prehľad časových zložitostí, ak $m < n$.]{
 % \begin{tabular}{m{2.5cm}m{2.2cm}m{2.2cm}}
 % & Naivné spájanie & Spájanie podľa ranku \tabularnewline
 % \hline
@@ -147,7 +161,7 @@ množiny. Jednotlivé množiny sme už vykreslovali tesným Walkerovým algoritm
 % \label{fig:uf:comp2}
 % \end{tabular}}
 % \caption{\normalsize Porovnanie časových zložitostí pre rôzne kombinácie hľadaní prvkov a 
-% spájaní množín pre \uf. Počet prvkov je $n$ a počet operácií je $m$. $\alpha$ 
+% spájaní množín pre union-find. Počet prvkov je $n$ a počet operácií je $m$. $\alpha$ 
 % je inverzná Ackermannova funkcia. V praxi zväčša platí, že $m > n$.}
 % \label{fig:uf:comp}
 % \end{table}

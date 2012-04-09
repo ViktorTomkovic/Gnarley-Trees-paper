@@ -10,7 +10,7 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{svk}[2010/03/07]
 %
-\let\if@slovak\iffalse
+%\let\if@slovak\iffalse
 \DeclareOption{slovensky}{\let\if@slovak\iftrue}
 \ProcessOptions
 
@@ -27,8 +27,9 @@
 %\RequirePackage[headings]{fullpage}
 \RequirePackage[utf8]{inputenc}
 \if@slovak
-  \RequirePackage[slovak]{babel}
-  \RequirePackage[T1]{fontenc}
+  \RequirePackage{slovak}
+  %\RequirePackage[slovak]{babel}
+  %\RequirePackage[T1]{fontenc}
 \fi
 \RequirePackage{url}
 \RequirePackage{hyperref}
