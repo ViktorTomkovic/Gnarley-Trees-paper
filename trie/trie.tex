@@ -1,11 +1,11 @@
 
 \def\k{w}
 %\def\kluc{kľúč}
-\def\put{$\mathop{insert}\left( \k\right)$}
-\def\find{$\mathop{find}\left( \k\right)$}
-\def\delete{$\mathop{delete}\left( \k\right)$}
+\def\put{$\mathop{\mathit{insert}}(\k)$}
+\def\find{$\mathop{\mathit{find}}(\k)$}
+\def\delete{$\mathop{\mathit{delete}}(\k)$}
 \def\trie{trie}
-\def\uz{{\tt\$}}
+\def\uz{\hbox{\tt\$}}
 
 \section{Písmenkový strom}
 \emph{Písmenkový strom} reprezentuje množinu slov. Oproti binárnym 
@@ -18,7 +18,7 @@ vo vrcholoch, ale samotná poloha v strome určuje kľúč (slovo).
 
 
 \paragraph{Popis.}
-Písmenkový strom je \emph{zakorenený strom}, v ktorom každá hrana obsahuje 
+Písmenkový strom je \emph{zakorenený strom}, v~ktorom každá hrana obsahuje 
 práve jeden znak z abecedy alebo \emph{ukončovací znak}. Teda, každá cesta 
 z koreňa do listu so znakmi $w_1, w_2, \ldots, w_n, \uz$ prirodzene 
 zodpovedá slovu $w=w_1w_2\cdots w_n$. \emph{Ukončovací znak} je ľubovoľný, 
@@ -27,16 +27,16 @@ dopredu dohodnutý symbol, ktorý sa v abecede nenachádza.
 Písmenkový strom je \emph{asociatívne pole (slovník)}, čiže 
 poskytuje tieto tri operácie:
 \begin{itemize}
-\item $\mathop{\mathbf{insert}}(\k)$ -- pridá do stromu slovo $\k$;
-\item $\mathop{\mathbf{find}}(\k)$ -- zistí, či sa v strom slovo $\k$ nachádza;
-\item $\mathop{\mathbf{delete}}(\k)$ -- odstráni zo stromu slovo $\k$.
+\item \put\ -- pridá do stromu slovo $\k$;
+\item \find\ -- zistí, či sa v strome slovo $\k$ nachádza;
+\item \delete\ -- odstráni zo stromu slovo $\k$.
 \end{itemize}
 Všetky operácie začínajú v koreni a ku slovu pridávajú ukončovací znak, 
-teda pracujú s reťazcom $\k\emph{\$}$. 
+teda pracujú s reťazcom $\k\uz$. 
 
 Operácia \put\ vloží do stromu vstupný reťazec tak, že z reťazca číta znaky 
 a prechádza po príslušných hranách. Ak hrana s daným symbolom neexistuje, 
-pridá ju. (pozri obrázok~\ref{img:trieinsert})
+pridá ju (pozri obr.~\ref{img:trieinsert}).
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{obrazky/trieinsertsmall.png}
@@ -56,8 +56,7 @@ znakom a vrchol, ktorý bol na nej zavesený. V tomto štádiu sa nám môže
 stať, že v strome ostane \emph{mŕtva vetva} -- nie je ukončená 
 ukončovacím znakom. Pre fungovanie stromu to nevadí, všetky operácie by 
 prebiehali správne, ale takto štruktúra zaberá zbytočne veľa miesta. 
-Preto je dobré túto mŕtvu vetvu odstrániť. 
-(pozri obrázok~\ref{img:triedelete})
+Preto je dobré túto mŕtvu vetvu odstrániť (pozri obr.~\ref{img:triedelete}).
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{obrazky/triedeletesmall.png}
@@ -70,7 +69,7 @@ ktorá je vyznačená červenou.}
 \bigskip
 % \paragraph{Časová zložitosť.}
 Všetky tri operácie majú časovú 
-zložitosť $O\left( |\k|\right)$, kde $|\k|$ je dĺžka slova.
+zložitosť $O(|\k|)$, kde $|\k|$ je dĺžka slova.
 
 \paragraph{Použitie.}
 Prvýkrát navrhol písmenkový strom \citet{fredkin}, ktorý používal názov 
@@ -124,4 +123,3 @@ známy Walkerov algoritumus pre úsporné rozloženie vrcholov v strome.
 \citep{walker} Keď má vrchol viacej synov a hrany kreslíme priamo, tak vzniká 
 nedostatok priestoru pre umiestnenie znakov na hrany. Preto sme sa rozhodli 
 kresliť hrany zakrivene, podľa Bézierovej krivky určenej štyrmi bodmi.
-
