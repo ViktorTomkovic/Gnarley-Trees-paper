@@ -94,15 +94,15 @@ na tohto zástupcu. Zástupcom novej množiny bude vybratý zástupca.
 \includegraphics[width=\columnwidth]{obrazky/komp.png}
 \caption{\emph{Kompresia cesty z vrcholu 11 do koreňa.} 
 Cesta je vyznačená šedou. 
-(a) Pred vykonaním kompresie. Pri kompresii~(b) sa všetky vrcholy napoja 
-na zástupcu. Pri delení cesty~(c) a pólení cesty~(d) sa cesta skráti 
+(a) Pred vykonaním kompresie. Pri úplnej kompresii~(b) sa všetky vrcholy 
+napoja na zástupcu. Pri delení cesty~(c) a pólení cesty~(d) sa cesta skráti 
 približne na polovicu.} 
 \label{img:komp} 
 \end{figure}
 
 Druhou heuristikou je kompresia cesty. Algoritmov na efektívnu kompresiu 
 cesty je veľa \citep{paths2}. Tu popíšeme tie najefektívnejšie. Prvou z nich 
-je \emph{kompresia} \citep{comp1}. Pri vykonávaní 
+je \emph{úplná kompresia} \citep{comp1}. Pri vykonávaní 
 operácie \find, po tom, 
 ako nájdeme zástupcu množiny obsahujúcej prvok $x$, smerníky prvkov 
 navštívených po ceste (vrátane $x$) presmerujeme na zástupcu množiny. Toto 
@@ -148,7 +148,7 @@ veľa operácií.
 % & Naivné spájanie & Spájanie podľa ranku \tabularnewline
 % \hline
 % Naivné hľadanie & $\Theta\left( mn\right)$ & $\Theta\left( m\log n\right)$ \tabularnewline
-% Kompresia, delenie cesty, pólenie cesty & $\Theta\left(m\log _{1+m/n} n \right)$ & $\Theta\left( m\alpha\left( m, n\right) \right)$ \tabularnewline
+% Úplná kompresia, delenie cesty, pólenie cesty & $\Theta\left(m\log _{1+m/n} n \right)$ & $\Theta\left( m\alpha\left( m, n\right) \right)$ \tabularnewline
 % \label{fig:uf:comp1}
 % \end{tabular}
 % }
@@ -158,7 +158,7 @@ veľa operácií.
 % & Naivné spájanie & Spájanie podľa ranku \tabularnewline
 % \hline
 % Naivné hľadanie & $\Theta\left( mn\right)$ & $\Theta\left(n + m\log n\right)$ \tabularnewline
-% Kompresia& $\Theta\left(n + m\log  n \right)$ & $\Theta\left(n + m\alpha\left( n, n\right) \right)$ \tabularnewline
+% Úplná kompresia& $\Theta\left(n + m\log  n \right)$ & $\Theta\left(n + m\alpha\left( n, n\right) \right)$ \tabularnewline
 % Delenie cesty & $\Theta\left(n \log m \right)$ & $\Theta\left(n + m\alpha\left( n, n\right) \right)$ \tabularnewline
 % Pólenie cesty & $\Omega\left(n + m\log n \right)$, $O\left(n\log m\right)$ & $\Theta\left(n + m\alpha\left( n, n\right) \right)$ \tabularnewline
 % \label{fig:uf:comp2}

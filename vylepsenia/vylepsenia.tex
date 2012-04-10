@@ -5,14 +5,20 @@
 toto treba kompletne vymyslieť a napísať a potom tam dakde pichnúť:
 
 \paragraph{Tesnejšie vykresľovanie grafov.}
-Stromy sa vykresľovali tak, že sa spravil obdĺžnikový obal podstromov daného 
-vrcholu, tieto obdĺžniky sa usporiadali vedľa seba a k nim sa pripojil daný 
-vrchol a okolo celej štruktúry sa spravil obdĺžnik. Toto je ale spôsob, ktorý 
+V pôvodnej verzii programu sa stromy vykresľovali tak, že vertikálna súradnica 
+predstavovala hĺbku v strome a horizontálna poradie vrcholu v \emph{
+inorderovom prechode} stromu. Toto je ale spôsob, ktorý 
 nešetrí priestor a pri štruktúrach ako písmenkový strom by výsledné stromy 
 vyzerali škaredo. Preto sme sa rozhodli pre stromy implementovať 
-alternatívny spôsob rozloženia, ktorý vymyslel \citet{reingold} a pre $m$-árne 
-stromy rozšíril \citet{walker}. Tieto rozloženia vykresľujú vrcholy stromov 
-najtesnejšie, pričom dodržujú tieto pravidlá: vrcholy v rovnakej hĺbke musia 
-byť vykreslené na jednej priamke a priamky určujúce jednotlivé úrovne majú byť 
-rovnobežné; poradie synov má byť zachované; otec má ležať v strede svojich 
-synov a podstromy majú byť symetrické.
+alternatívny spôsob rozloženia, ktorý vymyslel \citet{reingold} a pre $n$-árne 
+stromy rozšíril \citet{walker}. Tieto rozloženia vykresľujú vrcholy stromov čo 
+najtesnejšie, pričom dodržujú tieto pravidlá: 
+\begin{itemize} 
+\item vrcholy v rovnakej hĺbke sú vykreslené na jednej priamke a priamky 
+určujúce jednotlivé úrovne sú rovnobežné; 
+\item poradie synov je zachované; 
+\item otec leží v strede nad najľavejším a najpravejším synom; 
+\item izomorfné podstromy sa vykreslia identicky až na presunutie;
+\item ak vo všetkých vrcholoch vymeníme poradie všetkých synov, výsledný strom 
+sa vykreslí zrkadlovo.
+\end{itemize}
