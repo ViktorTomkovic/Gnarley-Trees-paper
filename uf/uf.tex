@@ -101,22 +101,16 @@ približne na polovicu.}
 \end{figure}
 
 Druhou heuristikou je kompresia cesty. Algoritmov na efektívnu kompresiu 
-cesty je veľa \citep{paths2}. Tu popíšeme tie najefektívnejšie. Prvou z nich 
-je \emph{kompresia} \citep{comp1}. Pri vykonávaní 
-operácie \find, po tom, 
-ako nájdeme zástupcu množiny obsahujúcej prvok $x$, smerníky prvkov 
-navštívených po ceste (vrátane $x$) presmerujeme na zástupcu množiny. Toto 
-síce spomalí prvé vykonávanie, ale výrazne zrýchli ďalšie hľadania. 
+cesty je veľa \citep{paths2}, tu popíšeme tie najefektívnejšie. Prvou z nich 
+je \emph{kompresia} \citep{comp1}. Pri vykonávaní operácie \find, po tom, 
+ako nájdeme zástupcu, napojíme všetky vrcholy po ceste priamo pod koreň. Toto 
+síce trochu spomalí prvé hľadanie, ale výrazne zrýchli ďalšie hľadania pre
+všetky prvky na ceste ku koreňu.
 Druhou heuristikou je \emph{delenie cesty} \citep{comp2}. Pri vykonávaní 
-operácie \find\ 
-pripojíme každý vrchol\footnote{Okrem koreňa a synov koreňa, 
-keďže tie deda a otca resp. deda nemajú.} v ceste od vrcholu $x$ po koreň stromu 
-na otca jeho otca. 
-Treťou heuristikou je \emph{pólenie cesty} \citep{comp2}. Pri vykonávaní 
-operácie \find\ 
-pripojíme každý druhý vrchol\footnote{Okrem koreňa a synov koreňa, 
-keďže tie deda a otca resp. deda nemajú.} 
-v ceste od vrcholu $x$ po koreň stromu na otca jeho otca. 
+operácie \find\ pripojíme každý vrchol v ceste od vrcholu $x$ po koreň stromu
+na otca jeho otca. Treťou heuristikou je \emph{pólenie cesty} \citep{comp2}.
+Pri vykonávaní operácie \find\  pripojíme každý druhý vrchol v ceste od vrcholu
+$x$ po koreň stromu na otca jeho otca. 
 
 \bigskip
 Časová zložitosť union-findu záleží od toho, koľko prvkov je v množinách a koľko je 

@@ -4,6 +4,8 @@
 \usepackage{subfig}
 \usepackage{array}
 
+\def\todo#1{\par\smallskip{\scriptsize {\bf TODO: }#1}\par\smallskip}
+
 \begin{document}
   \catcode`\"=\active \def "{\begingroup\clqq\def "{\endgroup\crqq}}
 
@@ -55,11 +57,12 @@ týchto štruktúrach.
 
 \input{uvod/uvod}
 \input{vylepsenia/vylepsenia}
+\input{vylepsenia/historia}
+\input{vylepsenia/dalsie}
 \input{vyvazene-stromy/vyvazene-stromy}
 \input{haldy/haldy}
 \input{uf/uf}
 \input{trie/trie}
-\input{historia/historia}
 \input{zaver/zaver}
 \input{prispevky/prispevky}
 \input{podakovanie/podakovanie}
