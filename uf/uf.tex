@@ -54,17 +54,22 @@ krokov.
 
 \paragraph{Použitie.}
 
-% Vďaka dvom hlavným operáciam \find\ a \union\ je táto dátová štruktúra známejšia
-% pod pojmom \emph{union-find}, ktorý používame aj my.
-Medzi najznámejšie problémy, ktoré sa riešia pomocou 
-union-find patria Kruskalov algoritmus na nájdenie najlacnejšej kostry 
-\citep{kruskal} a unifikácia \citep{unif}. Veľmi priamočiare použitie je 
-na zodpovedanie otázky "Koľko je komponentov súvislosti?" alebo
-"Sú dva prvky v rovnakej množine?" ("Sú dva objekty navzájom prepojené?"), 
-ak máme dovolené za behu pridávať hrany (spájať množiny objektov). 
-Niektoré ďalšie grafové problémy popísal napr. \citet{paths1}.
+Union-find sa dá použiť na reprezentáciu neorientovaného grafu,
+do ktorého pridávame hrany a odpovedáme na otázku "sú dané dva
+vrcholy spojené nejakou cestou?" (t.j.\ sú v rovnakom komponente súvislosti?).
+Medzi najznámejšie aplikácie patria Kruskalov algoritmus na nájdenie najlacnejšej
+kostry \citep{kruskal} a unifikácia \citep{unif}.
 
-\bigskip
+\citet{cholesky} ukázali, ako sa dá union-find použiť pri Choleského dekompozícií
+riedkych matíc. Autori navrhli efektívny algoritmus, ktorý zistí počet nenulových
+prvkov v každom riadku a stĺpci výslednej matice, čo slúži na efektívnu alokáciu
+pamäte.
+
+Pre offline verziu úlohy, kde sú všetky operácie dopredu známe, \citep{offline-uf}
+navrhli lineárny algoritmus. Článok obsahuje tiež viacero aplikácií v teoretickej
+informatike.
+
+\smallskip
 Existujú dva prístupy ako zlepšiť operácie a tým aj zrýchliť ich vykonanie. 
 Sú to: heuristika \emph{spájanie podľa ranku} a rôzne heuristiky na 
 \emph{kompresiu cesty}. 
@@ -101,19 +106,17 @@ približne na polovicu.}
 \end{figure}
 
 Druhou heuristikou je kompresia cesty. Algoritmov na efektívnu kompresiu 
-cesty je veľa \citep{paths2}. Tu popíšeme tie najefektívnejšie. Prvou z nich 
-je \emph{úplná kompresia} \citep{comp1}. Pri vykonávaní 
-operácie \find, po tom, 
-ako nájdeme zástupcu množiny obsahujúcej prvok $x$, smerníky prvkov 
-navštívených po ceste (vrátane $x$) presmerujeme na zástupcu množiny. Toto 
-síce spomalí prvé vykonávanie, ale výrazne zrýchli ďalšie hľadania. 
+cesty je veľa \citep{paths2}, tu popíšeme tie najefektívnejšie. Prvou z nich 
+je \emph{úplná kompresia} \citep{comp1}. Pri vykonávaní operácie \find, po tom, 
+ako nájdeme zástupcu, napojíme všetky vrcholy po ceste priamo pod koreň. Toto 
+síce trochu spomalí prvé hľadanie, ale výrazne zrýchli ďalšie hľadania pre
+všetky prvky na ceste ku koreňu.
 Druhou heuristikou je \emph{delenie cesty} \citep{comp2}. Pri vykonávaní 
 operácie \find\ pripojíme každý vrchol v ceste od vrcholu $x$ po koreň stromu
 na otca jeho otca. Treťou heuristikou je \emph{pólenie cesty} \citep{comp2}.
 Pri vykonávaní operácie \find\  pripojíme každý druhý vrchol v ceste od vrcholu
 $x$ po koreň stromu na otca jeho otca. 
 
-\bigskip
 Časová zložitosť union-findu záleží od toho, koľko prvkov je v množinách a koľko je 
 operácií celkovo vykonaných operácií. Všetky uvedené spôsoby ako vykonať 
 operáciu \find\ sa dajú použiť s obomi realizáciami operácie \union. 

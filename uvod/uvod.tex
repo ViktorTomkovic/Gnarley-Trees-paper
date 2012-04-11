@@ -1,4 +1,12 @@
 \section{Úvod}
+Dátové štruktúry a algoritmy tvoria základnú, prvotnú časť výučby 
+informatiky. Vizualizácia algoritmov a dátových štruktúr je grafické 
+znázornenie, ktoré abstrahuje spôsob ako algoritmus a dátové štruktúry 
+pracujú od ich vnútornej reprezentácie a umiestnení v pamäti. Je teda 
+vyhľadávaná a všeobecne rozšírená pomôcka pri výučbe. Výsledky výskumov 
+ohľadne jej efektívnosti sa líšia, od stavu "nezaznamenali sme výrazné 
+zlepšenie" po "je viditeľné zlepšenie" \citep{shaffer}.
+
 Ako ľudia so záujmom o dátové štruktúry sme sa rozhodli pomôcť vybudovať 
 dobrý softvér na vizualizáciu algoritmov a dátových štruktúr a obohatiť 
 kompiláciu Jakuba Kováča \citep{kuko} o ďalšie dátové štruktúry. 
@@ -11,16 +19,17 @@ problém)} a \emph{písmenkový strom (trie)}.
 Okrem vizualizácie prerábame softvér, doplnili sme ho o históriu krokov 
 a operácií, jednoduchšie ovládanie a veľa iných vecí, zlepšujúcich 
 celkový dojem. Softvér je celý v slovenčine a angličtine a je 
-implementovaný v jazyku \texttt{Java}.
+implementovaný v jazyku \texttt{Java}.j štruktúry. Vďaka tomu sa využívajú na jazykovú korekciu, 
+automatické dopĺňanie slov a podobne \citep{scrabble,ca}. 
 
-\subsection{Vizualizácia}
-Dátové štruktúry a algoritmy tvoria základnú, prvotnú časť výučby 
-informatiky. Vizualizácia algoritmov a dátových štruktúr je grafické 
-znázornenie, ktoré abstrahuje spôsob ako algoritmus a dátové štruktúry 
-pracujú od ich vnútornej reprezentácie a umiestnení v pamäti. Je teda 
-vyhľadávaná a všeobecne rozšírená pomôcka pri výučbe. Výsledky výskumov 
-ohľadne jej efektívnosti sa líšia, od stavu "nezaznamenali sme výrazné 
-zlepšenie" po "je viditeľné zlepšenie" \citep{shaffer}.
+Priamočiare je použitie písmenkového stromu na utriedenie poľa slov. 
+Všetky slová sa pridajú do stromu a potom sa spraví \emph{preorderový prechod} 
+stromu. Túto myšlienku spracovali \citet{burstsort1} a veľmi výrazne zrýchlil 
+triedenie dlhých zoznamov slov. Neskôr tento algoritmus vylepšili 
+\citet{burstsort2}. Kvôli tomu, ako algoritmus pracuje, 
+sa nazýva \emph{burstsort}.
+
+%\subsection{Vizualizácia}
 
 Rozmach vizualizačných algoritmov priniesla najmä Java a jej fungovanie 
 bez viazanosti na konkrétny operačný systém. Kvalita vizualizácií sa líši 
@@ -46,3 +55,4 @@ je teda ponúknuť plnohodnotné prostredie pri učení.
 %
 %Friker, makaj! Zvyšok, pomôž!
 
+\todo{V sekcií 2 popiseme toto, v dalsich sekciach tamto}
