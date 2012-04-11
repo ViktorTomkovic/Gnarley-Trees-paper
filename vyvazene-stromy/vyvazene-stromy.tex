@@ -53,8 +53,8 @@ kľúčov, ako je povolené, znova sa aplikuje predošlý algoritmus. Keďže na
 minimálny limit, po skončení bude strom zaručene v konzistentnom tvare.
 
 %\paragraph{Časová zložitosť}
-\todo{toto je pocet pristupov na disk! pocet krokov je $O(B\log_B n)$; ale pocet pristupov
-na disk nas zaujima, lebo disk je pomaly}
+%\todo{toto je pocet pristupov na disk! pocet krokov je $O(B\log_B n)$; ale pocet pristupov
+%na disk nas zaujima, lebo disk je pomaly}
 Vkladanie, vymazávanie a hľadanie má časovú zložitosť $O(\log_B n)$.
 
 \paragraph{Použitie.}
@@ -75,12 +75,9 @@ $O(\log_B(n) + t/B)$ prístupov na disk.
 
 
 \subsection{Strom s prstom}
-\emph{Strom s prstom} (z anglického \emph{finger tree}) je vyhľadávací strom, kde prst je smerník na nejaký
-vrchol. Jeho poloha sa využíva pri všetkých operáciách. Vďaka tomu má strom s prstom efektívnejšie vyhľadávanie,
-vkladanie a mazanie kľúčov, ktoré sú v blízkom okolí prsta.
-\todo{toto je facina; samotny finger dobru zlozitost nezaruci (ako sa tana mohla sama presvedcit, ked sa to snazila
-implementovať cez 2-3-4 strom... strom ma finger property (vyhladavanie s prstom?) AK vie vyhladavat v $O(\log d)$
-(namiesto trivialneho $O(\log n)$.}
+\emph{Strom s prstom} (z anglického Finger tree) je vyhľadávací strom s hranami na vrstvách a štruktúrou 
+nazývanou prst. Prst je smerník na konkrétny vrchol a umožňuje (aj vďaka väzbám navyše) efektívnejší 
+prístup k vrcholom v jeho blízkom okolí.
 
 \paragraph{Popis.}
 Strom s prstom je upravený 2-3-4$^+$ strom (\Bp-strom rádu 4, t.j.\ vnútorné vrcholy
@@ -159,8 +156,8 @@ danej štruktúre.
 Poskytuje operácie
 \begin{itemize}
 % \item $\mathop{\mathit{insert}}(\k)$ -- pridá do stromu $\k$;
-\item $\mathop{\mathit{find}}(k)$ -- zistí, ktorý prvok je na $k$-tom mieste permutácie a
-\item $\mathop{\mathit{reverse}}(i,j)$ -- reverzne interval od $i$ po $j$.
+\item $\mathop{\mathit{find}}(k)$ -- zistí, ktorý prvok je na $k$-tom mieste permutácie;
+\item $\mathop{\mathit{reverse}}(i,j)$ -- spraví reverz intervalu od $i$ po $j$.
 \end{itemize}
 
 \paragraph{Popis.}
