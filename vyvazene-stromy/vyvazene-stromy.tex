@@ -113,20 +113,21 @@ kľúč bude patriť do jeho podstromu.
 % ukazujeme, nemá napríklad pravého suseda, je zrejmé, že vačší kľúč ako je najvačší v tomto vrchole
 % v strome nie je. Preto ľubovoľný kľúč do podstromu tohto vrchola patrí práve vtedy, keď je väčší
 % ako jeho najmenší prvok. Analogicky to platí, ak chýba ľavý sused.
-
-% <<<<<<< HEAD
-% Operácia \ins\ najprv pomocou operácie \find\ nájde miesto, kam by mal vkladaný kľúč patriť. 
+% 
+% Operácia $\ins$ najprv pomocou operácie $\find$ nájde miesto, kam by mal vkladaný kľúč patriť. 
 % Ak taký kľúč už v strome je, ďalší sa nevloží. V prípade, že sme vložili nový kľúč, môže sa stať, 
 % že vrchol "pretečie", tzn.\ má viac ako 3 prvky%
 % (pozri obr.~\ref{img:finger-insert}). Situácia sa vyrieši rovnako ako v \Bp-strome. 
-% 
-% Operácia \delete\ najprv pomocou operácie \find\ nájde miesto, kam by mal hľadaný kľúč patriť. 
-% =======
-Operácia $\ins$ najprv pomocou operácie $\find$ nájde miesto, kam by mal vkladaný kľúč patriť.
-Ak taký kľúč už v strome je, ďalší sa nevloží. V prípade, že sme vložili nový kľúč, môže sa stať,
-že vrchol "pretečie", tzn.\ má viac ako 3 prvky. Situácia sa vyrieši rovnako ako v \Bp-strome.
-Operácia $\delete$ najprv pomocou operácie $\find$ nájde miesto, kam by mal hľadaný kľúč patriť.
-% >>>>>>> a0feba993f87ff1223dad61de4a624b8b4102adb
+
+Operácia $\ins$ najprv pomocou operácie $\find$ zistí, či štruktúra daný kľúč obsahuje. Ak nie, 
+je zrejmé, že patrí práve do vrchola, kde $\find$ skončil. V prípade, že sme vložili nový kľúč, 
+môže sa stať, že vrchol "pretečie", tzn.\ má viac ako 3 prvky%
+(pozri obr.~\ref{img:finger-insert}). Ak vrchol pretiekol, použije sa COPY-UP 
+a rozdelí sa na dve časti. Stredný jednoprvkový vrchol sa vloží do otca. Ak pretiekol, použijeme 
+rovnaký postup, akurát s PUSH-UP. Pokračujeme analogicky, pokým štruktúra nebude znova 
+v konzistentom stave.
+
+Operácia $\delete$ najprv pomocou operácie $\find$ nájde miesto, kam by mal hľadaný kľúč patriť. 
 Ak tam nie je, vymazávanie sa končí. Inak sa vymaže. Môže sa stať, že vrchol "podtečie", tzn.\ 
 nemá kľúč. Tento problém sa rieši rovnako ako v \Bp-strome. 
 Samozrejme je treba ošetriť konzistentnosť vo vyšších vrstvách, aby sa tam nenachádzali kópie 
