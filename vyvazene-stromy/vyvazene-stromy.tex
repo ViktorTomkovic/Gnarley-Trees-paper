@@ -60,7 +60,7 @@ Vkladanie, vymazávanie a hľadanie má časovú zložitosť $O(\log_B n)$.
 \paragraph{Použitie.}
 Hlavné využitie \Bp-stromov je v databázových systémoch. Ak zvolíme vhodný rád, vieme jednotlivé
 vrcholy dobre napasovať na stránky a tým regulovať ako počet prístupov k pamäti, tak jej zaplnenie
-\citet{sahni}. Agregačné funkcie, ako napríklad súčet, minimum, priemer, vieme pre daný interval
+\citep{sahni}. Agregačné funkcie, ako napríklad súčet, minimum, priemer, vieme pre daný interval
 spočítať v čase $O(\log_B(n))$. Vypísať všetky prvky z daného intervalu dokážeme pomocou
 $O(\log_B(n) + t/B)$ prístupov na disk.
 % \Bp-strom podporuje efektívne vyhľadanie prvkov poľa, ktoré patria do daného intervalu.
@@ -121,6 +121,7 @@ Operácia \ins\ najprv pomocou operácie \find\ nájde miesto, kam by mal vklada
 Ak taký kľúč už v strome je, ďalší sa nevloží. V prípade, že sme vložili nový kľúč, môže sa stať, 
 že vrchol "pretečie", tzn.\ má viac ako 3 prvky%
 (pozri obr.~\ref{img:finger-insert}). Situácia sa vyrieši rovnako ako v \Bp-strome. 
+
 Operácia \delete\ najprv pomocou operácie \find\ nájde miesto, kam by mal hľadaný kľúč patriť. 
 Ak tam nie je, vymazávanie sa končí. Inak sa vymaže. Môže sa stať, že vrchol "podtečie", tzn.\ 
 nemá kľúč. Tento problém sa rieši rovnako ako v \Bp-strome. 
@@ -145,7 +146,7 @@ kľúčov, ktoré už boli zo štruktúry vymazané (pozri obr. ~\ref{img:finger
 Keďže každý vrchol má aspoň dvoch synov, 2-3-4 strom má hĺbku $O(\log n)$, kde $n$ je počet kľúčov, 
 a teda podporuje vykonávanie operácií v čase $O(\log n)$. Ak sa však použije prst, časová zložitosť 
 vychádza na $O(\log d)$, kde $d$ je vzdialenosť pozície prsta a vrcholu, kam patrí cieľový kľúč, 
-amortizovane dokonca na $O(1)$ \citet{sahni}. 
+amortizovane dokonca na $O(1)$ \citep{sahni}. 
 
 % \paragraph{Použitie.}
 % Prst ako smerník na prvok štruktúry, ktorý umožňuje efektívnejší prístup k okolitým kľúčom, prvýkrát
@@ -174,10 +175,10 @@ Poskytuje operácie
 \end{itemize}
 
 \paragraph{Popis.}
-Permutáciu reprezentujeme ako strom, v ktorom je in-order poradie prvkov totožné 
+Permutáciu reprezentujeme ako strom, v ktorom je \emph{inorder} poradie prvkov totožné 
 s poradím prvkov v permutácií. Strom s reverzami môžeme implementovať pomocou ľubovoľného 
 vyváženého stromu, ktorý podporuje rozdelenie a zreťazenie dvoch stromov v logaritmickom čase. 
-My sme zvolili splay strom pre jeho jednoduchosť. 
+My sme zvolili \emph{splay strom} pre jeho jednoduchosť. 
 
 % Splay strom je štruktúrou binárny strom,
 % líši sa od neho iba operáciami. Keď pracuje s ľubovoľným prvkom, na konci operácie bude vo vrchole
@@ -208,7 +209,8 @@ Pri takomto riešení musíme ešte upraviť vyhľadávanie a rotácie, aby bral
 Najelegantnejšie riešenie je odstrániť vlajku vždy, keď na ňu narazíme:
 Danému vrcholu odstránime vlajku, vymeníme mu synov a každému synovi vlajkový bit znegujeme.
 
-Všetky operácie vieme implementovať v rovnakom čase ako operácie v splay tree, t.j.\ amortizovane $O(\log n)$.
+Všetky operácie vieme implementovať v rovnakom čase ako operácie v splay tree, teda amortizovaná 
+časová zložitosť oboch operácií je $O(\log n)$.
 
 \paragraph{Použitie.}
 Stromy s reverzami (pôvodne založené na AVL stromoch) navrhli \citet{chrobak}
