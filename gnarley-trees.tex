@@ -6,6 +6,12 @@
 
 \def\todo#1{\par\smallskip{\scriptsize {\bf TODO: }#1}\par\smallskip}
 
+\def\ins{\mathop{\mathit{insert}}}
+\def\find{\mathop{\mathit{find}}}
+\def\delete{\mathop{\mathit{delete}}}
+\def\dec{\mathop{\mathit{decreaseKey}}}
+
+
 \begin{document}
   \catcode`\"=\active \def "{\begingroup\clqq\def "{\endgroup\crqq}}
 
@@ -51,7 +57,7 @@ týchto štruktúrach.
 
 \noindent
 \textbf{Dostupnosť:} Softvér je voľne dostupný na stránke
-           {\url{http://people.ksp.sk/~kuko/gnarley-trees}}.
+           {\small\url{http://people.ksp.sk/~kuko/gnarley-trees}}.
 \keywords{Gnarley Trees, vizualizácia, algoritmy a dátové štruktúry}
 \end{abstract}
 
@@ -67,15 +73,8 @@ týchto štruktúrach.
 \input{prispevky/prispevky}
 \input{podakovanie/podakovanie}
 
-\nocite{*}
+%\nocite{*}
 \bibliographystyle{apalike}
 \bibliography{references}
-
-%% citacie ulozte do suboru references.bib
-%% na populaciu zoznamu literatury pouzite program
-%%
-%% bibtex references
-%%
-%% po ktorom je potrebne dokument znova zlatexovat
 
 \end{document}

@@ -1,19 +1,24 @@
 \section{Haldy}
 
-V nasledujúcom texte sa budeme zaoberať rôznymi druhmi prioritných front. Popíšeme \emph{d-árnu haldu} ako 
-základnú modifikáciu binárnej haldy, \emph{Ľavicovú haldu} a niektoré druhy samoupravujúcich sa háld, konkrétne 
-\emph{Skew haldu} a \emph{Párovaciu haldu}.
+V nasledujúcom texte sa budeme zaoberať rôznymi druhmi prioritných front. Popíšeme \emph{$d$-árnu haldu} ako 
+základnú modifikáciu binárnej haldy, \emph{ľavicovú haldu} a niektoré druhy samoupravujúcich sa háld, konkrétne 
+\emph{skew haldu} a \emph{párovaciu haldu}.
 Halda je vo všeobecnosti \emph{zakorenený strom} s vrcholmi obsahujúcimi kľúče reprezentujúce dáta. Dôležitá je 
-zakladná podmienka haldy, ak vrchol$p(x)$ je otcom vrcholu $x$, potom \emph{kľúč}$(p(x))$ $\leq$ \emph{kľúč}$(x)$\footnote{Bez ujmy na všeobecnosti budeme uvažovať o \emph{min haldách}, teda v koreni sa bude nachádzať najmenší prvok. Podobnými úvahami by sme text mohli rozšíriť o \emph{max haldy} s najväčším prvkom v koreni.}.
+zakladná podmienka haldy, ak vrchol $p(x)$ je otcom vrcholu $x$, potom
+$\hbox{\emph{kľúč}}(p(x)) \leq \hbox{\emph{kľúč}}(x)$\footnote{Bez ujmy na všeobecnosti budeme uvažovať o \emph{min haldách},
+teda v koreni sa bude nachádzať najmenší prvok. Podobnými úvahami by sme text mohli rozšíriť o \emph{max haldy}
+s najväčším prvkom v koreni.}.
+
 Štandardné operácie, ktoré haldy podporujú, a ktorými sa budeme zaoberať pri každej dátovej štuktúre, sú:
 \begin{itemize}
-\item $\mathop{\mathbf{createHeap}}$ -- vytvorí prázdnu haldu;
-\item $\mathop{\mathbf{insert}}\left( x\right)$ -- vloží vrchol s kľúčom $x$;
-\item $\mathop{\mathbf{findMin}}$ -- vráti minimum t.j. hodnotu kľúča v koreni;
-\item $\mathop{\mathbf{deleteMin}}$ -- odstráni vrchol s najmenším kľúčom, t.j. koreň;
-\item $\mathop{\mathbf{decreaseKey}}\left( v, \Delta\right)$ -- zníži kľúč vrcholu v o delta;
+%\item $\mathop{\mathit{createHeap}}$ -- vytvorí prázdnu haldu;
+\item $\mathop{\mathit{insert}}(x)$ -- vloží vrchol s kľúčom $x$;
+\item $\mathop{\mathit{findMin}}$ -- vráti minimum, t.j. hodnotu kľúča v koreni;
+\item $\mathop{\mathit{deleteMin}}$ -- odstráni vrchol s najmenším kľúčom, t.j.\ koreň;
+\item $\mathop{\mathit{decreaseKey}}(v, \Delta)$ -- zníži kľúč vrcholu $v$ o $\Delta\geq0$;
 \end{itemize}
-Niektoré haldy navyše implementujú $\mathop{\mathbf{meld}}\left( i, j\right)$ -- spojí haldu $i$ s haldou $j$.
+
+Niektoré haldy navyše implementujú operáciu $\mathop{\mathit{meld}}(i, j)$, ktorá spojí haldu $i$ s haldou $j$.
 
 \input haldy/daryheap.tex
 \input haldy/leftist.tex
