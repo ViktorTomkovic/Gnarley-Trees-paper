@@ -1,7 +1,27 @@
 \section{Rozšírenie predošlej práce}
-jednotlive vizualizacie a implementovane ficurie
-co sa zmenilo od bakalarky? zoomovanie, komentare, tree layouty, historia a nove ds
+%jednotlive vizualizacie a implementovane ficurie
+%co sa zmenilo od bakalarky? zoomovanie, komentare, tree layouty, historia a nove ds
 
 Projekt Gnarley Trees sme rozšírili nielen o vizualizácie ďalších dátových
 štruktúr, ale pribudli aj softvérové (vizualizačné) vylepšenia.
 
+toto treba kompletne vymyslieť a napísať a potom tam dakde pichnúť:
+
+\paragraph{Tesnejšie vykresľovanie grafov.}
+V pôvodnej verzii programu sa stromy vykresľovali tak, že vertikálna súradnica 
+predstavovala hĺbku v strome a horizontálna poradie vrcholu v \emph{
+inorderovom prechode} stromu. Toto je ale spôsob, ktorý 
+nešetrí priestor a pri štruktúrach ako písmenkový strom by výsledné stromy 
+vyzerali škaredo. Preto sme sa rozhodli pre stromy implementovať 
+alternatívny spôsob rozloženia, ktorý vymyslel \citet{reingold} a pre $n$-árne 
+stromy rozšíril \citet{walker}. Tieto rozloženia vykresľujú vrcholy stromov čo 
+najtesnejšie, pričom dodržujú tieto pravidlá: 
+\begin{itemize} 
+\item vrcholy v rovnakej hĺbke sú vykreslené na jednej priamke a priamky 
+určujúce jednotlivé úrovne sú rovnobežné; 
+\item poradie synov je zachované; 
+\item otec leží v strede nad najľavejším a najpravejším synom; 
+\item izomorfné podstromy sa vykreslia identicky až na presunutie;
+\item ak vo všetkých vrcholoch vymeníme poradie všetkých synov, výsledný strom 
+sa vykreslí zrkadlovo.
+\end{itemize}
