@@ -5,11 +5,14 @@ Je to všeobecná halda, teda počet synov nie je obmedzený.
 Základná procedúra, ktorú táto dátová štruktúra implementuje je spájanie (\emph{linking}) dvoch háld. Procedúra spočíva iba v tom, že sa halda s väčśím kľúčom v koreni napojí na tú s menším kľúčom. V našej implementácií sa nový vrchol napája vždy ako prvý syn.
 
 \paragraph{Operácie.}
-Operácia \emph{meld($i$,$j$)} využíva procedúru pre linking. Tiež \emph{insert($x$)}, len prilinkuje novú jednoprvkovú haldu. Operácia \emph{decreaseKey($v$, $\Delta$)} najprv zníži hodnotu vrcholu $v$, a keďže môže byť porušená podmienka pre haldu, strom zakorenený vo vrchole $v$ sa odtrhne a prilinkuje ku zvyšku. Časové zložitosti pre všetky tieto operácie sú $O(1)$.
-Najzaujímavejšie na Párovacích haldách je \emph{deleteMin}. Po odstránení koreňa ostane les jeho detí. Môžeme zvoliť niekoľko prístupov ako z detí vytvoríme nový strom.
+Operácia $\meld(i,j)$ využíva procedúru pre linking. Tiež $\ins(x)$, len prilinkuje novú jednoprvkovú haldu.
+Operácia $\dec(v, \Delta)$ najprv zníži hodnotu vrcholu $v$, a keďže môže byť porušená podmienka pre haldu,
+strom zakorenený vo vrchole $v$ sa odtrhne a prilinkuje ku zvyšku. Časové zložitosti pre všetky tieto operácie
+sú $O(1)$. Najzaujímavejšie na párovacích haldách je \emph{deleteMin}. Po odstránení koreňa ostane les jeho detí.
+Môžeme zvoliť niekoľko prístupov ako z detí vytvoríme nový strom.
 
-Naivné riešenie hovorí, že si vyberieme jedno dieťa a ostatné k nemu prilinkujeme. Už na prvý pohľad vidíme, že pri nesprávnom 
-zvolení prvého dieťaťa môže byť časová zložitosť takéhoto algoritmu $O(n)$.
+Naivné riešenie hovorí, že si vyberieme jedno dieťa a ostatné k nemu prilinkujeme. Už na prvý pohľad vidíme,
+že pri nesprávnom zvolení prvého dieťaťa môže byť časová zložitosť takéhoto algoritmu $O(n)$.
 
 Ďalší, o niečo lepší nápad je deti najprv popárovať a prilinkovať. S výhliadkami do budúcnosti nám tento algoritmus dá 
 amortizovanú časovú zložitosť $O(\sqrt{n})$.
