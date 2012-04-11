@@ -1,7 +1,21 @@
 \section{Haldy}
-\subsection{$d$-nárna halda}
-\subsection{Ľavicová halda}
-\subsection{Skew halda}
-\subsection{Párovacia halda}
-Katka, zase spíš?!
-[citacie]
+
+V nasledujúcom texte sa budeme zaoberať rôznymi druhmi prioritných front. Popíšeme \emph{d-árnu haldu} ako 
+základnú modifikáciu binárnej haldy, \emph{Ľavicovú haldu} a niektoré druhy samoupravujúcich sa háld, konkrétne 
+\emph{Skew haldu} a \emph{Párovaciu haldu}.
+Halda je vo všeobecnosti \emph{zakorenený strom} s vrcholmi obsahujúcimi kľúče reprezentujúce dáta. Dôležitá je 
+zakladná podmienka haldy, ak vrchol$p(x)$ je otcom vrcholu $x$, potom \emph{kľúč}$(p(x))$ $\leq$ \emph{kľúč}$(x)$\footnote{Bez ujmy na všeobecnosti budeme uvažovať o \emph{min haldách}, teda v koreni sa bude nachádzať najmenší prvok. Podobnými úvahami by sme text mohli rozšíriť o \emph{max haldy} s najväčším prvkom v koreni.}.
+Štandardné operácie, ktoré haldy podporujú, a ktorými sa budeme zaoberať pri každej dátovej štuktúre, sú:
+\begin{itemize}
+\item $\mathop{\mathbf{createHeap}}$ -- vytvorí prázdnu haldu;
+\item $\mathop{\mathbf{insert}}\left( x\right)$ -- vloží vrchol s kľúčom $x$;
+\item $\mathop{\mathbf{findMin}}$ -- vráti minimum t.j. hodnotu kľúča v koreni;
+\item $\mathop{\mathbf{deleteMin}}$ -- odstráni vrchol s najmenším kľúčom, t.j. koreň;
+\item $\mathop{\mathbf{decreaseKey}}\left( v, \Delta\right)$ -- zníži kľúč vrcholu v o delta;
+\end{itemize}
+Niektoré haldy navyše implementujú $\mathop{\mathbf{meld}}\left( i, j\right)$ -- spojí haldu $i$ s haldou $j$.
+
+\input haldy/daryheap.tex
+\input haldy/leftist.tex
+\input haldy/skewheap.tex
+\input haldy/pairheap.tex
