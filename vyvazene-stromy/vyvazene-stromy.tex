@@ -1,6 +1,101 @@
+\def\k{a}
+\def\l{b}
+\def\insert{$\mathop{insert}\left( \k \right)$}
+\def\find{$\mathop{find}\left( \k \right)$}
+\def\delete{$\mathop{delete}\left( \k \right)$}
+\def\reverse{$\mathop{reverse}\left( \k , \l \right)$}
+
 \section{Vyvážené stromy}
 
-uz boli, pribudli 
-\subsection{Finger tree}
-\subsection{Reversal tree}
-Táňa, čiň sa! 
+Vyvážený strom je taký strom, kde pre každý vrchol platí, že rozdiel hĺbok jeho ľavého a pravého podstromu je najviac 1. V dobre vyváženom strome je rozdiel hĺbok rovný nule.
+
+\subsection{B+-strom}
+
+\paragraph{Popis.}
+
+\emph{B+-strom} je variácia B stromu taká, že má všetky kľúče uložené v listoch a všetky vrcholy, ktoré sú listami, sú spojené do spájaného zoznamu. B strom je zakorenený utriedený strom, ktorý má rád $n$ (v jednom vrchole maximálne $n-1$ prvkov) a limity na maximálny ($n$) a minimálny ($\lfloor \frac{n}{2} \rfloor$) počet potomkov. Vďaka tomu je dobre vyvážený a jeho operácie sú vykonávané v logaritmickom čase.
+Vzhľadom na usporiadanie budem predpokladať, že menšie prvky sa nachádzajú vždy vľavo.
+\emph{B+-strom} je \emph{asociatívne pole (slovník)}, čiže
+poskytuje tieto tri operácie:
+\begin{itemize}
+\item $\mathop{\mathit{insert}}(\k)$ -- pridá do stromu $\k$;
+\item $\mathop{\mathit{find}}(\k)$ -- zistí, či sa v strome nachádza $\k$;
+\item $\mathop{\mathit{delete}}(\k)$ -- odstráni zo stromu $\k$.
+\end{itemize}
+
+Operácia \find\ začne v koreni, nájde v ňom prvý kľúč väčší od hľadaného. Nech je i-ty v poradí, potom hľadanie pokračuje v i-tom synovi tohto vrchola. Je zrejmé, že ak sa väčší kľúč nenájde, presunieme sa do posledného $n$-tého syna. V liste sa už len skontroluje, či sa v ňom hľadaný kľúč nachádza.
+
+Definujem dve operácie: COPY-UP a PUSH-UP, ktoré používa operácia \insert\.
+Ak má vrchol viac prvkov, ako je maximálny limit, treba ho zmenšiť. Rozdelí sa na dve časti. Ak vrchol nie je listom, použije sa PUSH-UP, najmenší kľúč pravej časti sa vyberie a stane sa otcom vytvorených dvoch častí. Pokiaľ to list je, kľúč v ňom musí zostať, preto sa iba skopíruje. Táto operácia sa nazýva COPY-UP.
+
+Operácia \insert\ najprv pomocou operácie \find\ zistí, či štruktúra daný kľúč obsahuje. Ak nie, je zrejmé, že patrí práve do vrchola, kde \find\ skončil. Ak vrchol má po vložení viac kľúčov ako maximálny limit, je treba ho zmenšiť. Pokiaľ otcovský vrchol má syna, do ktorého je možné kľúč presunúť a zároveň syn susedí s veľkým vrcholom, postup je nasledovný. Nech je vrchol vľavo menší a terajší vrchol je $i$-ty syn v poradí. Potom algoritmus z neho vyberie najmenší kľúč, presunie ho na miesto $(i-1)$-ho kľúča v otcovskom vrchole. Vymenený kľúč následne vloží do $(i-1)$-ho syna. Ak sú susedné vrcholy príliš veľké na presun kľúča, použije sa operácia COPY-UP. Nový vrchol s jedným kľúčom, ktorý vznikol, vložíme do otcovského vrchola. Ak otcovský vrchol presiahol najväčšiu možnú veľkosť, znova sa aplikuje popísaný algoritmus s jedným rozdielom - namiesto COPY-UP sa použije PUSH-UP.
+
+Operácia \delete\ najprv pomocou \find\ nájde kľúč, potom ho z vrcholu odstráni. Tento vrchol môže mať po odstránení menší počet kľúčov ako minimálny limit. Vtedy, ak sa dá, sa prenesie jeden kľúč zo súrodenca. Ak sa nedá, vrchol sa s ním zlúči. Zároveň sa k nim pridá aj kľúč z otcovského vrchola, ktorý ich rozdeľoval. Pokiaľ to spôsobilo, že otcovský vrchol má menej kľúčov, ako je povolené, znova sa aplikuje predošlý algoritmus. Keďže na koreň sa nevzťahuje minimálny limit, po skončení bude strom zaručene v konzistentnom tvare.
+
+\paragraph{Časová zložitosť}
+Vkladanie, vymazávanie a hľadanie má časovú zložitosť $O(\log_B(n))$\citet{sahni}. Kde $B$ je veľkosť najmenšej stránky záznamov a $n$ je počet prvkov.
+
+\paragraph{Použitie.}
+B+-strom podporuje efektívne vyhľadanie prvkov poľa, ktoré patria do daného intervalu\citet{sahni}. Algoritmus nájde jeden krajný bod a vďaka spájanému zoznamu, vytvorenému z listov, ostatné prvky postupne prečíta. Zložitosť je $O(\log_B(n) + \frac{t}{B})$, kde $t$ je počet výsledných kľúčov z hľadaného intervalu.
+Keď sa pozrieme na širšie využitie B+-stromu, zistíme, že je použitý takmer vo všetkých databázových systémoch. Ak zvolíme vhodný rád, vieme jednotlivé vrcholy dobre napasovať na stránky a tým regulovať ako počet prístupov k pamäti, tak jej zaplnenie\citet{sahni}. Pridáva mu aj fakt, že pri implementácii agregačných funkcií na túto štruktúru vychádza ich zložitosť na $O(\log_B(n))$.
+Ďaľšia výhoda, ktorú táto štruktúra poskytuje, sa prejaví, ak máme dáta a chceme ich vložiť do štruktúry. V iných prípadoch by bolo treba spraviť $n$ vložení. Avšak spájaný zoznam na najnižšej vrstve umožní vystavať B+-strom odpodu. Takýto postup nám zaručí zložitosť $O(\frac{n}{B}*\log_B(n))$, čo je B-krát rýchlejšie ako tradičný spôsob.
+
+\subsection{Strom s prstom}
+\emph{Strom s prstom} (z anglického Finger tree) je vyhľadávací strom, kde prst je smerník na nejaký vrchol. Jeho poloha sa využíva pri všetkých operáciách. Vďaka tomu má strom s prstom efektívnejšie vyhľadávanie, vkladanie a mazanie kľúčov, ktoré sú v blízkom okolí prsta.
+
+\paragraph{Popis.}
+Strom s prstom je upravený (2,4)-strom. (2,4)-strom je dobre vyvážený utriedený zakorenený strom, kde všetky listy majú rovnakú hĺbku a vnútorné vrcholy majú stupeň 2, 3 alebo 4. Kľúče sú uložené v listoch a vnútorné vrcholy obsahujú ich kópie, aby viedli vyhľadávanie. Pre podporu vyhľadávania s prstom bola táto štruktúra rozšírená o hrany na vrstvách, čo znamená, že všetky vrcholy na rovnakej vrstve (také, ktoré sú rovnako vzdialené od koreňa) sú pospájané do obojsmerného spájaného zoznamu. Ak sú nejaké dva vrcholy spojené takouto hranou, budeme hovoriť, že sú susedia.
+Prst, ako už bolo spomenuté, ukazuje na nejaký vrchol. Môže sa pohybovať po všetkých hranách a pomocou neho sa vykonávajú všetky operácie. Keďže sú všetky kľúče uložené v listoch, prst na tejto vrstve začína, aj končí.
+Vzhľadom na usporiadanie budem predpokladať, že menšie prvky sa nachádzajú vždy vľavo a každý prekopírovaný kľúč má svoj originál vždy vľavo v listovom vrchole.
+Strom s prstom je \emph{asociatívne pole (slovník)}, čiže
+poskytuje tieto tri operácie:
+\begin{itemize}
+\item $\mathop{\mathbf{insert}}(\k)$ -- pridá do stromu $\k$;
+\item $\mathop{\mathbf{find}}(\k)$ -- zistí, či sa v strome nachádza $\k$;
+\item $\mathop{\mathbf{delete}}(\k)$ -- odstráni zo stromu $\k$.
+\end{itemize}
+
+Operácia \find\ začne na mieste, kam ukazuje prst. Skontroluje, či by kľúč mal patriť do daného vrchola. Ak nie, pozrie sa, či nepatrí do niektorého zo susedov. Ak áno, prst sa tam presunie a vyhľadávanie sa skončilo. Inak smerník prejde o vrstvu vyššie, na otcovský vrchol. Ak hľadaný kľúč patrí do jeho podstromu (t.j. je väčší ako jeho najmenší kľúč a menší ako ten najväčší), zíde po hranách do listu, kde by sa daný kľúč mal nachádzať. Keď do podstromu nepatrí, skontroluje, či nepatrí do podstromu susedov. Ak áno, prejde po vrstevnej hrane na suseda a následne zíde až do listu, kde by mal kľúč byť. Pokiaľ prst nenarazil na správny podstrom, znova sa presunie smerom nahor po otcovskej hrane. Hľadanie pokračuje analogicky. Je zrejmé, že ak prst ukazuje na koreň, kľúč bude patriť do jeho podstromu.
+
+Otázka patričnosti do podstromu sa dá pre krajné prípady optimalizovať. Ak totiž vrchol, na ktorý ukazujeme, nemá napríklad pravého suseda, je zrejmé, že vačší kľúč ako je najvačší v tomto vrchole v strome nie je. Preto ľubovoľný kľúč do podstromu tohto vrchola patrí práve vtedy, keď je väčší ako jeho najmenší prvok. Analogicky to platí, ak chýba ľavý sused.
+
+Operácia \insert\ najprv pomocou operácie \find\ nájde miesto, kam by mal vkladaný kľúč patriť. Ak taký kľúč už v strome je, ďalší sa nevloží. V prípade, že sme vložili nový kľúč, môže sa stať, že vrchol "pretečie", tzn. má viac ako 3 prvky. Situácia sa vyrieši rovnako ako v B+-strome.
+Operácia \delete\ najprv pomocou operácie \find\ nájde miesto, kam by mal hľadaný kľúč patriť. Ak tam nie je, vymazávanie sa končí. Inak sa vymaže. Môže sa stať, že vrchol "podtečie", tzn. nemá kľúč. Tento problém sa rieši rovnako ako v B+-strome.
+%\bigskip
+
+\paragraph{Časová zložitosť.}
+Keďže každý vrchol má stupeň minimálne 2, (2,4)-strom má hĺbku $O(\log( n ))$, kde $n$ je počet kľúčov, a teda podporuje vykonávanie operácií v čase $O(\log(n))$. Ak sa však použije prst, časová zložitosť vychádza na $O(\log( d ))$, kde $d$ je vzdialenosť pozície prsta a vrcholu, kam patrí cieľový kľúč, amortizovane dokonca na $O(1)$\citet{sahni}.
+
+\paragraph{Použitie.}
+Prst ako smerník na prvok štruktúry, ktorý umožňuje efektívnejší prístup k okolitým kľúčom, prvýkrát spomenuli Guibas et al. Vo svojej publikácii prezentujú B-strom podporujúci vyhľadávanie v $O(\log(n))$ a update-y dokonca v $O(1)$ čase, predpokladajúc, že je udržiavaných len $O(1)$ pohyblivých prstov\citet{sahni}. Pohyb prsta o $d$ pozícií trvalo $O(\log(n))$ času. Na základe tejto práce navrhli Huddleston a Mehlhorn svoj vrstvovo spájaný (2,4)-strom, ktorý bol neskôr upravený vďaka Belloch et al. na priestorovo efektívnejšiu alternatívu. Toto riešenie využíva jeden prst, s ktorým štruktúra ponúka rovnakú operačnú zložitosť ako (2,4)-stromy. Model bol dokonca zovšeobecnený na ($a$,$b$)-stromy, kde $b\geq 2a$. Je zaujímavé, že pre (2,3)-strom, ktorý nespĺňa danú podmienku, bola nájdená postupnosť vkladaní a vymazávaní taká, že vyžadovala až $O(n\log(n))$ čas\citet{sahni}.
+
+\paragraph{Vizualizácia.}
+Strom s prstom je vizualizovaný pomocou B+-stromu s rádom 4, keďže jeho podmienky pre počet potomkov vyhovujú danej štruktúre. Prst je samostaný pohyblivý článok, ktorý si pamätá iba vrchol, na ktorý ukazuje. Po stromovitej štruktúre sa vie hýbať vďaka informáciám získaným z daného vrcholu.
+
+\subsection{Strom s reverzami}
+\emph{Strom s reverzami} (z anglického Reversal tree) je dátová štruktúra na uchovávanie permutácií. Má stromovitý charakter, teda poradie prvkov môžeme chápať rovnako ako v usporiadaných stromoch (t.j. najľavejší prvok je na prvom mieste).
+
+\paragraph{Popis.}
+Strom s reverzami je založený na Splay strome\citet{kuko}. Splay strom je štruktúrou binárny strom, líši sa od neho iba operáciami. Keď pracuje s ľubovoľným prvkom, na konci operácie bude vo vrchole buď daný kľúč alebo najbližší z jeho okolia (vďaka splay algoritmu - preto ten názov). Na rozdiel od Splay stromu, strom s reverzami nepracuje s kľúčmi, ale s poradím prvkov. Preto je nutné, aby mal každý vrchol zaznamenané, aký veľký je jeho podstrom (vrátane neho). Ďalšiou informáciou, o ktorú sú vrcholy rozšírené, je vlajka, ktorú vrchol môže a nemusí mať. Ak ju má, potom podstrom daného vrchola má byť čítaný reverzne.
+
+Strom s reverzami poskytuje tieto tri operácie:
+\begin{itemize}
+\item $\mathop{\mathbf{insert}}(\k)$ -- pridá do stromu $\k$;
+\item $\mathop{\mathbf{find}}(\k)$ -- zistí, ktorý prvok je na $\k$-tom mieste;
+\item $\mathop{\mathbf{reverse}}(\k,\l)$ -- reverzne interval od $\k$ po $\l$.
+\end{itemize}
+
+Operácia \find\ pomocou veľkosti podstromov zistí, ktorý prvok je na požadovanom mieste. Po nájdení pozície sa použije splay algoritmus, aby hľadaný prvok skončil v koreni. Ak niekedy narazí na vrchol s vlajkou, použije algoritmus na odstránenie vlajky, ktorý vyzerá nasledovne. Danému vrcholu odstráni vlajku, vymení mu synov a každému z nich zmení status vlajky.
+
+Operácia \insert\ najprv pomocou operácie \find\ dostane do koreňa posledný prvok. Je zrejmé, že na mieste pravého syna nie je žiaden vrchol. Následne sa na toto miesto pripojí desať prvkov už prepojených v stromovitej štruktúre.
+
+Operácia \reverse\ pomocou operácie \find\ dostane prvok na pozícii vľavo od intervalu na miesto koreňa a vymaže hranu medzi koreňom a pravým synom. To spôsobí, že vzniknú dva stromy T1 a T2, pričom v T1 budú všetky prvky, ktoré sú pred intervalom. Následne použije \find\ v strome T2 na prvok vpravo od intervalu, a aj ten oddelí tak, že zruší hranu medzi koreňom a jeho ľavým synom. Tým vznikli T3 a T4, kde T4 obsahuje prvky za intevalom. Zostane strom T3 - interval, ktorý chceme reverznúť, takže koreňu zmeníme status vlajky. Následne pospájame strom dohromady. T3 bude ľavý syn T4 a T4 bude pravý syn T1.
+
+% \paragraph{Časová zložitosť.}
+Všetky operácie splay tree sú amortizovane $O(\log(n))$. Nakoľko samotné reverzovanie je v$O(\log(1))$, časová zložitosť operácií v strome s reverzami bude tiež amortizovane $O(\log(n))$.
+
+\paragraph{Použitie.}
+Dátových štruktúr na ukladanie permutácií je mnoho. Splay strom ako základ si vzali Fredman et al., pretože ponúkali dobré konštanty a zároveň umožňovali elegantnú implementáciu rozdeľovania a spájania postromov\citet{reversals}.
+
+\paragraph{Vizualizácia.}
+Pre lepšiu vizualizáciu sme pridali do stromu nultý a posledný prvok. Tieto prvky do reverzovateľného intervalu nepatria, majú však zmysel v prípade, ak sa reverzuje interval, ktorý zahŕňa aspoň jeden okraj. V tom prípade v operácii \reverse\ nezostane ani T1 ani T4 prázdny. Aby nevznikli problémy s operáciami, za krajné kľúče boli zvolené hodnoty $0$ a číslo o jedna väčšie od aktuálneho maxima. Zároveň, pre lepšiu predstavu, bolo pridané pole, v ktorom užívateľ vidí skutočné poradie prvkov, ktoré zo stromu nie je až tak zjavné. Pole simuluje operácie spolu so stromom, ale tie sú na ňom vykonávané v lineárnom čase.

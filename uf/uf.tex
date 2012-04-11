@@ -108,15 +108,10 @@ ako nájdeme zástupcu množiny obsahujúcej prvok $x$, smerníky prvkov
 navštívených po ceste (vrátane $x$) presmerujeme na zástupcu množiny. Toto 
 síce spomalí prvé vykonávanie, ale výrazne zrýchli ďalšie hľadania. 
 Druhou heuristikou je \emph{delenie cesty} \citep{comp2}. Pri vykonávaní 
-operácie \find\ 
-pripojíme každý vrchol\footnote{Okrem koreňa a synov koreňa, 
-keďže tie deda a otca resp. deda nemajú.} v ceste od vrcholu $x$ po koreň stromu 
-na otca jeho otca. 
-Treťou heuristikou je \emph{pólenie cesty} \citep{comp2}. Pri vykonávaní 
-operácie \find\ 
-pripojíme každý druhý vrchol\footnote{Okrem koreňa a synov koreňa, 
-keďže tie deda a otca resp. deda nemajú.} 
-v ceste od vrcholu $x$ po koreň stromu na otca jeho otca. 
+operácie \find\ pripojíme každý vrchol v ceste od vrcholu $x$ po koreň stromu
+na otca jeho otca. Treťou heuristikou je \emph{pólenie cesty} \citep{comp2}.
+Pri vykonávaní operácie \find\  pripojíme každý druhý vrchol v ceste od vrcholu
+$x$ po koreň stromu na otca jeho otca. 
 
 \bigskip
 Časová zložitosť union-findu záleží od toho, koľko prvkov je v množinách a koľko je 
