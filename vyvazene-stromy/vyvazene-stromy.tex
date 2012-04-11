@@ -121,23 +121,11 @@ kľúč bude patriť do jeho podstromu.
 
 Operácia $\ins$ najprv pomocou operácie $\find$ zistí, či štruktúra daný kľúč obsahuje. Ak nie, 
 je zrejmé, že patrí práve do vrchola, kde $\find$ skončil. V prípade, že sme vložili nový kľúč, 
-môže sa stať, že vrchol "pretečie", tzn.\ má viac ako 3 prvky%
+môže sa stať, že vrchol "pretečie", tzn.\ má viac ako 3 prvky %
 (pozri obr.~\ref{img:finger-insert}). Ak vrchol pretiekol, použije sa COPY-UP 
 a rozdelí sa na dve časti. Stredný jednoprvkový vrchol sa vloží do otca. Ak pretiekol, použijeme 
 rovnaký postup, akurát s PUSH-UP. Pokračujeme analogicky, pokým štruktúra nebude znova 
 v konzistentom stave.
-
-Operácia $\delete$ najprv pomocou operácie $\find$ nájde miesto, kam by mal hľadaný kľúč patriť. 
-Ak tam nie je, vymazávanie sa končí. Inak sa vymaže. Môže sa stať, že vrchol "podtečie", tzn.\ 
-nemá kľúč. Tento problém sa rieši rovnako ako v \Bp-strome. 
-Samozrejme je treba ošetriť konzistentnosť vo vyšších vrstvách, aby sa tam nenachádzali kópie 
-kľúčov, ktoré už boli zo štruktúry vymazané (pozri obr. ~\ref{img:finger-delete}).  
-
-\begin{figure}
-\includegraphics[width=\columnwidth]{obrazky/finger-delete.png}
-\caption{\emph{Vymazávanie kľúča $762$.} Odstrániť sa musí aj kópia vo vyšších vrstvách.}
-\label{img:finger-delete}
-\end{figure}
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{obrazky/finger-insert.png}
@@ -145,6 +133,18 @@ kľúčov, ktoré už boli zo štruktúry vymazané (pozri obr. ~\ref{img:finger
 2) vrchol sa delí a kľúč sa kopíruje, aby originál zostal v liste 3) nový otec sa vkladá do vyššej vrstvy 
 4) aj tento vrchol preteká, delí sa a vzniká nový koreň 5) finálny tvar.}
 \label{img:finger-insert}
+\end{figure}
+
+Operácia $\delete$ najprv pomocou operácie $\find$ nájde miesto, kam by mal hľadaný kľúč patriť. 
+Ak tam nie je, vymazávanie sa končí. Inak sa vymaže. Môže sa stať, že vrchol "podtečie", tzn.\ 
+nemá kľúč. Tento problém sa rieši rovnako ako v \Bp-strome. 
+Samozrejme je treba ošetriť konzistentnosť vo vyšších vrstvách, aby sa tam nenachádzali kópie 
+kľúčov, ktoré už boli zo štruktúry vymazané (pozri obr.~\ref{img:finger-delete}).  
+
+\begin{figure}
+\includegraphics[width=\columnwidth]{obrazky/finger-delete.png}
+\caption{\emph{Vymazávanie kľúča $762$.} Odstrániť sa musí aj kópia vo vyšších vrstvách.}
+\label{img:finger-delete}
 \end{figure}
 
 \paragraph{Časová zložitosť.}

@@ -1,25 +1,29 @@
 \section{Úvod}
 Dátové štruktúry a algoritmy tvoria základnú, prvotnú časť výučby 
 informatiky. Vizualizácia algoritmov a dátových štruktúr je grafické 
-znázornenie, ktoré abstrahuje spôsob ako algoritmus a dátové štruktúry 
-pracujú od ich vnútornej reprezentácie a umiestnení v pamäti. Je teda 
-vyhľadávaná a všeobecne rozšírená pomôcka pri výučbe. Výsledky výskumov 
-ohľadne jej efektívnosti sa líšia, od stavu "nezaznamenali sme výrazné 
-zlepšenie" po "je viditeľné zlepšenie" \citep{shaffer}.
+znázornenie, ktoré abstrahuje od implementačných detajlov a reprezentácie
+v pamäti. Je teda vhodnou pomôckou pri výučbe i samoštúdiu. Hoci výsledky
+výskumov zatiaľ nedokázali úplne preukázať pedagogickú efektívnosť
+vizualizácií \citep{shaffer}, viacero štúdií potvrdilo zvýšený záujem
+a zapojenosť študentov \citep{naps02, hundhausen02}.
 
 Rozhodli sme sa pomôcť vybudovať 
 dobrý softvér na vizualizáciu algoritmov a dátových štruktúr a obohatiť 
 kompiláciu Jakuba Kováča \citep{kuko} o ďalšie dátové štruktúry. 
 Vizualizujeme rôznorodé dátové štruktúry. Z binárnych vyvažovaných stromov 
-to sú \emph{finger tree} a \emph{reversal tree}, z háld to sú \emph{d-árna 
+to sú \emph{B$^+$-strom}, \emph{strom s prstom} a \emph{strom s reverzami}, z háld to sú \emph{d-árna 
 halda}, \emph{ľavicová halda}, \emph{skew halda} a \emph{párovacia halda}. 
 Taktiež vizualizujeme aj \emph{union-find problém} a 
 \emph{písmenkový strom (trie)}. 
 
-Okrem vizualizácie prerábame softvér, doplnili sme ho o históriu krokov 
-a operácií, jednoduchšie ovládanie a veľa iných vecí, zlepšujúcich 
-celkový dojem. Softvér je celý v slovenčine a angličtine a je 
-implementovaný v jazyku \texttt{Java}.
+Okrem vizualizácie softvér prerábame a neustále vylepšujeme.
+Doplnili sme ho o históriu krokov a operácií, jednoduchšie ovládanie
+a veľa ďalších funkcií. Softvér je celý v slovenčine aj angličtine a je 
+implementovaný v jazyku \texttt{Java}. Dostupný je na stránke
+\hbox{\url{http://people.ksp.sk/~kuko/gnarley-trees}} vo forme appletov
+s jednotlivými dátovými štruktúrami, a tiež vo forme samostatného programu,
+ktorý obsahuje všetky dátové štruktúry a je určený na používanie offline.
+%, kde má každá dátová štruktúra 
 
 Rozmach vizualizačných algoritmov priniesla najmä Java a jej fungovanie 
 bez viazanosti na konkrétny operačný systém. Kvalita vizualizácií sa líši 
