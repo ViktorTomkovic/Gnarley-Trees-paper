@@ -80,23 +80,22 @@ keďže išlo o spôsob udržiavania dát v pamäti.
 %a $\mathop{deletion}$ (\delete) a dátovú štruktúru nazýval \emph{trie 
 %memory}, keďže išlo naozaj o spôsob uloženia dát v pamäti.
 
-O niečo neskôr \citet{knuth} uviedol vo svojej knihe ako príklad na 
-písmenkový strom vreckový slovník. 
+%O niečo neskôr \citet{knuth} uviedol vo svojej knihe ako príklad na 
+%písmenkový strom vreckový slovník. 
 %V tom istom diele uviedol aj možnosť 
 %komprimovania vetiev a možnosť prerobenia $m$-árneho \trie\ na binárny. 
-\citet{knuth} však ukázal len komprimovanie koncov vetiev. Písmenkový 
-strom, v ktorom každý vrchol, ktorého otec má len jedného syna 
-je zlúčený s otcom\footnote{Na hranách teda nie sú znaky, ale slová.}, 
-vymyslel \citet{patricia} a zaviedol pre ňho pojem \emph{PATRICIA} 
-(\emph{radix tree, resp. radix trie}). Využíva sa napríklad v 
-\emph{routovacích tabuľkách} \citep{radix}.
+%\citet{knuth} však ukázal len komprimovanie koncov vetiev. 
+\citet{patricia} navrhol písmenkový strom, v ktorom sa každá cesta bez vetvení
+skomprimuje do jedinej hrany (na hranách potom nie sú znaky, ale slová).
+Táto štruktúra je známa pod menom \emph{PATRICIA} (tiež \emph{radix tree},
+resp.\ \emph{radix trie}) a využíva sa napríklad v \emph{routovacích tabuľkách}
+\citep{radix}.
 
-Pôvodný návrh \citep{fredkin} ako uložiť \trie\ do pamäte zaberal príliš 
-veľa nevyužitého priestoru. \citet{liang} navrhol ako efektívne zmenšiť 
-pamäťový priestor potrebný na uloženie \trie. Nazval ho \emph{packed trie} 
-a navrhol spôsob, akým ho dobre použiť na slabikovanie slov. Systém bol 
-následne použitý v programe \TeX. 
-%vzorce vytvoril pomocou stromu alebo nie?
+Písmenkový strom (tzv.\ \emph{packed trie} alebo \emph{hash trie}) sa používa
+napríklad v programe \TeX\ na slabikovanie slov \citep{liang}.
+Pôvodný návrh \citep{fredkin} ako uložiť \trie\ do pamäte zaberal
+príliš veľa nevyužitého priestoru. \citet{liang} však navrhol, ako
+tieto nároky zmenšiť použitím hašovacej tabuľky.
 
 Písmenkové stromy sa podobajú na \emph{konečné automaty}. 
 Vznikli rôzne modifikácie stromov na automaty, ktorých hlavnou výhodou je, 
@@ -112,10 +111,10 @@ triedenie dlhých zoznamov slov. Neskôr tento algoritmus vylepšili
 \citet{burstsort2}. Kvôli tomu, ako algoritmus pracuje, 
 sa nazýva \emph{burstsort}.
 
-Špeciálnym použitím písmenkového stromu je vytvorenie stromu zo všetkých 
-prípon slova. Táto dátova štruktúra sa nazýva \emph{sufixový strom} a dá sa 
-mo\-di\-fi\-ko\-vať na udržiavanie viacerých slov. Tieto štruktúry majú 
-veľmi veľa praktických využití \citep{gusfield}. 
+% Špeciálnym použitím písmenkového stromu je vytvorenie stromu zo všetkých 
+% prípon slova. Táto dátova štruktúra sa nazýva \emph{sufixový strom} a dá sa 
+% mo\-di\-fi\-ko\-vať na udržiavanie viacerých slov. Tieto štruktúry majú 
+% veľmi veľa praktických využití \citep{gusfield}. 
 
 \paragraph{Vizualizácia.} Pri vizualizácií písmenkového stromu sme použili 
 Walkerov algoritumus pre úsporné rozloženie vrcholov v strome. 
