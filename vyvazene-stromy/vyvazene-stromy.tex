@@ -175,10 +175,6 @@ danej štruktúre.
 Poskytuje operácie 
 \begin{itemize}
 \item $\mathop{\mathit{insert}}(k)$ -- pridá do stromu $k$;
-% <<<<<<< HEAD
-% \item $\mathop{\mathit{find}}(k)$ -- zistí, ktorý prvok je na $k$-tom mieste permutácie;
-% \item $\mathop{\mathit{reverse}}(i,j)$ -- spraví reverz intervalu od $i$ po $j$.
-% =======
 \item $\mathop{\mathit{find}}(k)$ -- zistí, ktorý prvok je na $k$-tom mieste permutácie a
 \item $\mathop{\mathit{reverse}}(i,j)$ -- reverzne interval od $i$ po $j$.
 \end{itemize}
@@ -194,15 +190,9 @@ My sme zvolili \emph{splay strom} pre jeho jednoduchosť.
 % buď daný kľúč alebo najbližší z jeho okoli. Na rozdiel od splay stromu, strom s reverzami nepracuje
 % s kľúčmi, ale s poradím prvkov. Preto je nutné, aby mal
 
-% <<<<<<< HEAD
-% Aby sme vedeli efektívne vyhľadať $k$-ty prvok, budeme si pre každý vrchol udržiavať veľkosť jeho 
-% podstromu. V operácií \find\ sa vieme podľa toho rozhodnúť, či sa $k$-ty prvok nachádza v ľavom podstrome, 
-% resp.\ koľký prvok je v pravom podstrome. Po nájdení sa prvok presunie do koreňa pomocou operácie splay. 
-% =======
 Aby sme vedeli efektívne vyhľadať $k$-ty prvok, budeme si pre každý vrchol udržiavať veľkosť jeho
 podstromu. V operácií $\mathop{\mathit{find}}(k)$ sa vieme podľa toho rozhodnúť, či sa $k$-ty prvok nachádza v ľavom podstrome,
-resp.\ koľký prvok je v pravom podstrome. Po nájdení sa prvok presunie do koreňa pomocou operácie splay.
-% >>>>>>> a0feba993f87ff1223dad61de4a624b8b4102adb
+resp.~koľký prvok je v pravom podstrome. Po nájdení sa prvok presunie do koreňa pomocou operácie splay.
 
 Operáciu \reverse\ implementujeme lenivo: 
 strom najskôr rozdelíme na tri časti: $T_1,T_2,T_3$, pričom $T_2$ obsahuje interval od $i$-teho 
