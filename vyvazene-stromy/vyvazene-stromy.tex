@@ -117,18 +117,35 @@ kľúč bude patriť do jeho podstromu.
 % v strome nie je. Preto ľubovoľný kľúč do podstromu tohto vrchola patrí práve vtedy, keď je väčší
 % ako jeho najmenší prvok. Analogicky to platí, ak chýba ľavý sused.
 
-Operácia \ins\ najprv pomocou operácie \find\ nájde miesto, kam by mal vkladaný kľúč patriť.
-Ak taký kľúč už v strome je, ďalší sa nevloží. V prípade, že sme vložili nový kľúč, môže sa stať,
-že vrchol "pretečie", tzn.\ má viac ako 3 prvky. Situácia sa vyrieši rovnako ako v \Bp-strome.
-Operácia \delete\ najprv pomocou operácie \find\ nájde miesto, kam by mal hľadaný kľúč patriť.
+Operácia \ins\ najprv pomocou operácie \find\ nájde miesto, kam by mal vkladaný kľúč patriť. 
+Ak taký kľúč už v strome je, ďalší sa nevloží. V prípade, že sme vložili nový kľúč, môže sa stať, 
+že vrchol "pretečie", tzn.\ má viac ako 3 prvky%
+(pozri obr.~\ref{img:finger-insert}). Situácia sa vyrieši rovnako ako v \Bp-strome. 
+Operácia \delete\ najprv pomocou operácie \find\ nájde miesto, kam by mal hľadaný kľúč patriť. 
 Ak tam nie je, vymazávanie sa končí. Inak sa vymaže. Môže sa stať, že vrchol "podtečie", tzn.\ 
-nemá kľúč. Tento problém sa rieši rovnako ako v \Bp-strome.
+nemá kľúč. Tento problém sa rieši rovnako ako v \Bp-strome. 
+Samozrejme je treba ošetriť konzistentnosť vo vyšších vrstvách, aby sa tam nenachádzali kópie 
+kľúčov, ktoré už boli zo štruktúry vymazané (pozri obr. ~\ref{img:finger-delete}).  
+
+\begin{figure}
+\includegraphics[width=\columnwidth]{obrazky/finger-delete.png}
+\caption{\emph{Vymazávanie kľúča $762$.} Odstrániť sa musí aj kópia vo vyšších vrstvách.}
+\label{img:finger-delete}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=\columnwidth]{obrazky/finger-insert.png}
+\caption{\emph{Pretečenie vrchola.} Do stromu sme vložili prvok $308$ a 1) listový vrchol pretiekol. 
+2) vrchol sa delí a kľúč sa kopíruje, aby originál zostal v liste 3) nový otec sa vkladá do vyššej vrstvy 
+4) aj tento vrchol preteká, delí sa a vzniká nový koreň 5) finálny tvar.}
+\label{img:finger-insert}
+\end{figure}
 
 \paragraph{Časová zložitosť.}
-Keďže každý vrchol má aspoň dvoch synov, 2-3-4 strom má hĺbku $O(\log n)$, kde $n$ je počet kľúčov,
-a teda podporuje vykonávanie operácií v čase $O(\log n)$. Ak sa však použije prst, časová zložitosť
-vychádza na $O(\log d)$, kde $d$ je vzdialenosť pozície prsta a vrcholu, kam patrí cieľový kľúč,
-amortizovane dokonca na $O(1)$ \citet{sahni}.
+Keďže každý vrchol má aspoň dvoch synov, 2-3-4 strom má hĺbku $O(\log n)$, kde $n$ je počet kľúčov, 
+a teda podporuje vykonávanie operácií v čase $O(\log n)$. Ak sa však použije prst, časová zložitosť 
+vychádza na $O(\log d)$, kde $d$ je vzdialenosť pozície prsta a vrcholu, kam patrí cieľový kľúč, 
+amortizovane dokonca na $O(1)$ \citet{sahni}. 
 
 % \paragraph{Použitie.}
 % Prst ako smerník na prvok štruktúry, ktorý umožňuje efektívnejší prístup k okolitým kľúčom, prvýkrát
@@ -145,15 +162,11 @@ Strom s prstom je vizualizovaný pomocou \Bp-stromu s rádom 4, keďže jeho pod
 danej štruktúre.
 % Prst je samostaný pohyblivý článok, ktorý si pamätá iba vrchol, na ktorý ukazuje. Po stromovitej
 % štruktúre sa vie hýbať vďaka informáciám získaným z daného vrcholu.
-\todo{OBRAZOK}
-
-
-
 \def\find{$\mathop{find}(k)$}
 
 \subsection{Strom s reverzami}
-\emph{Strom s reverzami} je dátová štruktúra na uchovávanie permutácií.
-Poskytuje operácie
+\emph{Strom s reverzami} je dátová štruktúra na uchovávanie permutácií. 
+Poskytuje operácie 
 \begin{itemize}
 % \item $\mathop{\mathit{insert}}(\k)$ -- pridá do stromu $\k$;
 \item $\mathop{\mathit{find}}(k)$ -- zistí, ktorý prvok je na $k$-tom mieste permutácie;
@@ -161,26 +174,35 @@ Poskytuje operácie
 \end{itemize}
 
 \paragraph{Popis.}
-Permutáciu reprezentujeme ako strom, v ktorom je in-order poradie prvkov totožné
-s poradím prvkov v permutácií. Strom s reverzami môžeme implementovať pomocou ľubovoľného
-vyváženého stromu, ktorý podporuje rozdelenie a zreťazenie dvoch stromov v logaritmickom čase.
-My sme zvolili splay strom pre jeho jednoduchosť.
+Permutáciu reprezentujeme ako strom, v ktorom je in-order poradie prvkov totožné 
+s poradím prvkov v permutácií. Strom s reverzami môžeme implementovať pomocou ľubovoľného 
+vyváženého stromu, ktorý podporuje rozdelenie a zreťazenie dvoch stromov v logaritmickom čase. 
+My sme zvolili splay strom pre jeho jednoduchosť. 
 
 % Splay strom je štruktúrou binárny strom,
 % líši sa od neho iba operáciami. Keď pracuje s ľubovoľným prvkom, na konci operácie bude vo vrchole
 % buď daný kľúč alebo najbližší z jeho okoli. Na rozdiel od splay stromu, strom s reverzami nepracuje
 % s kľúčmi, ale s poradím prvkov. Preto je nutné, aby mal
 
-Aby sme vedeli efektívne vyhľadať $k$-ty prvok, budeme si pre každý vrchol udržiavať veľkosť jeho
-podstromu. V operácií \find\ sa vieme podľa toho rozhodnúť, či sa $k$-ty prvok nachádza v ľavom podstrome,
-resp.\ koľký prvok je v pravom podstrome. Po nájdení sa prvok presunie do koreňa pomocou operácie splay.
+Aby sme vedeli efektívne vyhľadať $k$-ty prvok, budeme si pre každý vrchol udržiavať veľkosť jeho 
+podstromu. V operácií \find\ sa vieme podľa toho rozhodnúť, či sa $k$-ty prvok nachádza v ľavom podstrome, 
+resp.\ koľký prvok je v pravom podstrome. Po nájdení sa prvok presunie do koreňa pomocou operácie splay. 
 
-Operáciu \reverse\ implementujeme lenivo:
-strom najskôr rozdelíme na tri časti: $T_1,T_2,T_3$, pričom $T_2$ obsahuje interval od $i$-teho
-po $j$-ty prvok, $T_1$ obsahuje začiatok a $T_3$ koniec permutácie. Koreň $T_2$ jednoducho
-označíme vlajkou, ktorá bude signalizovať, že podstrom je reverznutý a prvky sú v skutočnosti
-v opačnom poradí ako doteraz. Ak už koreň vlajku obsahuje, odstránime ju.
+Operáciu \reverse\ implementujeme lenivo: 
+strom najskôr rozdelíme na tri časti: $T_1,T_2,T_3$, pričom $T_2$ obsahuje interval od $i$-teho 
+po $j$-ty prvok, $T_1$ obsahuje začiatok a $T_3$ koniec permutácie (obr.~\ref{img:rev2}). 
+Koreň $T_2$ jednoducho označíme vlajkou, ktorá bude signalizovať, že podstrom je reverznutý a 
+prvky sú v skutočnosti v opačnom poradí ako doteraz. Ak už koreň vlajku obsahuje, odstránime ju. 
 Následne stromy $T_1,T_2,T_3$ opäť spojíme.
+
+
+\begin{figure}
+\includegraphics[width=\columnwidth]{obrazky/rev3trees.png}
+\caption{\emph{Tri stromy.} Pri operácii \reverse\ sa strom rozdelí na 3 stromy. 
+Vľavo prvky pred intervalom, vpravo prvky za ním. 
+Na reverznutie intervalu stačí dať vlajku koreňu stredného stromu.}
+\label{img:rev2}
+\end{figure}
 
 Pri takomto riešení musíme ešte upraviť vyhľadávanie a rotácie, aby brali do úvahy vlajky vo vrcholoch.
 Najelegantnejšie riešenie je odstrániť vlajku vždy, keď na ňu narazíme:
@@ -194,7 +216,7 @@ na efektívnu implementáciu 2-opt heuristiky na riešenie problému obchodného
 Pri 2-opt heuristike sa snažíme reverzovať úseky cesty, kým nenájdeme lokálne minimum.
 
 V bioinformatike sa tieto stromy používajú na triedenie orientovaných permuácií
-pomocou reverzov \citep{reversals, reversals2}.
+pomocou reverzov \citep{reversals,reversals2}.
 
 Za povšimnutie stojí fakt, že táto dátová štruktúra podporuje výmenu ľubovoľných dvoch blokov
 v logaritmickom čase, keďže túto operáciu vieme odsimulovať pomocou štyroch reverzov.
@@ -203,8 +225,14 @@ v logaritmickom čase, keďže túto operáciu vieme odsimulovať pomocou štyro
 Pre lepšiu vizualizáciu sme pridali do stromu nultý a posledný prvok. Tieto prvky
 do reverzovateľného intervalu nepatria, majú však zmysel v prípade, ak sa reverzuje
 interval, ktorý zahŕňa aspoň jeden okraj. V tom prípade v operácii \reverse\ nezostane
-ani $T_1$ ani $T_4$ prázdny. Aby nevznikli problémy s operáciami, za krajné kľúče boli
+ani $T_1$ ani $T_3$ prázdny. Aby nevznikli problémy s operáciami, za krajné kľúče boli
 zvolené hodnoty $0$ a číslo o jedna väčšie od aktuálneho maxima. Zároveň, pre lepšiu
 predstavu, bolo pridané pole, v ktorom užívateľ vidí skutočné poradie prvkov, ktoré
-zo stromu nie je až tak zjavné. Pole simuluje operácie spolu so stromom, ale tie sú
+zo stromu nie je až tak zjavné (obr.~\ref{img:rev1}). Pole simuluje operácie spolu so stromom, ale tie sú
 na ňom vykonávané v lineárnom čase.
+
+\begin{figure}
+\includegraphics[width=\columnwidth]{obrazky/reversal.png}
+\caption{\emph{Strom s reverzami.} Pre ľudí je názornejšie pole, počítaču viac vyhovuje strom.}
+\label{img:rev1}
+\end{figure}
