@@ -1,7 +1,4 @@
-\def\ins{$\mathop{insert}(x)$}
-\def\find{$\mathop{find}(x)$}
-\def\delete{$\mathop{delete}(x)$}
-\def\reverse{$\mathop{reverse}(i, j)$}
+\def\reverse{$\mathop{\mathit{reverse}}(i, j)$}
 \def\Bp{$\hbox{\rm B}^+$}
 
 \section{Vyvážené stromy}
@@ -18,24 +15,24 @@ má každý vnútorný vrchol najmenej $\lfloor B/2 \rfloor$, ale najviac $B$ sy
 Vďaka tomu je dobre vyvážený a jeho operácie sú vykonávané v logaritmickom čase.
 \Bp-strom je \emph{asociatívne pole (slovník)}, čiže poskytuje tieto tri operácie:
 \begin{itemize}
-\item $\mathop{\mathit{insert}}(x)$ -- pridá do stromu $x$;
-\item $\mathop{\mathit{find}}(x)$ -- zistí, či sa v strome nachádza $x$;
-\item $\mathop{\mathit{delete}}(x)$ -- odstráni zo stromu $x$.
+\item $\ins(x)$ -- pridá do stromu $x$;
+\item $\find(x)$ -- zistí, či sa v strome nachádza $x$;
+\item $\delete(x)$ -- odstráni zo stromu $x$.
 \end{itemize}
 
-Operácia \find\ začne v koreni, nájde v ňom prvý kľúč väčší od hľadaného.
+Operácia $\find$ začne v koreni, nájde v ňom prvý kľúč väčší od hľadaného.
 Nech je $i$-ty v poradí, potom hľadanie pokračuje v $i$-tom synovi tohto vrcholu.
 Je zrejmé, že ak sa väčší kľúč nenájde, presunieme sa do posledného, $B$-tého syna.
 V liste sa už len skontroluje, či sa v ňom hľadaný kľúč nachádza.
 
-Definujeme dve operácie: {\sc Copy-Up} a {\sc Push-Up}, ktoré používa operácia \ins.
+Definujeme dve operácie: {\sc Copy-Up} a {\sc Push-Up}, ktoré používa operácia $\ins$.
 Ak má vrchol viac prvkov, ako je maximálny limit, treba ho zmenšiť. Rozdelí sa na dve časti.
 Ak vrchol nie je listom, použije sa {\sc Push-Up}, najmenší kľúč pravej časti sa vyberie
 a stane sa otcom vytvorených dvoch častí. Pokiaľ to list je, kľúč v ňom musí zostať,
 preto sa iba skopíruje. Táto operácia sa nazýva {\sc Copy-Up}.
 
-Operácia \ins\ najprv pomocou operácie \find\ zistí, či štruktúra daný kľúč obsahuje.
-Ak nie, je zrejmé, že patrí práve do vrchola, kde \find\ skončil. Ak má vrchol po vložení
+Operácia $\ins$ najprv pomocou operácie $\find$ zistí, či štruktúra daný kľúč obsahuje.
+Ak nie, je zrejmé, že patrí práve do vrchola, kde $\find$ skončil. Ak má vrchol po vložení
 viac kľúčov ako maximálny limit, je treba ho zmenšiť. Pokiaľ otcovský vrchol má syna,
 do ktorého je možné kľúč presunúť a zároveň syn susedí s veľkým vrcholom, postup je nasledovný.
 Nech je vrchol vľavo menší a terajší vrchol je $i$-ty syn v poradí. Potom algoritmus z neho
@@ -45,7 +42,7 @@ použije sa operácia {\sc Copy-Up}. Nový vrchol s jedným kľúčom, ktorý vz
 otcovského vrcholu. Ak otcovský vrchol presiahol najväčšiu možnú veľkosť, znova sa aplikuje
 popísaný algoritmus s jedným rozdielom -- namiesto {\sc Copy-Up} sa použije {\sc Push-Up}.
 
-Operácia \delete\ najprv pomocou \find\ nájde kľúč, potom ho z vrcholu odstráni. Tento vrchol
+Operácia $\delete$ najprv pomocou $\find$ nájde kľúč, potom ho z vrcholu odstráni. Tento vrchol
 môže mať po odstránení menší počet kľúčov ako minimálny limit. Vtedy, ak sa dá, sa prenesie
 jeden kľúč zo súrodenca. Ak sa nedá, vrchol sa s ním zlúči. Zároveň sa k nim pridá aj kľúč
 z otcovského vrcholu, ktorý ich rozdeľoval. Pokiaľ to spôsobilo, že otcovský vrchol má menej
@@ -69,7 +66,7 @@ $O(\log_B(n) + t/B)$ prístupov na disk.
 
 Ďaľšia výhoda \Bp-stromov oproti B-stromom sa prejaví, ak máme utriedený zoznam dát a chceme z neho vytvoriť \Bp-strom:
 \Bp-strom môžeme vystavať odspodu. Takýto postup nám zaručí vyžaduje $O((n/B)\cdot\log_B n)$ prístupov na disk,
-čo je $B$-krát rýchlejšie ako spraviť $n$ volaní \ins.
+čo je $B$-krát rýchlejšie ako spraviť $n$ volaní $\ins$.
 
 
 
@@ -97,12 +94,12 @@ prekopírovaný kľúč má svoj originál vždy vľavo v listovom vrchole.
 % Strom s prstom je \emph{asociatívne pole (slovník)}, čiže
 % poskytuje tieto tri operácie:
 % \begin{itemize}
-% \item $\mathop{\mathbf{insert}}(\k)$ -- pridá do stromu $\k$;
-% \item $\mathop{\mathbf{find}}(\k)$ -- zistí, či sa v strome nachádza $\k$;
+% \item $\ins(\k)$ -- pridá do stromu $\k$;
+% \item $\find(\k)$ -- zistí, či sa v strome nachádza $\k$;
 % \item $\mathop{\mathbf{delete}}(\k)$ -- odstráni zo stromu $\k$.
 % \end{itemize}
 
-Operácia \find\ začne na mieste, kam ukazuje prst. Skontroluje, či by kľúč mal patriť do daného
+Operácia $\find$ začne na mieste, kam ukazuje prst. Skontroluje, či by kľúč mal patriť do daného
 vrcholu. Ak nie, pozrie sa, či nepatrí do niektorého zo susedov. Ak áno, prst sa tam presunie
 a vyhľadávanie sa skončilo. Inak smerník prejde o vrstvu vyššie, na otcovský vrchol. Ak hľadaný
 kľúč patrí do jeho podstromu (t.j.\ je väčší ako jeho najmenší kľúč a menší ako ten najväčší),
@@ -117,12 +114,19 @@ kľúč bude patriť do jeho podstromu.
 % v strome nie je. Preto ľubovoľný kľúč do podstromu tohto vrchola patrí práve vtedy, keď je väčší
 % ako jeho najmenší prvok. Analogicky to platí, ak chýba ľavý sused.
 
-Operácia \ins\ najprv pomocou operácie \find\ nájde miesto, kam by mal vkladaný kľúč patriť. 
-Ak taký kľúč už v strome je, ďalší sa nevloží. V prípade, že sme vložili nový kľúč, môže sa stať, 
-že vrchol "pretečie", tzn.\ má viac ako 3 prvky%
-(pozri obr.~\ref{img:finger-insert}). Situácia sa vyrieši rovnako ako v \Bp-strome. 
-
-Operácia \delete\ najprv pomocou operácie \find\ nájde miesto, kam by mal hľadaný kľúč patriť. 
+% <<<<<<< HEAD
+% Operácia \ins\ najprv pomocou operácie \find\ nájde miesto, kam by mal vkladaný kľúč patriť. 
+% Ak taký kľúč už v strome je, ďalší sa nevloží. V prípade, že sme vložili nový kľúč, môže sa stať, 
+% že vrchol "pretečie", tzn.\ má viac ako 3 prvky%
+% (pozri obr.~\ref{img:finger-insert}). Situácia sa vyrieši rovnako ako v \Bp-strome. 
+% 
+% Operácia \delete\ najprv pomocou operácie \find\ nájde miesto, kam by mal hľadaný kľúč patriť. 
+% =======
+Operácia $\ins$ najprv pomocou operácie $\find$ nájde miesto, kam by mal vkladaný kľúč patriť.
+Ak taký kľúč už v strome je, ďalší sa nevloží. V prípade, že sme vložili nový kľúč, môže sa stať,
+že vrchol "pretečie", tzn.\ má viac ako 3 prvky. Situácia sa vyrieši rovnako ako v \Bp-strome.
+Operácia $\delete$ najprv pomocou operácie $\find$ nájde miesto, kam by mal hľadaný kľúč patriť.
+% >>>>>>> a0feba993f87ff1223dad61de4a624b8b4102adb
 Ak tam nie je, vymazávanie sa končí. Inak sa vymaže. Môže sa stať, že vrchol "podtečie", tzn.\ 
 nemá kľúč. Tento problém sa rieši rovnako ako v \Bp-strome. 
 Samozrejme je treba ošetriť konzistentnosť vo vyšších vrstvách, aby sa tam nenachádzali kópie 
@@ -169,9 +173,13 @@ danej štruktúre.
 \emph{Strom s reverzami} je dátová štruktúra na uchovávanie permutácií. 
 Poskytuje operácie 
 \begin{itemize}
-% \item $\mathop{\mathit{insert}}(\k)$ -- pridá do stromu $\k$;
-\item $\mathop{\mathit{find}}(k)$ -- zistí, ktorý prvok je na $k$-tom mieste permutácie;
-\item $\mathop{\mathit{reverse}}(i,j)$ -- spraví reverz intervalu od $i$ po $j$.
+\item $\mathop{\mathit{insert}}(k)$ -- pridá do stromu $k$;
+% <<<<<<< HEAD
+% \item $\mathop{\mathit{find}}(k)$ -- zistí, ktorý prvok je na $k$-tom mieste permutácie;
+% \item $\mathop{\mathit{reverse}}(i,j)$ -- spraví reverz intervalu od $i$ po $j$.
+% =======
+\item $\mathop{\mathit{find}}(k)$ -- zistí, ktorý prvok je na $k$-tom mieste permutácie a
+\item $\mathop{\mathit{reverse}}(i,j)$ -- reverzne interval od $i$ po $j$.
 \end{itemize}
 
 \paragraph{Popis.}
@@ -185,9 +193,15 @@ My sme zvolili \emph{splay strom} pre jeho jednoduchosť.
 % buď daný kľúč alebo najbližší z jeho okoli. Na rozdiel od splay stromu, strom s reverzami nepracuje
 % s kľúčmi, ale s poradím prvkov. Preto je nutné, aby mal
 
-Aby sme vedeli efektívne vyhľadať $k$-ty prvok, budeme si pre každý vrchol udržiavať veľkosť jeho 
-podstromu. V operácií \find\ sa vieme podľa toho rozhodnúť, či sa $k$-ty prvok nachádza v ľavom podstrome, 
-resp.\ koľký prvok je v pravom podstrome. Po nájdení sa prvok presunie do koreňa pomocou operácie splay. 
+% <<<<<<< HEAD
+% Aby sme vedeli efektívne vyhľadať $k$-ty prvok, budeme si pre každý vrchol udržiavať veľkosť jeho 
+% podstromu. V operácií \find\ sa vieme podľa toho rozhodnúť, či sa $k$-ty prvok nachádza v ľavom podstrome, 
+% resp.\ koľký prvok je v pravom podstrome. Po nájdení sa prvok presunie do koreňa pomocou operácie splay. 
+% =======
+Aby sme vedeli efektívne vyhľadať $k$-ty prvok, budeme si pre každý vrchol udržiavať veľkosť jeho
+podstromu. V operácií $\mathop{\mathit{find}}(k)$ sa vieme podľa toho rozhodnúť, či sa $k$-ty prvok nachádza v ľavom podstrome,
+resp.\ koľký prvok je v pravom podstrome. Po nájdení sa prvok presunie do koreňa pomocou operácie splay.
+% >>>>>>> a0feba993f87ff1223dad61de4a624b8b4102adb
 
 Operáciu \reverse\ implementujeme lenivo: 
 strom najskôr rozdelíme na tri časti: $T_1,T_2,T_3$, pričom $T_2$ obsahuje interval od $i$-teho 
