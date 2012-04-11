@@ -12,13 +12,13 @@ s najväčším prvkom v koreni.}.
 Štandardné operácie, ktoré haldy podporujú, a ktorými sa budeme zaoberať pri každej dátovej štuktúre, sú:
 \begin{itemize}
 %\item $\mathop{\mathit{createHeap}}$ -- vytvorí prázdnu haldu;
-\item $\mathop{\mathit{insert}}(x)$ -- vloží vrchol s kľúčom $x$;
+\item $\ins(x)$ -- vloží vrchol s kľúčom $x$;
 \item $\mathop{\mathit{findMin}}$ -- vráti minimum, t.j. hodnotu kľúča v koreni;
 \item $\mathop{\mathit{deleteMin}}$ -- odstráni vrchol s najmenším kľúčom, t.j.\ koreň;
-\item $\mathop{\mathit{decreaseKey}}(v, \Delta)$ -- zníži kľúč vrcholu $v$ o $\Delta\geq0$;
+\item $\dec(v, \Delta)$ -- zníži kľúč vrcholu $v$ o $\Delta\geq0$;
 \end{itemize}
 
-Niektoré haldy navyše implementujú operáciu $\mathop{\mathit{meld}}(i, j)$, ktorá spojí haldu $i$ s haldou $j$.
+Niektoré haldy navyše implementujú operáciu $\meld(i, j)$, ktorá spojí haldu $i$ s haldou $j$.
 
 \input haldy/daryheap.tex
 \input haldy/leftist.tex
