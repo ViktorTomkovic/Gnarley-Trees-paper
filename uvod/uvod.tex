@@ -7,7 +7,20 @@ výskumov zatiaľ nedokázali úplne preukázať pedagogickú efektívnosť
 vizualizácií \citep{shaffer}, viacero štúdií potvrdilo zvýšený záujem
 a zapojenosť študentov \citep{naps02, hundhausen02}.
 
-Rozhodli sme sa pomôcť vybudovať 
+% Zaujímavé je pozorovanie, že určovanie si vlastného tempa pri vizualizácií 
+% je veľká pomôcka. Naopak, ukazovanie pseudokódu alebo nemožnosť určenia si
+% vlastného tempa (napríklad animácia bez možnosti pozastavenia), takmer 
+% žiadne zlepšenie neprináša \citep{shaffer,saraiya}.
+
+Rozmach vizualizácie algoritmov priniesla najmä {\tt Java} a jej fungovanie 
+bez viazanosti na konkrétny operačný systém. Kvalita vizualizácií sa líši 
+a keďže ide o ľahko naprogramovateľné programy, je ich veľa a sú pomerne 
+nekvalitné. 
+% V takomto množstve je ťažké nájsť kvalitné vizualizácie. 
+% Zbieraním a analyzovaním kvality sa venuje skupina AlgoViz, ktorá už 
+% veľa rokov funguje na portále \url{http://algoviz.org/}.
+
+Ako ľudia so záujmom o dátové štruktúry sme sa rozhodli pomôcť vybudovať 
 dobrý softvér na vizualizáciu algoritmov a dátových štruktúr a obohatiť 
 kompiláciu Jakuba Kováča \citep{kuko} o ďalšie dátové štruktúry. 
 Vizualizujeme rôznorodé dátové štruktúry. Z binárnych vyvažovaných stromov 
@@ -23,22 +36,12 @@ implementovaný v jazyku \texttt{Java}. Dostupný je na stránke
 \hbox{\url{http://people.ksp.sk/~kuko/gnarley-trees}} vo forme appletov
 s jednotlivými dátovými štruktúrami, a tiež vo forme samostatného programu,
 ktorý obsahuje všetky dátové štruktúry a je určený na používanie offline.
-%, kde má každá dátová štruktúra 
-
-Rozmach vizualizačných algoritmov priniesla najmä Java a jej fungovanie 
-bez viazanosti na konkrétny operačný systém. Kvalita vizualizácií sa líši 
-a keďže ide o ľahko naprogramovateľné programy, je ich veľa a sú pomerne 
-nekvalitné. V takomto množstve je ťažké nájsť kvalitné vizualizácie. 
-Zbieraním a analyzovaním kvality sa venuje skupina AlgoViz, ktorá už 
-veľa rokov funguje na portále \url{http://algoviz.org/}.
-
-Zaujímavé je pozorovanie, že určovanie si vlastného tempa pri vizualizácií 
-je veľká pomôcka. Naopak, ukazovanie pseudokódu alebo nemožnosť určenia si
-vlastného tempa (napríklad animácia bez možnosti pozastavenia), takmer 
-žiadne zlepšenie neprináša \citep{shaffer,saraiya}.
 
 Našou snahou je vytvoriť kvalitný softvér nezávislý od operačného systému, 
 ktorý bude vyhovovať ako pomôcka pri výučbe ako aj pri samoštúdiu a bude
-voľne prístupný. Toto sú hlavné body, ktoré nespĺňa žiaden slovenský a 
-len veľmi málo svetových vizualizačných softvérov. Našou hlavnou snahou 
-je teda ponúknuť plnohodnotné prostredie pri učení.
+voľne prístupný. 
+
+Zvyšok článku je organizovaný nasledovne: V sekcií 2 popisujeme implementované
+vylepšenia týkajúce sa vizualizácie, grafiky a ovládania, v sekciách 3 až 6
+nové dátové štruktúry, ktoré sme implementovali a vizualizovali: vyvážené
+stromy, haldy, union-find a písmenkové stromy.
