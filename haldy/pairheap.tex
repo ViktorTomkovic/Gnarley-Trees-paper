@@ -27,8 +27,8 @@ amortizovanú časovú zložitosť $O(\sqrt{n})$.
 Keď si dáme väčší pozor na to, ako deti párujeme, môžeme dosiahnnuť lepšie výsledky. Pokiaľ párujeme synov v poradí v akom boli prilinkovaní od najmladšieho a potom ich sprava doľava prilinkujeme, vieme dostať lepšie, avšak dosiaľ nedokázané výsledky.
 Ostatné riešenia sme zatiaľ neimplementovali, preto len spomenieme, že sú popísané napríklad v \cite{pairing}.
 
-Aby boli ale operácie efektívne, musíme zvoliť správnu reprezentáciu tejto dátovej štruktúry. V našom programe sme použili 
-reprezentáciu pomocou binárneho stromu (\emph{binary tree represetation}), ktorú naprogramoval Viktor Tomkovič. V každom vrchole sa uchováva ľavý smerník na prvého syna, pravý smerník na nasledujúceho brata a ešte jeden smerník na rodiča.
+% Aby boli ale operácie efektívne, musíme zvoliť správnu reprezentáciu tejto dátovej štruktúry. V našom programe sme použili 
+% reprezentáciu pomocou binárneho stromu (\emph{binary tree represetation}), ktorú naprogramoval Viktor Tomkovič. V každom vrchole sa uchováva ľavý smerník na prvého syna, pravý smerník na nasledujúceho brata a ešte jeden smerník na rodiča.
 
 \paragraph{Vizualizácia.}
 Aby sa dala vizualizácia \emph{deleteMin} lepšie previesť, minimum, teda koreň haldy ostáva súčasťou haldy až do konca operácie, ale je zneviditeľnený. Navonok teda vyzerá, že po odstránení minima ostal les synov, ale v skutočnosti je to stále jedna halda. Týmto využijeme už naprogramované rozloženie vrcholov a nemusíme zavádzať nové pole pre synov.

@@ -1,17 +1,20 @@
 \section{Rozšírenie predošlej práce}
 
 Projekt Gnarley Trees sme rozšírili nielen o vizualizácie ďalších dátových
-štruktúr, ale pribudli aj softvérové (vizualizačné) vylepšenia.
+štruktúr, ale pribudli aj softvérové (vizualizačné) vylepšenia:
+kompaktnejšie vykresľovanie stromov, história krokov s možnosťou návratu,
+či približovanie a vzďaľovanie.
 
-\subsection{Tesnejšie vykresľovanie grafov}
+\subsection{Tesnejšie vykresľovanie stromov}
+
 V pôvodnej verzii programu sa stromy vykresľovali tak, že vertikálna súradnica 
 predstavovala hĺbku v strome a horizontálna poradie vrcholu v \emph{
-inorderovom prechode} stromu. Toto je ale spôsob, ktorý 
-nešetrí priestor a pri štruktúrach ako písmenkový strom by výsledné stromy 
+inorderovom prechode} stromu. Tento jednoduchý spôsob však nešetrí priestor
+a pri štruktúrach ako union-find či písmenkový strom by výsledné stromy 
 vyzerali škaredo. Preto sme sa rozhodli pre stromy implementovať 
-alternatívny spôsob rozloženia, ktorý vymyslel \citet{reingold} a pre $n$-árne 
-stromy rozšíril \citet{walker}. Tieto rozloženia vykresľujú vrcholy stromov čo 
-najtesnejšie, pričom dodržujú tieto pravidlá: 
+alternatívny spôsob rozloženia, ktorý pre binárne stromy navrhli \citet{reingold}
+a na všeobecné stromy rozšíril \citet{walker}. Tieto rozloženia vykresľujú
+vrcholy stromov čo najtesnejšie, pričom dodržujú tieto estetické pravidlá: 
 \begin{itemize} 
 \item vrcholy v rovnakej hĺbke sú vykreslené na jednej priamke a priamky 
 určujúce jednotlivé úrovne sú rovnobežné; 
@@ -21,4 +24,5 @@ určujúce jednotlivé úrovne sú rovnobežné;
 \item ak vo všetkých vrcholoch obrátime poradie všetkých synov, výsledný strom 
 sa vykreslí zrkadlovo.
 \end{itemize}
-
+Reingoldov-Tilfordov, aj zovšeobecnený Walkerov algoritmus pracuje v lineárnom
+čase.
