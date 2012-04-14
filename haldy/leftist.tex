@@ -12,7 +12,7 @@ Toto zabezpečuje pre každý podstrom, že pravá cesta je vždy kratšia ako �
 Najdôležitejšia operácia vykonávaná na ľavicovej halde je $\meld(i,j)$. Pomocou nej si zadefinujeme aj \emph{insert($x$)} a 
 \emph{deleteMin}. Haldy sa spájajú pozdĺž pravej cesty. Postupne prechádzame odvrchu nadol celú pravú cestu haldy $i$ a 
 porovnávame kľúče s koreňom haldy $j$. Ak narazíme na kľúč vrcholu $v$ v halde $i$, ktorý je väčší ako kľúč v koreni 
-$w$ haldy $j$, vrcholy vymeníme. Teda z $w$ sa stane pravý syn otca $v$ a z $v$ sa stane halda $j$. Kľúč prázdnej 
+$w$ haldy $j$, vrcholy vymeníme. Teda z vrcholu $w$ sa stane pravý syn otca $v$ a z podstromu zakoreneným vrcholom $v$ sa stane halda $j$. Kľúč prázdnej 
 haldy považujeme za nekonečno. Takto pokračujeme, až kým nedôjdeme na koniec pravej cesty haldy $i$.
 Potom nasleduje fáza úpravy rankov. Ranky sa mohli zmeniť len na pravej, spájacej ceste, preto ich pozdĺž tejto cesty 
 zdola nahor upravíme.
@@ -29,7 +29,9 @@ Preto tieto podstromy vymeníme a pokračujeme v spájaní podstromov 101 a 144 
 \label{img:leftmeld} 
 \end{figure}
 
-Pokiaľ máme definovanú operáciu \emph{meld($i$,$j$)}, zadefinovať \emph{insert($x$)} na halde $i$ je jednoduché. Vytvorí sa nová jednoprvková halda $j$ obsahujúca iba vrchol $x$ a zavolá sa \emph{meld($i$,$j$)}.
+Pokiaľ máme definovanú operáciu \emph{meld($i$,$j$)}, zadefinovať 
+\emph{insert($x$)} na halde $i$ je jednoduché. Vytvorí sa nová jednoprvková 
+halda $j$ obsahujúca iba vrchol $x$ a zavolá sa \emph{meld($i$,$j$)}.
 
 Operácia \emph{deleteMin} najprv vymaže vrchol haldy $h$ a potom zavolá \emph{meld(left($h$), right($h$))}.
 
