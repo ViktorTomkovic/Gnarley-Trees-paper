@@ -24,7 +24,7 @@ a poslednej vrstvy. V praxi to znamená, že sa pridá nový prvok na koniec po�
 podmienku haldy, takže ešte musí "prebublať" smerom hore na správne miesto. Vymieňa sa so svojím otcom, až pokým 
 nie je podmienka haldy splnená.
 
-Minimum sa nachádza v koreni haldy. Operácia \emph{deleteMin} najprv vymení koreň haldy s posledným vrcholom a potom 
+Minimum sa nachádza v koreni haldy. Operácia $\delmin$ najprv vymení koreň haldy s posledným vrcholom a potom 
 minimum, ktoré sa teraz nachádza na konci haldy, odstráni. Koreň haldy po výmene nemusí spĺňať podmienku haldy a 
 preto musí "prebublať" nadol. Vymieňa sa so svojím najmenším synom, až pokým nie je splnená podmienka.
 
@@ -32,16 +32,15 @@ Po zavolaní operácie $\dec(v, \Delta)$ vrchol $v$ nemusí spĺňať podmienku 
 "prebublať" nahor.
 
 \paragraph{Časová zložitosť.}
-Z popisu jednotlivých operácií sú zrejmé časové zložitosti:
-Ak $n$ je počet prvkov v halde, potom operácie $\ins$ a $\dec$ majú časovú zložitosť $O(\log_d(n))$, pretože 
-$\log_d(n)$ je hĺbka stromu, teda vrchol sa po $\log_d(n)$ krokoch dostane ku koreňu. Operácia \emph{deleteMin} má 
-zložitosť $O(d\cdot \log_d(n))$, pretože sa navyše pri prebublávaní musí hľadať najmenší syn spomedzi $d$ synov;
-$\mathit{findMin}$ sa deje v konštantnom čase.
+Úplný $d$-árny strom má hĺbku $O(\log_d n)$. Z popisu jednotlivých operácií sú zrejmé časové zložitosti:
+Ak $n$ je počet prvkov v halde, potom operácie $\ins$ a $\dec$ majú časovú zložitosť $O(\log_d n)$.
+Operácia $\delmin$ má zložitosť $O(d\cdot \log_d n)$, pretože sa navyše pri prebublávaní nadol musí
+hľadať najmenší syn spomedzi $d$ synov; $\mathit{findMin}$ sa deje v konštantnom čase.
 
 \paragraph{Použitie.}
 Z časových zložitostí platiacich pre binárnu haldu sa môže zdať vznik $d$-árnej haldy zbytočný. Avšak v mnohých 
 reálnych prípadoch funguje zovšeobecnená verzia efektívnejšie, najmä ak sú operácie $\ins$ a $\dec$
-využívané častejšie ako operácia \emph{deleteMin}. Ak napríklad v Dijkstrovom, či Jarníkovom--Primovom
+využívané častejšie ako operácia $\delmin$. Ak napríklad v Dijkstrovom, či Jarníkovom--Primovom
 algoritme zvolíme $d=m/n$, vieme nájsť najkratšiu cestu, resp.\ minimálnu kostru v čase $O(m\log_{m/n} n)$.
 
 Pre malé $d>2$ funguje $d$-árna halda rýchlejšie než binárna vďaka lepšej práci s rýchlou vyrovnávacou pamäťou

@@ -104,7 +104,7 @@ a teda v slovách ľudských jazykov výrazne znižujú pamäťový priestor pot
 na uchovanie dátovej štruktúry. Vďaka tomu sa využívajú na jazykovú korekciu, 
 automatické dopĺňanie slov a podobne \citep{scrabble,ca}. 
 
-Priamočiare je použitie písmenkového stromu na utriedenie poľa slov. 
+Ďalšie použitie písmenkového stromu je pri triedení zoznamu slov. 
 Všetky slová sa pridajú do stromu a potom sa spraví \emph{preorderový prechod} 
 stromu. Túto myšlienku spracovali \citet{burstsort1} a veľmi výrazne zrýchlil 
 triedenie dlhých zoznamov slov. Neskôr tento algoritmus vylepšili 
@@ -117,8 +117,8 @@ sa nazýva \emph{burstsort}.
 % veľmi veľa praktických využití \citep{gusfield}. 
 
 \paragraph{Vizualizácia.} Pri vizualizácií písmenkového stromu sme použili 
-Walkerov algoritumus pre úsporné rozloženie vrcholov v strome. 
-\citep{walker} Keď má vrchol viacej synov a hrany kreslíme priamo, tak vzniká 
+Walkerov algoritumus pre úsporné rozloženie vrcholov v strome
+\citep{walker}. Keď má vrchol viacej synov a hrany kreslíme priamo, tak vzniká 
 nedostatok priestoru pre umiestnenie znakov na hrany. Preto sme sa rozhodli 
 kresliť hrany zakrivene, podľa Bézierovej krivky určenej štyrmi bodmi. 
 Vo vizualizácií sa dajú vložiť náhodné slová podľa momentálne nastaveného 

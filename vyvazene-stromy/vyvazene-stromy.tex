@@ -1,11 +1,9 @@
-\def\Bp{$\hbox{\rm B}^+$}
-
 \section{Vyvážené stromy}
 
 Pôvodná verzia \citep{kuko} obsahovala vizualizáciu viacerých vyvážených stromov.
 K nim sme pridali \Bp-stromy, stromy s prstom a stromy s reverzami.
 
-\subsection{B$^+$-strom}
+\subsection{B$\!^+\!$-strom}
 
 \paragraph{Popis.}
 \emph{\Bp-strom} je variácia B-stromu, v ktorom sú všetky kľúče uložené v listoch
@@ -38,7 +36,7 @@ Ak nie, je zrejmé, že $x$ patrí práve na miesto, kde $\find$ skončil.
 Môže sa stať, že vrchol po vložení "pretečie" -- bude obsahovať $b+1$ prvkov. V takom prípade
 ak má vrchol brata s menej ako $b$ prvkami, môžeme jeden kľúč presunúť k nemu.
 Ak sú susedné vrcholy plné, vrchol rozdelíme na dva, pričom stredný kľúč skopírujeme
-k otcovi. (Ten sa môže tiež preplniť, čím vznikne kaskáda rozdelení, ktorá skončí
+k otcovi. (Ten sa môže tiež preplniť -- môže vzniknúť celá kaskáda rozdelení, ktorá skončí
 v najhoršom prípade v koreni.)
 % Nový vrchol s jedným kľúčom, ktorý vznikol, vložíme do
 % otcovského vrcholu. Ak otcovský vrchol presiahol najväčšiu možnú veľkosť, znova sa aplikuje
@@ -67,12 +65,17 @@ prístupov na disk. Vypísať všetky prvky z daného intervalu dokážeme pomoc
 % Algoritmus nájde jeden krajný bod a vďaka spájanému zoznamu, vytvorenému z listov, ostatné prvky
 % postupne prečíta. Zložitosť je $O(\log_b(n) + t/b)$, kde $t$ je počet výsledných kľúčov z hľadaného intervalu.
 
-Ďaľšia výhoda \Bp-stromov oproti B-stromom sa prejaví, ak máme utriedený zoznam dát a chceme z neho vytvoriť \Bp-strom:
+Ďalšia výhoda \Bp-stromov oproti B-stromom sa prejaví, ak máme utriedený zoznam dát a chceme z neho vytvoriť \Bp-strom:
 \Bp-strom môžeme vystavať odspodu. Takýto postup vyžaduje $O((n/b)\cdot\log_b n)$ prístupov na disk,
 čo je $b$-krát rýchlejšie ako spraviť $n$ volaní $\ins$.
 
-
-
+\begin{figure*}
+\includegraphics[width=2\columnwidth]{obrazky/finger.png}
+\caption{\emph{Strom s prstom.} Jednotlivé kľúče sú uložené v listoch, vnútorné vrcholy
+slúžia na vyhľadávanie. Vďaka smerníkom spájajúcim vrcholy na jednej úrovni vieme nájsť
+ľubovoľný prvok vo vzdialenosti $d$ od prstu v čase $O(\log d)$.}
+\label{img:finger}
+\end{figure*}
 
 \subsection{Strom s prstom}
 Tradičné vyvážené vyhľadávacie stromy podporujú vyhľadávanie v čase $O(\log n)$.
@@ -88,13 +91,14 @@ sme implementovali upravený 2-3-4$^+$ strom \citep{finger}.
 2-3-4$^+$ strom je \Bp-strom rádu 4, t.j.\ kľúče sú uložené v listoch a vnútorné vrcholy
 majú stupeň 2, 3 alebo 4. Pre podporu vyhľadávania s prstom spojíme všetky vrcholy
 na rovnakej úrovni (v rovnakej vzdialenosti od koreňa) do obojsmerného spájaného zoznamu.
-Ak sú nejaké dva vrcholy spojené takouto hranou, budeme hovoriť, že sú susedia.
+Ak sú nejaké dva vrcholy spojené takouto hranou, budeme hovoriť, že sú susedia (pozri
+obr.~\ref{img:finger}).
 
 % Prst, ako už bolo spomenuté, ukazuje na nejaký vrchol. Môže sa pohybovať po všetkých hranách
 % a pomocou neho sa vykonávajú všetky operácie. Keďže sú všetky kľúče uložené v listoch, prst
 % na tejto vrstve začína, aj končí.
 
-Operácia $\find$ začína v liste, na mieste, kam ukazuje prst. Vyhľadávanie pozostáva z dvoch
+Operácia $\find$ začína vo vrchole, kam ukazuje prst. Vyhľadávanie pozostáva z dvoch
 fáz: V prvej fáze postupujeme nahor, až kým hľadaný kľúč nepatrí do nášho alebo susedovho podstromu.
 (V prípade potreby použijeme úrovňovú hranu, ktorou sa dostaneme do susedného vrcholu.)
 V druhej fáze potom zostupujeme nadol ako pri štandardnom vyhľadávaní.
@@ -207,13 +211,14 @@ Následne stromy $T_1,T_2,T_3$ opäť spojíme.
 
 Aby sme vedeli efektívne vyhľadať $k$-ty prvok, budeme si pre každý vrchol udržiavať veľkosť jeho
 podstromu. V operácií $\mathop{\mathit{find}}(k)$ sa vieme podľa toho rozhodnúť, či sa $k$-ty prvok nachádza v ľavom podstrome,
-resp.~koľký prvok je v pravom podstrome. Po nájdení sa prvok presunie do koreňa pomocou operácie splay.
+resp.~koľký prvok je v pravom podstrome. (Po nájdení sa prvok presunie do koreňa pomocou operácie splay.)
 
 \begin{figure}
-\includegraphics[width=\columnwidth]{obrazky/reversal.png}
-\caption{\emph{Strom s reverzami.} Hore permutácia $\pi$, dolu reprezentácia pomocou splay stromu.
-Vlajky vo vrcholoch 8 a 9 signalizujú, že úseky $5,8$ a $4,9,3,1,7$ sú v opačnom poradí. Číslo vľavo
-hore od vrcholu je počet vrcholov v danom podstrome.}
+\includegraphics[width=\columnwidth]{obrazky/rev1.png}
+\caption{\emph{Strom s reverzami.} Hore permutácia $\pi$, dolu jej reprezentácia pomocou splay stromu.
+Vlajky vo vrcholoch 3 a 8 signalizujú, že v inorder poradí vrcholov $7,6,\underline{2,3,\underline{1,8,9},5},4,10$
+treba podčiarknuté úseky (zodpovedajúce podstromom 3 a 8) prevrátiť.
+Číslo vľavo hore od vrcholu je počet vrcholov v danom podstrome.}
 \label{img:rev1}
 \end{figure}
 
@@ -229,7 +234,7 @@ Stromy s reverzami (pôvodne založené na AVL stromoch) navrhli \citet{chrobak}
 na efektívnu implementáciu 2-opt heuristiky na riešenie problému obchodného cestujúceho.
 Pri 2-opt heuristike sa snažíme preklápať rôzne úseky cesty, kým nenájdeme lokálne minimum.
 
-V bioinformatike sa tieto stromy používajú na triedenie orientovaných permuácií
+V bioinformatike sa tieto stromy používajú na triedenie orientovaných permutácií
 pomocou reverzov \citep{reversals,reversals2}.
 
 Za povšimnutie stojí fakt, že táto dátová štruktúra podporuje výmenu ľubovoľných dvoch blokov
@@ -237,19 +242,20 @@ v logaritmickom čase, keďže túto operáciu vieme odsimulovať pomocou štyro
 
 \paragraph{Vizualizácia.}
 Pre lepšiu predstavu, bolo pridané pole, v ktorom užívateľ vidí skutočné poradie prvkov, ktoré
-zo stromu nie je až tak zjavné (obr.~\ref{img:rev1}). Pole simuluje operácie spolu so stromom,
+zo stromu nie je až tak zjavné (obr.~\ref{img:rev1}, \ref{img:rev2}). Pole simuluje operácie spolu so stromom,
 tie sa však vykonávajú v lineárnom čase.
 
-Do stromu sme pridali ako zarážky nultý a posledný prvok. Tieto prvky do reverzovateľného
+Do stromu sme pridali ako zarážky prvky 0 a $n+1$. Tieto prvky do reverzovateľného
 intervalu nepatria, majú však zmysel v prípade, ak sa reverzuje interval, ktorý zahŕňa
 aspoň jeden okraj: V tom prípade v operácii $\reverse$ nezostane $T_1$ ani $T_3$ prázdny. 
 %Aby nevznikli problémy s operáciami, za krajné kľúče boli zvolené hodnoty $0$ a číslo o jedna väčšie od aktuálneho maxima.
 
 \begin{figure}
-\includegraphics[width=\columnwidth]{obrazky/rev3trees.png}
+\includegraphics[width=\columnwidth]{obrazky/rev2.png}
 \caption{Pri operácii \emph{reverse} sa strom rozdelí na tri časti. 
-Vľavo prvky pred intervalom, vpravo prvky za ním. 
-Na reverznutie intervalu stačí pridať vlajku vrcholu 3 (koreň stredného stromu).}
+Vľavo sú prvky pred intervalom, vpravo prvky za ním. 
+Na prevrátenie úseku $5,1,8,9,3$ stačí pridať vlajku vrcholu 3 (koreň stredného stromu)
+a stromy opäť spojiť.}
 \label{img:rev2}
 \end{figure}
 

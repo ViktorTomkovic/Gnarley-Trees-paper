@@ -5,8 +5,6 @@
 
 \section{Union-find}
 
-\paragraph{Popis.}
-
 % Sú problémy, ktoré vyžadujú spájanie objektov do množín a množín navzájom 
 % a následné určovanie, do ktorej množiny objekt patrí. Od takejto \emph{
 % dátovej štruktúry pre disjunktné množiny} očakávame, že si bude udržiavať 
@@ -29,28 +27,14 @@ a potrebujeme implementovať nasledovné tri operácie:
                 prvok $x$ nachádza.
 \end{itemize}
 
-V takejto situácií je vhodná štruktúra \emph{union-find}.
+%V takejto situácií je vhodná štruktúra \emph{union-find}.
+
 % Vďaka častej asociácií objektov a spájania množín ako vrcholy a hrany grafu 
 % sa často dátová štruktúra abstraktne reprezentuje ako 
 % \emph{les} -- množina zakorenených stromov. 
 % Konkrétnou implementáciou potom býva pole objektov -- vrcholov. Ku každému 
 % objektu sa musí udržiavať smerník $p(x)$ na otca v strome. Smerník zástupcu 
 % množiny ukazuje na hodnotu \null.
-Táto dátová štruktúra sa reprezentuje ako les, kde každý strom zodpovedá
-jednej množine a korene stromov sú zástupcovia množín. Pri implementácií si
-stačí pre každý prvok $x$ udržiavať smerník $p(x)$ na jeho otca
-(pre koreň je $p(x)=\null$).
-
-Operácia \makeset\ teda vytvorí nový prvok $x$ a nastaví $p(x) = \null$. 
-
-Operáciu \find\ vykonáme tak, že budeme sledovať cestu po smerníkoch, až 
-kým nenájdeme zástupcu. 
-
-Operáciu \union\ ide najjednoduchšie vykonať tak, že presmerujeme smerník 
-$p(y)$ na prvok $x$, teda $p(y) = x$. 
-Môžeme ľahko pozorovať, že takýto \emph{naivný} spôsob je neefektívny, 
-lebo nám operácia \find\ v najhoršom prípade, na $n$ prvkoch, trvá $O(n)$ 
-krokov. 
 
 \paragraph{Použitie.}
 
@@ -69,29 +53,50 @@ Pre offline verziu úlohy, kde sú všetky operácie dopredu známe, \citep{offl
 navrhli lineárny algoritmus. Článok obsahuje tiež viacero aplikácií v teoretickej
 informatike.
 
-\smallskip
-Existujú dva prístupy ako zlepšiť operácie a tým aj zrýchliť ich vykonanie. 
-Sú to: heuristika \emph{spájanie podľa ranku} a rôzne heuristiky na 
-\emph{kompresiu cesty}. 
-
 %\begin{figure}
 %\includegraphics[width=\columnwidth]{obrazky/union.png}
 %\caption{\emph{Spájanie podľa ranku.} (a) Pred spojením. (b) Po spojení. 
 %Plytší strom sa napojil pod hlbší.} 
 %\label{img:union} 
 %\end{figure}
+
+\paragraph{Popis.}
+Dátová štruktúra \emph{union-find} sa reprezentuje ako les, kde každý strom zodpovedá
+jednej množine a korene stromov sú zástupcovia množín. Pri implementácií si
+stačí pre každý prvok $x$ udržiavať smerník $p(x)$ na jeho otca
+(pre koreň je $p(x)=\null$).
+
+Operácia \makeset\ teda vytvorí nový prvok $x$ a nastaví $p(x) = \null$. 
+
+Operáciu \find\ vykonáme tak, že budeme sledovať cestu po smerníkoch, až 
+kým nenájdeme zástupcu. 
+
+Operáciu \union\ ide najjednoduchšie vykonať tak, že presmerujeme smerník 
+$p(y)$ na prvok $x$, teda $p(y) \gets x$. 
+Môžeme ľahko pozorovať, že takýto \emph{naivný} spôsob je neefektívny, 
+lebo nám operácia \find\ v najhoršom prípade, na $n$ prvkoch, trvá $\Omega(n)$ 
+krokov. 
+
+\smallskip
+Existujú dva prístupy ako zlepšiť operácie a tým aj zrýchliť ich vykonanie. 
+Sú to: heuristika \emph{spájanie podľa ranku} a rôzne heuristiky na 
+\emph{kompresiu cesty}. 
+
 \paragraph{Heuristika na spájanie.}
 
-Prvá heuristika pridáva ku algoritmom hodnotu 
-$rank(x)$, ktorá bude určovať najväčšiu možnú hĺbku podstromu zakorenenú 
-vrcholom $x$. V tom prípade pri o\-pe\-rá\-cií \makeset\ zadefinujeme 
-$rank(x) = 0$. 
-Pri o\-pe\-rá\-cií \union\ vždy porovnáme $rank(x)$ a $rank(y)$, aby sme zistili, 
-ktorý zástupca predstavuje menší strom. Smerník tohto zástupcu potom napojíme 
-na zástupcu s výšším rankom. Zástupca novej množiny bude ten s vyšším rankom. 
-Ak sú oba ranky rovnaké, vyberieme ľubovoľného zo zástupcov $x$ a $y$, 
-jeho rank zvýšime o jeden a smerník ostatného zástupcu bude ukazovať 
-na tohto zástupcu. Zástupcom novej množiny bude vybratý zástupca. 
+Prvá heuristika pre každý vrchol $x$ udržuje hodnotu $\rank(x)$,
+ktorá určuje najväčšiu možnú hĺbku podstromu s koreňom $x$.
+Pri o\-pe\-rá\-cií \makeset\ zadefinujeme $\rank(x) = 1$. 
+Pri o\-pe\-rá\-cií \union\ porovnáme $\rank(x)$ a $\rank(y)$
+a vždy napojíme strom s menším rankom pod strom s väčším rankom.
+Ak majú oba stromy rovnaký rank, napojíme povedzme $x$ pod $y$
+a $\rank(y)$ zvýšime o 1.
+%aby sme zistili, ktorý zástupca predstavuje menší strom. 
+% Smerník tohto zástupcu potom napojíme 
+% na zástupcu s výšším rankom. Zástupca novej množiny bude ten s vyšším rankom. 
+% Ak sú oba ranky rovnaké, vyberieme ľubovoľného zo zástupcov $x$ a $y$, 
+% jeho rank zvýšime o jeden a smerník ostatného zástupcu bude ukazovať 
+% na tohto zástupcu. %Zástupcom novej množiny bude vybratý zástupca. 
 
 \paragraph{Heuristiky na kompresiu cesty.}
 
@@ -108,15 +113,13 @@ približne na polovicu.}
 Druhou heuristikou je kompresia cesty. Algoritmov na efektívnu kompresiu 
 cesty je veľa \citep{paths2}, tu popíšeme tie najefektívnejšie. Prvou z nich 
 je \emph{úplná kompresia} \citep{comp1}. Pri vykonávaní operácie \find, po tom, 
-ako nájdeme zástupcu, napojíme všetky vrcholy po ceste priamo pod koreň. Toto 
-síce trochu spomalí prvé hľadanie, ale výrazne zrýchli ďalšie hľadania pre
-všetky prvky na ceste ku koreňu.
-Druhou heuristikou je \emph{delenie cesty} \citep{comp2}. Pri vykonávaní 
+ako nájdeme zástupcu, napojíme všetky vrcholy po ceste priamo pod koreň (obr.~\ref{img:komp}(b)).
+Toto síce trochu spomalí prvé hľadanie, ale výrazne zrýchli ďalšie hľadania pre
+všetky prvky na ceste ku koreňu. Druhou heuristikou je \emph{delenie cesty} \citep{comp2}. Pri vykonávaní 
 operácie \find\ pripojíme každý vrchol v ceste od vrcholu $x$ po koreň stromu
-na otca jeho otca. Treťou heuristikou je \emph{pólenie cesty} \citep{comp2}.
+na otca jeho otca (obr.~\ref{img:komp}(c)). Treťou heuristikou je \emph{pólenie cesty} \citep{comp2}.
 Pri vykonávaní operácie \find\  pripojíme každý druhý vrchol v ceste od vrcholu
-$x$ po koreň stromu na otca jeho otca. Kompresie sú znázornené v obrázku~%
-\ref{img:komp}.
+$x$ po koreň stromu na otca jeho otca (obr.~\ref{img:komp}(d)).
 
 Časová zložitosť union-findu záleží od toho, koľko prvkov je v množinách a koľko je 
 operácií celkovo vykonaných operácií. Všetky uvedené spôsoby ako vykonať 
@@ -127,11 +130,12 @@ pri použití spájania podľa ranku časová zložitosť pre algoritmus bez kom
 $\Theta(m\log n)$ a pre všetky tri uvedené typy kompresií 
 $\Theta(m\mathop{\alpha}(m,n))$ \citep{paths2}.
 
-\paragraph{Vizualizácia.} Union-find sme vizualizovali ako les. Pre názorné 
+\paragraph{Vizualizácia.}
+Dátovú štruktúru union-find sme vizualizovali ako les. Pre názorné 
 oddelenie množín sme si zvolili pravidlo, ktoré zakazovalo vykresliť vrchol 
 napravo od najľavejšieho vrcholu a naľavo od napravejšieho vrcholu inej 
 množiny. Jednotlivé množiny sme už vykreslovali tesným Walkerovým algoritmom 
-\citep{walker}. Vizualizácie poskytuje všetky vyššie spomínané heuristiky a 
+\citep{walker}. Vizualizácia poskytuje všetky vyššie spomínané heuristiky a 
 aj tlačidlo na vykonanie viacerých náhodných spojení naraz. Toto je užitočné, 
 keď chce uživateľ vidieť, ako dátová štruktúra vyzerá, po vykonaní 
 veľa operácií.

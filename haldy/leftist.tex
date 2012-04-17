@@ -10,12 +10,12 @@ Toto zabezpečuje pre každý podstrom, že pravá cesta je vždy kratšia ako �
 
 \paragraph{Operácie.}
 Najdôležitejšia operácia vykonávaná na ľavicovej halde je $\meld(i,j)$. Pomocou nej si zadefinujeme aj \emph{insert($x$)} a 
-\emph{deleteMin}. Haldy sa spájajú pozdĺž pravej cesty. Postupne prechádzame odvrchu nadol celú pravú cestu haldy $i$ a 
+$\delmin$. Haldy sa spájajú pozdĺž pravej cesty. Postupne prechádzame odvrchu nadol celú pravú cestu haldy $i$ a 
 porovnávame kľúče s koreňom haldy $j$. Ak narazíme na kľúč vrcholu $v$ v halde $i$, ktorý je väčší ako kľúč v koreni 
-$w$ haldy $j$, vrcholy vymeníme. Teda z vrcholu $w$ sa stane pravý syn otca $v$ a z podstromu zakoreneným vrcholom $v$ sa stane halda $j$. Kľúč prázdnej 
-haldy považujeme za nekonečno. Takto pokračujeme, až kým nedôjdeme na koniec pravej cesty haldy $i$.
-Potom nasleduje fáza úpravy rankov. Ranky sa mohli zmeniť len na pravej, spájacej ceste, preto ich pozdĺž tejto cesty 
-zdola nahor upravíme.
+$w$ haldy $j$, vrcholy vymeníme. Teda z vrcholu $w$ sa stane pravý syn otca $v$ a z podstromu zakoreneným vrcholom $v$ sa
+stane halda $j$ (pozri obr.~\ref{img:leftmeld}). Kľúč prázdnej haldy považujeme za nekonečno. Takto pokračujeme,
+až kým nedôjdeme na koniec pravej cesty haldy $i$. Potom nasleduje fáza úpravy rankov. Ranky sa mohli zmeniť len na pravej,
+spájacej ceste, preto ich pozdĺž tejto cesty zdola nahor upravíme.
 
 Nakoniec pre ľavicovú haldu musí byť dodržané pravidlo o veľkosti rankov synov. Preto opäť prejdeme pravú cestu 
 výslednej haldy a pokiaľ je niekde pravidlo porušené, bratov vymeníme.\footnote{Druhý a tretí krok sa dajú robiť 
@@ -26,22 +26,21 @@ súčasne, avšak z hľadiska prehľadnosti vizualizácie sú v našom programe 
 \caption{\emph{Spájanie pozdĺž pravej cesty.} V danom momente spájame podstrom 144 a 92 (hore).
 Aby sme zachovali podmienku haldy, pravý syn vrcholu 10 bude menší prvok z dvojice 144, 92.
 Preto tieto podstromy vymeníme a pokračujeme v spájaní podstromov 101 a 144 (dolu).} 
-\label{img:leftmeld} 
+\label{img:leftmeld}
 \end{figure}
 
-Pokiaľ máme definovanú operáciu \emph{meld($i$,$j$)}, zadefinovať 
-\emph{insert($x$)} na halde $i$ je jednoduché. Vytvorí sa nová jednoprvková 
-halda $j$ obsahujúca iba vrchol $x$ a zavolá sa \emph{meld($i$,$j$)}.
+Akonáhle vieme vykonať operáciu $\meld(i,j)$, pridať operáciu
+\emph{insert($x$)} je jednoduché: Vytvorí sa nová jednoprvková 
+halda obsahujúca iba vrchol s kľúčom $x$ a tá sa spojí s pôvodnou pomocou funkcie $\meld$.
 
-Operácia \emph{deleteMin} najprv vymaže vrchol haldy $h$ a potom zavolá \emph{meld(left($h$), right($h$))}.
+Operácia $\delmin$ najprv vymaže koreň haldy $v$ a potom zavolá $\meld(\L(v), \R(v))$.
 
-Hoci operácia \emph{decreaseKey} nie je štandardná pre Ľavicovú haldu, v programe je definovaná ako \emph{decreaseKey} pre 
-binárnu haldu. Teda po znížení kľúča vrchol "prebubláva" nahor.
+Operácia $\dec$ sa implementuje rovnako ako v binárnej halde, teda po znížení kľúča sa vrchol "prebuble" nahor.
 
 \paragraph{Časová zložitosť.}
 Veľkým plusom ľavicovej haldy je spájanie v logaritmickom čase. 
 Toto sa dosiahne vďaka tomu, že cesta, pozdĺž ktorej sa dve haldy spájajú, sa udržuje čo 
-najkratšia. Operácie $\ins(x)$ a \emph{deleteMin} majú rovnakú zložitosť ako $\meld(i,j)$.
+najkratšia. Operácie $\ins(x)$ a $\delmin$ majú rovnakú zložitosť ako $\meld(i,j)$.
 %\emph{findMin} má konštantnú časovú zložitosť.
 
 Existuje "lenivá" verzia ľavicovej haldy \citep{left}, ktorá odkladá vymazávanie a spájanie na neskôr.

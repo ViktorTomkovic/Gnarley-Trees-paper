@@ -10,13 +10,13 @@
 \def\find{\mathop{\mathit{find}}}
 \def\delete{\mathop{\mathit{delete}}}
 \def\dec{\mathop{\mathit{decreaseKey}}}
+\def\delmin{\mathop{\mathit{deleteMin}}}
 \def\meld{\mathop{\mathit{meld}}}
 \def\rank{\mathop{\mathit{rank}}}
 \def\L{\mathop{\mathit{left}}}
 \def\R{\mathop{\mathit{right}}}
 \def\reverse{\mathop{\mathit{reverse}}}
-
-
+\def\Bp{$\hbox{\rm B}\!^+\!$}
 
 \begin{document}
   \catcode`\"=\active \def "{\begingroup\clqq\def "{\endgroup\crqq}}
@@ -55,11 +55,11 @@ Mlynská Dolina,
 \begin{abstract}
 V článku prezentujeme našu prácu na projekte Gnarley Trees, ktorý začal
 Jakub Kováč ako svoju bakalársku prácu. Zaoberá sa dátovými štruktúrami
-a ich vizualizáciou. Z vyvažovaných stromov to sú B$^+$-strom, strom s prstom
+a ich vizualizáciou. Z vyvažovaných stromov to sú \Bp-strom, strom s prstom
 a strom s reverzom, z háld $d$-árna a ľavicová halda, skew halda a párovacia
 halda. Z iných štruktúr bol pridaný union-find problém a písmenkový strom (trie).
-Okrem vizualizácie sme softvér doplnili o históriu krokov a operacií,
-jednoduchšie ovládanie a tesnejšie vykresľovanie vrcholov.
+Okrem vizualizácie sme softvér doplnili o históriu krokov a operácií,
+jednoduchšie ovládanie a tesnejšie vykresľovanie stromov.
 
 \noindent
 \textbf{Dostupnosť:} Softvér je voľne dostupný na stránke
